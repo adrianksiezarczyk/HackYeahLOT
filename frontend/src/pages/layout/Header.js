@@ -8,7 +8,7 @@ const Content = styled.div`
   top: 0;
   width: 100%;
   height: 60px;
-  z-index: 1000;
+  z-index: 100;
   display: flex;
   align-items: center;
   background: #fff;

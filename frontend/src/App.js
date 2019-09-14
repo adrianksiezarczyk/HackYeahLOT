@@ -1,13 +1,11 @@
-import "bootstrap/dist/css/bootstrap.min.css"
-import "./css/global.css"
 import React, { useRef, useState } from "react"
 import styled from "styled-components"
 import ReactPageScroller from "react-page-scroller"
 import SecondPage from "./pages/SecondPage"
-import ThirdPage from "./pages/ThirdPage"
+import RealizationDataPage from "./pages/RealizationDataPage"
 import FourthPage from "./pages/FourthPage"
 import { ArrowUp, ArrowDown } from "react-feather"
-import Header from "./pages/firstPage/Header"
+import Header from "./pages/layout/Header"
 import HolidaysType from "./pages/HolidaysType"
 
 const Layout = styled.div`
@@ -49,12 +47,10 @@ function App() {
   return (
     <Layout>
       <Header />
-
       <ReactPageScroller ref={scrollerRef} animationTimer={300}>
         <HolidaysType />
-
         <SecondPage />
-        <ThirdPage />
+        <RealizationDataPage />
         <FourthPage />
       </ReactPageScroller>
 

@@ -1,17 +1,21 @@
 import produce from "immer"
+import LotApi from "./api"
 
 export const lot = {
   state: {
-    test: false
+    info: null
   },
   reducers: {
-    test(state, payload) {
+    setInfo(state, payload) {
       return produce(state, draft => {
-        draft.test = payload
+        draft.info = payload
       })
     }
   },
   effects: dispatch => ({
-    async test() {}
+    async fetchInfo() {
+      const response = await LotApi.testFetch()
+      this.setInfo(response)
+    }
   })
 }
