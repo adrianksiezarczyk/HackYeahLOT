@@ -8,5 +8,6 @@ namespace LOT.Services.LotApiClient
     public interface ILotApiClient
     {
         Task<IEnumerable<FlightModel>> GetOffers(GetOffersRequest request);
+        Task<FlightDetailsModel> GetFlightDetails(GetFlightDetailsRequest id);
     }
 }

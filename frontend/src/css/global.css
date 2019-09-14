@@ -7,7 +7,8 @@ body {
   height: 100%;
 }
 
-.InputFromTo .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
+.InputFromTo
+  .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
   background-color: #f0f8ff !important;
   color: #4a90e2;
 }
@@ -27,4 +28,10 @@ body {
 }
 .InputFromTo-to .DayPickerInput-Overlay {
   margin-left: -198px;
+}
+
+@media (max-width: 1920px) {
+  .container {
+    max-width: 1400px;
+  }
 }

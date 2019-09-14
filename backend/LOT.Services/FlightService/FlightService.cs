@@ -16,6 +16,8 @@ namespace LOT.Services.FlightService
             this.lotApiClient = lotApiClient;
         }
 
+  
+
         public async Task<IEnumerable<FlightModel>> GetFlights(GetFlightsRequest request)
         {
             var from = new string[] { request.From };
@@ -33,6 +35,11 @@ namespace LOT.Services.FlightService
                     NumberOfAdultsOver16 = request.NumberOfAdultsOver16
                 }
             });
+        }
+
+        public async Task<FlightDetailsModel> GetFlightDetails(GetFlightDetailsRequest request)
+        {
+            return await lotApiClient.GetFlightDetails(request);
         }
     }
 }
