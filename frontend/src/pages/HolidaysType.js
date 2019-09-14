@@ -1,35 +1,36 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react"
+import styled from "styled-components"
 
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from "react-bootstrap"
 
-import Dropdown from '../components/Inputs/Dropdown';
+import Dropdown from "../components/Inputs/Dropdown"
 
-import Cat from '../images/cat.jpg';
-import Surprise from '../images/surprise.png';
-import Summer from '../images/wakajki.jpg';
+import Cat from "../images/cat.jpg"
+import Surprise from "../images/surprise.png"
+import Summer from "../images/wakajki.jpg"
 
-const whenAnswers = ['Kiedykolwiek', 'Jutro', 'Pojutrze'];
-const whereFromAnswers = ['Polska', 'Estonia', 'Gliwice', 'Sosnowiec'];
+const whenAnswers = ["Kiedykolwiek", "Jutro", "Pojutrze"]
+const whereFromAnswers = ["Polska", "Estonia", "Gliwice", "Sosnowiec"]
 
 const texts = {
   winter: {
-    text: 'Zimowe szaleństwo',
-    desc: 'Wybierz się w mroźne rejony'
+    text: "Zimowe szaleństwo",
+    desc: "Wybierz się w mroźne rejony"
   },
   surprise: {
-    text: 'Zaskocz mnie!',
-    desc: 'Pozwól nam zająć się Twoimi wakacjami'
+    text: "Zaskocz mnie!",
+    desc: "Pozwól nam zająć się Twoimi wakacjami"
   },
   summer: {
-    text: 'Letnie opalanko',
-    desc: 'Wyleguj się na słonecznych plażach'
+    text: "Letnie opalanko",
+    desc: "Wyleguj się na słonecznych plażach"
   }
-};
+}
 
 const StyledHolidaysTypeSection = styled.section`
+  margin-top: 60px;
   width: 100%;
-  min-height: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,7 +46,7 @@ const StyledHolidaysTypeSection = styled.section`
   .no-padding-left {
     padding-left: 0;
   }
-`;
+`
 
 const Dropdowns = styled.div`
   display: flex;
@@ -64,13 +65,13 @@ const Dropdowns = styled.div`
       width: 100%;
     }
   }
-`;
+`
 
 const StyledCard = styled.div`
   border-radius: 4px;
   position: relative;
   cursor: pointer;
-`;
+`
 
 const StyledImage = styled.img`
   width: 100%;
@@ -78,7 +79,7 @@ const StyledImage = styled.img`
   object-fit: cover;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-`;
+`
 
 const StyledText = styled.div`
   position: absolute;
@@ -92,7 +93,7 @@ const StyledText = styled.div`
   justify-content: flex-end;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  opacity: ${props => (props.show ? '1' : '0')};
+  opacity: ${props => (props.show ? "1" : "0")};
   transition: opacity 0.2s ease-in-out;
 
   p:nth-child(1) {
@@ -102,8 +103,8 @@ const StyledText = styled.div`
     color: #fff;
     margin: 0;
 
-    top: ${props => (props.show ? '0' : '5px')};
-    opacity: ${props => (props.show ? '1' : '0')};
+    top: ${props => (props.show ? "0" : "5px")};
+    opacity: ${props => (props.show ? "1" : "0")};
     transition: all 0.2s ease-in-out;
   }
 
@@ -113,50 +114,51 @@ const StyledText = styled.div`
     font-size: 16px;
     color: rgba(255, 255, 255, 0.8);
 
-    top: ${props => (props.show ? '0' : '5px')};
-    opacity: ${props => (props.show ? '1' : '0')};
+    top: ${props => (props.show ? "0" : "5px")};
+    opacity: ${props => (props.show ? "1" : "0")};
     transition: all 0.2s ease-in-out;
   }
-`;
+`
 
 const HolidayCard = props => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false)
 
   return (
     <StyledCard
       onMouseEnter={() => setShow(true)}
-      onMouseLeave={() => setShow(false)}>
+      onMouseLeave={() => setShow(false)}
+    >
       <StyledImage src={props.image}></StyledImage>
       <StyledText show={show}>
         <p>{props.text.text}</p>
         <p>{props.text.desc}</p>
       </StyledText>
     </StyledCard>
-  );
-};
+  )
+}
 
 const HolidaysType = () => (
   <StyledHolidaysTypeSection>
     <Container>
-      <Row className='dropdown-row'>
+      <Row className="dropdown-row">
         <Dropdowns>
-          <Dropdown answers={whenAnswers} title='When'></Dropdown>
-          <Dropdown answers={whereFromAnswers} title='Where'></Dropdown>
+          <Dropdown answers={whenAnswers} title="When"></Dropdown>
+          <Dropdown answers={whereFromAnswers} title="Where"></Dropdown>
         </Dropdowns>
       </Row>
       <Row>
-        <Col className='no-padding-left'>
+        <Col className="no-padding-left">
           <HolidayCard image={Cat} text={texts.winter}></HolidayCard>
         </Col>
         <Col>
           <HolidayCard image={Surprise} text={texts.surprise}></HolidayCard>
         </Col>
-        <Col className='no-padding-right'>
+        <Col className="no-padding-right">
           <HolidayCard image={Summer} text={texts.summer}></HolidayCard>
         </Col>
       </Row>
     </Container>
   </StyledHolidaysTypeSection>
-);
+)
 
-export default HolidaysType;
+export default HolidaysType

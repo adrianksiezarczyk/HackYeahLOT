@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { Container, Row, Col } from "reactstrap"
+import { Container } from "react-bootstrap"
 import logo from "../../assets/images/logo.svg"
 
 const Content = styled.div`
