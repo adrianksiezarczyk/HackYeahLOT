@@ -8,5 +8,6 @@ namespace LOT.Services.FlightService
     public interface IFlightService
     {
         Task<IEnumerable<FlightModel>> GetFlights(GetFlightsRequest request);
+        Task<FlightDetailsModel> GetFlightDetails(GetFlightDetailsRequest request);
     }
 }

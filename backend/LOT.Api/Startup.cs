@@ -45,6 +45,7 @@ namespace LOT.Api
                 app.UseDeveloperExceptionPage();
             }
             app.UseSwagger();
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
 
             app.UseSwaggerUI(c =>
             {

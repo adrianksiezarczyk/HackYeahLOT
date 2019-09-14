@@ -1,19 +1,23 @@
-import React, { useRef, useState } from "react"
-import styled from "styled-components"
-import ReactPageScroller from "react-page-scroller"
-import SecondPage from "./pages/SecondPage"
-import RealizationDataPage from "./pages/RealizationDataPage"
-import FourthPage from "./pages/FourthPage"
-import { ArrowUp, ArrowDown } from "react-feather"
-import Header from "./pages/layout/Header"
-import HolidaysType from "./pages/HolidaysType"
-import LocalStore from "./services/LocalStore"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './css/global.css';
+import React, { useRef, useState } from 'react';
+import styled from 'styled-components';
+import ReactPageScroller from 'react-page-scroller';
+import SecondPage from './pages/SecondPage';
+
+import FourthPage from './pages/FourthPage';
+import { ArrowUp, ArrowDown } from 'react-feather';
+import HolidaysType from './pages/HolidaysType';
+import HolidaysOptions from './pages/HolidaysOptions';
+import RealizationDataPage from './pages/RealizationDataPage';
+import Header from './pages/layout/Header';
+import LocalStore from './services/LocalStore';
 
 const Layout = styled.div`
   width: 100vw;
   padding: 0 !important;
   margin: 0 !important;
-`
+`;
 
 const ScrollerArrows = styled.div`
   position: fixed;
@@ -22,7 +26,7 @@ const ScrollerArrows = styled.div`
   width: 50px;
   height: 150px;
   color: #fff;
-`
+`;
 const Arrow = styled.div`
   display: flex;
   justify-content: center;
@@ -33,21 +37,22 @@ const Arrow = styled.div`
   border-radius: 5px;
   cursor: pointer;
   margin: 5px 0;
-`
+`;
 
 function App() {
-  const [currentPage, setCurrentPage] = useState(0)
-  const scrollerRef = useRef(null)
+  const [currentPage, setCurrentPage] = useState(0);
+  const scrollerRef = useRef(null);
 
   const goToPage = pageNumber => {
-    if (pageNumber < 0 || pageNumber > 2) return
-    setCurrentPage(pageNumber)
-    scrollerRef.current.goToPage(pageNumber)
-  }
+    if (pageNumber < 0 || pageNumber > 2) return;
+    setCurrentPage(pageNumber);
+    scrollerRef.current.goToPage(pageNumber);
+  };
 
   return (
     <Layout>
       <Header />
+
       <LocalStore>
         {test => (
           <ReactPageScroller ref={scrollerRef} animationTimer={300}>
@@ -62,20 +67,20 @@ function App() {
         <Arrow>
           <ArrowUp
             onClick={() => {
-              goToPage(currentPage - 1)
+              goToPage(currentPage - 1);
             }}
           />
         </Arrow>
         <Arrow>
           <ArrowDown
             onClick={() => {
-              goToPage(currentPage + 1)
+              goToPage(currentPage + 1);
             }}
           />
         </Arrow>
       </ScrollerArrows>
     </Layout>
-  )
+  );
 }
 
-export default App
+export default App;

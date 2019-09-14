@@ -22,6 +22,8 @@ namespace LOT.Services.LotApiClient
             this.lotApiConfig = lotApiConfig.Value;
         }
 
+
+
         public async Task<IEnumerable<FlightModel>> GetOffers(GetOffersRequest request)
         {
             var authToken = await GetAuthToken();
@@ -41,14 +43,14 @@ namespace LOT.Services.LotApiClient
                 var parsed = JsonConvert.DeserializeObject<GetOffersResponse>(stringResponse);
                 var allOffers = parsed.FlightsGroupedByPrice.SelectMany(a => a);
 
-                 var grouped = allOffers.GroupBy(a => a.Outbound.Segments.Last().ArrivalAirport);
+                var grouped = allOffers.GroupBy(a => a.Outbound.Segments.Last().ArrivalAirport);
 
                 var res = new List<FlightModel>();
 
                 return res;
             };
         }
-
+   
         private async Task<string> GetAuthToken()
         {
             using (var http = GetHttpClient())
@@ -77,6 +79,11 @@ namespace LOT.Services.LotApiClient
             http.DefaultRequestHeaders.Add("x-api-key", lotApiConfig.ApiKey);
 
             return http;
+        }
+
+        public Task<FlightDetailsModel> GetFlightDetails(GetFlightDetailsRequest id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
