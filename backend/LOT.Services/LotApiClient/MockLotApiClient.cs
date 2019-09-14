@@ -61,10 +61,13 @@ namespace LOT.Services.LotApiClient
             var to = request.GetOffersRequestParam.Destination.FirstOrDefault();
 
             if (!string.IsNullOrEmpty(from))
-                data = data.Where(a => a.From == from);
+                data = data.Where(a => a.OriginCode == from);
 
             if (!string.IsNullOrEmpty(to))
-                data = data.Where(a => a.To == to);
+                data = data.Where(a => a.DestinationCode == to);
+
+            if (data.Count() > 9)
+                data = data.Take(9);
 
             return data;
         }
