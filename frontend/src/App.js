@@ -4,12 +4,14 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import ReactPageScroller from 'react-page-scroller';
 import SecondPage from './pages/SecondPage';
-import ThirdPage from './pages/ThirdPage';
+
 import FourthPage from './pages/FourthPage';
 import { ArrowUp, ArrowDown } from 'react-feather';
-import Header from './pages/firstPage/Header';
 import HolidaysType from './pages/HolidaysType';
 import HolidaysOptions from './pages/HolidaysOptions';
+import RealizationDataPage from './pages/RealizationDataPage';
+import Header from './pages/layout/Header';
+import LocalStore from './services/LocalStore';
 
 const Layout = styled.div`
   width: 100vw;
@@ -51,14 +53,16 @@ function App() {
     <Layout>
       <Header />
 
-      <ReactPageScroller ref={scrollerRef} animationTimer={300}>
-        <HolidaysType />
-
-        <HolidaysOptions />
-        <ThirdPage />
-        <FourthPage />
-      </ReactPageScroller>
-
+      <LocalStore>
+        {test => (
+          <ReactPageScroller ref={scrollerRef} animationTimer={300}>
+            <HolidaysType test={test} />
+            <SecondPage />
+            <RealizationDataPage />
+            <FourthPage />
+          </ReactPageScroller>
+        )}
+      </LocalStore>
       <ScrollerArrows>
         <Arrow>
           <ArrowUp

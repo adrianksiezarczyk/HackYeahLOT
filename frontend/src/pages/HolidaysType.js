@@ -8,6 +8,7 @@ import HolidayCard from './holidayType/HolidayCard';
 import Cat from '../assets/images/cat.jpg';
 import Surprise from '../assets/images/surprise.png';
 import Summer from '../assets/images/wakajki.jpg';
+import backgroundImg from '../assets/images/backgroundImg.png';
 
 const TITLES = ['From', 'When'];
 
@@ -32,6 +33,11 @@ const texts = {
 };
 
 const StyledHolidaysTypeSection = styled.section`
+  background-image: url(${backgroundImg});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
   position: relative;
   margin-top: 60px;
   width: 100%;

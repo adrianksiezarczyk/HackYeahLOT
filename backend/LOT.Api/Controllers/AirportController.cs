@@ -17,9 +17,6 @@ namespace LOT.Api.Controllers
         }
 
         [HttpGet, Route("")]
-        public async Task<IEnumerable<AirportModel>> Get()
-        {
-            return await airportService.GetAirports();
-        }
+        public async Task<IEnumerable<AirportModel>> Get() => await airportService.GetAirports();
     }
 }
