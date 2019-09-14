@@ -49,7 +49,7 @@ function App() {
     <Layout>
       <Header />
       <LocalStore>
-        {(test) => (
+        {test => (
           <ReactPageScroller ref={scrollerRef} animationTimer={300}>
             <HolidaysType test={test} />
             <SecondPage />
