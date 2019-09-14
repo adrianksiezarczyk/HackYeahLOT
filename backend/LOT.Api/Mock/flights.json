@@ -4,6 +4,7 @@
     "minPrice": 600,
     "from": "WAW",
     "to": "BCN",
+    "destinationName":  "Barcelona",
     "temperature": 26,
     "imageUrl": "https://lonelyplanetimages.imgix.net/a/g/hi/t/c81f09d36451a030f40f459726f31a96-barcelona.jpeg?sharp=10&vib=20&w=400"
   },
@@ -12,6 +13,7 @@
     "minPrice": 650,
     "from": "WAW",
     "to": "TFS",
+    "destinationName": "Teneryfa",
     "temperature": 29,
     "imageUrl": "https://lonelyplanetwp.imgix.net/2016/04/GettyImages-498874871_master_1.jpg?crop=entropy&fit=crop&sharp=10&vib=20&w=400"
   },
@@ -20,6 +22,7 @@
     "minPrice": 750,
     "from": "WAW",
     "to": "CDG",
+    "destinationName": "Paryż",
     "temperature": 20,
     "imageUrl": "https://www.lonelyplanet.fr/sites/lonelyplanet/files/styles/manual_crop/public/media/destination/slider/mobile/paris2_0.jpg"
   },
@@ -28,6 +31,7 @@
     "minPrice": 1200,
     "from": "WAW",
     "to": "MLE",
+    "destinationName": "Malediwy",
     "temperature": 30,
     "imageUrl": "https://www.fairmont.com/assets/0/137/21638/21662/21664/21719/ce1adb0d-12d1-4b40-92bc-84e4764d0fad.jpg"
   },
@@ -36,6 +40,7 @@
     "minPrice": 640,
     "from": "KTW",
     "to": "BCN",
+    "destinationName": "Barcelona",
     "temperature": 26,
     "imageUrl": "https://lonelyplanetimages.imgix.net/a/g/hi/t/c81f09d36451a030f40f459726f31a96-barcelona.jpeg?sharp=10&vib=20&w=400"
 
@@ -45,6 +50,7 @@
     "minPrice": 770,
     "from": "KTW",
     "to": "TFS",
+    "destinationName": "Teneryfa",
     "temperature": 29,
     "imageUrl": "https://lonelyplanetwp.imgix.net/2016/04/GettyImages-498874871_master_1.jpg?crop=entropy&fit=crop&sharp=10&vib=20&w=400"
   },
@@ -53,6 +59,7 @@
     "minPrice": 900,
     "from": "KTW",
     "to": "CDG",
+    "destinationName": "Paryż",
     "temperature": 20,
     "imageUrl": "https://www.lonelyplanet.fr/sites/lonelyplanet/files/styles/manual_crop/public/media/destination/slider/mobile/paris2_0.jpg"
   },
@@ -61,6 +68,7 @@
     "minPrice": 1250,
     "from": "KTW",
     "to": "MLE",
+    "destinationName": "Malediwy",
     "temperature": 30,
     "imageUrl": "https://www.fairmont.com/assets/0/137/21638/21662/21664/21719/ce1adb0d-12d1-4b40-92bc-84e4764d0fad.jpg"
   },
@@ -69,6 +77,7 @@
     "minPrice": 650,
     "from": "GDN",
     "to": "BCN",
+    "destinationName": "Barcelona",
     "temperature": 26,
     "imageUrl": "https://lonelyplanetimages.imgix.net/a/g/hi/t/c81f09d36451a030f40f459726f31a96-barcelona.jpeg?sharp=10&vib=20&w=400"
   },
@@ -77,6 +86,7 @@
     "minPrice": 750,
     "from": "GDN",
     "to": "TFS",
+    "destinationName": "Teneryfa",
     "temperature": 29,
     "imageUrl": "https://lonelyplanetwp.imgix.net/2016/04/GettyImages-498874871_master_1.jpg?crop=entropy&fit=crop&sharp=10&vib=20&w=400"
   },
@@ -85,6 +95,7 @@
     "minPrice": 850,
     "from": "GDN",
     "to": "CDG",
+    "destinationName": "Paryż",
     "temperature": 20,
     "imageUrl": "https://www.lonelyplanet.fr/sites/lonelyplanet/files/styles/manual_crop/public/media/destination/slider/mobile/paris2_0.jpg"
   },
@@ -93,6 +104,7 @@
     "minPrice": 1500,
     "from": "GDN",
     "to": "MLE",
+    "destinationName": "Malediwy",
     "temperature": 30,
     "imageUrl": "https://www.fairmont.com/assets/0/137/21638/21662/21664/21719/ce1adb0d-12d1-4b40-92bc-84e4764d0fad.jpg"
   },
@@ -101,6 +113,7 @@
     "minPrice": 690,
     "from": "WRO",
     "to": "BCN",
+    "destinationName": "Barcelona",
     "temperature": 26,
     "imageUrl": "https://lonelyplanetimages.imgix.net/a/g/hi/t/c81f09d36451a030f40f459726f31a96-barcelona.jpeg?sharp=10&vib=20&w=400"
   },
@@ -109,6 +122,7 @@
     "minPrice": 620,
     "from": "WRO",
     "to": "TFS",
+    "destinationName": "Teneryfa",
     "temperature": 29,
     "imageUrl": "https://lonelyplanetwp.imgix.net/2016/04/GettyImages-498874871_master_1.jpg?crop=entropy&fit=crop&sharp=10&vib=20&w=400"
   },
@@ -117,6 +131,7 @@
     "minPrice": 730,
     "from": "WRO",
     "to": "CDG",
+    "destinationName": "Paryż",
     "temperature": 20,
     "imageUrl": "https://www.lonelyplanet.fr/sites/lonelyplanet/files/styles/manual_crop/public/media/destination/slider/mobile/paris2_0.jpg"
   },
@@ -125,6 +140,7 @@
     "minPrice": 1100,
     "from": "WRO",
     "to": "MLE",
+    "destinationName": "Malediwy",
     "temperature": 30,
     "imageUrl": "https://www.fairmont.com/assets/0/137/21638/21662/21664/21719/ce1adb0d-12d1-4b40-92bc-84e4764d0fad.jpg"
   }
