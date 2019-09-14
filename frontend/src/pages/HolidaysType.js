@@ -1,43 +1,31 @@
-<<<<<<< HEAD
 import React from "react"
 import styled from "styled-components"
-=======
-import React, { useState } from 'react';
-import styled from 'styled-components';
->>>>>>> bc7fcc60b5f611cdb4b9110ea3834bf000130f16
+import { Container, Row, Col } from "react-bootstrap"
 
-import { Container, Row, Col } from 'react-bootstrap';
+import Dropdown from "../components/Inputs/Dropdown"
 
-import Dropdown from '../components/Inputs/Dropdown';
-
-<<<<<<< HEAD
-import Cat from "../images/cat.jpg"
-import Surprise from "../images/surprise.png"
-import Summer from "../images/wakajki.jpg"
 import HolidayCard from "./holidayType/HolidayCard"
-=======
-import Cat from '../images/cat.jpg';
-import Surprise from '../images/surprise.png';
-import Summer from '../images/wakajki.jpg';
->>>>>>> bc7fcc60b5f611cdb4b9110ea3834bf000130f16
+import Cat from "../assets/images/cat.jpg"
+import Surprise from "../assets/images/surprise.png"
+import Summer from "../assets/images/wakajki.jpg"
 
-const whenAnswers = ['Kiedykolwiek', 'Jutro', 'Pojutrze'];
-const whereFromAnswers = ['Polska', 'Estonia', 'Gliwice', 'Sosnowiec'];
+const whenAnswers = ["Kiedykolwiek", "Jutro", "Pojutrze"]
+const whereFromAnswers = ["Polska", "Estonia", "Gliwice", "Sosnowiec"]
 
 const texts = {
   winter: {
-    text: 'Zimowe szaleństwo',
-    desc: 'Wybierz się w mroźne rejony'
+    text: "Zimowe szaleństwo",
+    desc: "Wybierz się w mroźne rejony"
   },
   surprise: {
-    text: 'Zaskocz mnie!',
-    desc: 'Pozwól nam zająć się Twoimi wakacjami'
+    text: "Zaskocz mnie!",
+    desc: "Pozwól nam zająć się Twoimi wakacjami"
   },
   summer: {
-    text: 'Letnie opalanko',
-    desc: 'Wyleguj się na słonecznych plażach'
+    text: "Letnie opalanko",
+    desc: "Wyleguj się na słonecznych plażach"
   }
-};
+}
 
 const StyledHolidaysTypeSection = styled.section`
   position: relative;
@@ -59,7 +47,7 @@ const StyledHolidaysTypeSection = styled.section`
   .no-padding-left {
     padding-left: 0;
   }
-`;
+`
 
 const Dropdowns = styled.div`
   display: flex;
@@ -78,7 +66,7 @@ const Dropdowns = styled.div`
       width: 100%;
     }
   }
-`;
+`
 
 const BackgroundSquare = styled.div`
   background: rgba(9, 52, 121, 0.85);
