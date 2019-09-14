@@ -135,28 +135,32 @@ const HolidayCard = props => {
   );
 };
 
-const HolidaysType = () => (
-  <StyledHolidaysTypeSection>
-    <Container>
-      <Row className='dropdown-row'>
-        <Dropdowns>
-          <Dropdown answers={whenAnswers} title='When'></Dropdown>
-          <Dropdown answers={whereFromAnswers} title='Where'></Dropdown>
-        </Dropdowns>
-      </Row>
-      <Row>
-        <Col className='no-padding-left'>
-          <HolidayCard image={Cat} text={texts.winter}></HolidayCard>
-        </Col>
-        <Col>
-          <HolidayCard image={Surprise} text={texts.surprise}></HolidayCard>
-        </Col>
-        <Col className='no-padding-right'>
-          <HolidayCard image={Summer} text={texts.summer}></HolidayCard>
-        </Col>
-      </Row>
-    </Container>
-  </StyledHolidaysTypeSection>
-);
+const HolidaysType = () => {
+  const [whenTitle, setWhenTitle] = useState();
+
+  return (
+    <StyledHolidaysTypeSection>
+      <Container>
+        <Row className='dropdown-row'>
+          <Dropdowns>
+            <Dropdown answers={whenAnswers} title='When'></Dropdown>
+            <Dropdown answers={whereFromAnswers} title='Where'></Dropdown>
+          </Dropdowns>
+        </Row>
+        <Row>
+          <Col className='no-padding-left'>
+            <HolidayCard image={Cat} text={texts.winter}></HolidayCard>
+          </Col>
+          <Col>
+            <HolidayCard image={Surprise} text={texts.surprise}></HolidayCard>
+          </Col>
+          <Col className='no-padding-right'>
+            <HolidayCard image={Summer} text={texts.summer}></HolidayCard>
+          </Col>
+        </Row>
+      </Container>
+    </StyledHolidaysTypeSection>
+  );
+};
 
 export default HolidaysType;
