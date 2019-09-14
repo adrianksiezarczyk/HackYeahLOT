@@ -28,8 +28,9 @@ const texts = {
 };
 
 const StyledHolidaysTypeSection = styled.section`
+  margin-top: 60px;
   width: 100%;
-  min-height: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
