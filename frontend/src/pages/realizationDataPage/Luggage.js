@@ -7,8 +7,19 @@ import smallBag from "../../assets/images/smallBag.png"
 const Content = styled.div`
   display: flex;
 `
-const Box = styled.div``
-const Image = styled.div``
+const Box = styled.div`
+  max-height: 300px;
+  padding: 5px;
+  border-radius: 2px;
+  margin: 2px;
+  background:#fff;
+`
+const Image = styled.div`
+  width: 150px;
+  img {
+    width: inherit;
+  }
+`
 
 const Luggage = () => {
   return (

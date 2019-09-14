@@ -4,10 +4,9 @@ import styled from "styled-components"
 
 const Page = styled.div`
   height: 100%;
-  background: rgba(9, 52, 121, 0.85);
+  background: #093479;
 `
-const Content = styled.div`
-`
+const Content = styled.div``
 const SecondPage = () => {
   return (
     <Page>

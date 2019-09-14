@@ -8965,6 +8965,11 @@ react-scripts@3.1.1:
   optionalDependencies:
     fsevents "2.0.7"
 
+react-seat-picker@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/react-seat-picker/-/react-seat-picker-1.3.0.tgz#30688a304ae08300310ab85bcb203ea322460468"
+  integrity sha512-fXzv6O7TYsFb5j4XmohqxU6JHy32l0aMB/LBh+rBJpUyUyAwGzVeYs8w1GXCWv4DnMBjL3KSG+8okFueVL8vTw==
+
 react-transition-group@^2.0.0, react-transition-group@^2.2.0:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.9.0.tgz#df9cdb025796211151a436c69a8f3b97b5b07c8d"
