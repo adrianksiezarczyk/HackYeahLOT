@@ -20,5 +20,8 @@ namespace LOT.Api.Controllers
 
         [HttpGet, Route("")]
         public async Task<IEnumerable<FlightModel>> Get([FromQuery] GetFlightsRequest request) => await flightService.GetFlights(request);
+
+        [HttpGet, Route("details")]
+        public async Task<FlightDetailsModel> Get([FromQuery]GetFlightDetailsRequest request) => await flightService.GetFlightDetails(request);
     }
 }

@@ -1,82 +1,131 @@
 ﻿[
   {
+    "id":  1,
     "minPrice": 600,
     "from": "WAW",
-    "to": "BCN"
+    "to": "BCN",
+    "temperature": 26,
+    "imageUrl": "https://lonelyplanetimages.imgix.net/a/g/hi/t/c81f09d36451a030f40f459726f31a96-barcelona.jpeg?sharp=10&vib=20&w=400"
   },
   {
+    "id": 2,
     "minPrice": 650,
     "from": "WAW",
-    "to": "TFS"
+    "to": "TFS",
+    "temperature": 29,
+    "imageUrl": "https://lonelyplanetwp.imgix.net/2016/04/GettyImages-498874871_master_1.jpg?crop=entropy&fit=crop&sharp=10&vib=20&w=400"
   },
   {
+    "id": 3,
     "minPrice": 750,
     "from": "WAW",
-    "to": "CDG"
+    "to": "CDG",
+    "temperature": 20,
+    "imageUrl": "https://www.lonelyplanet.fr/sites/lonelyplanet/files/styles/manual_crop/public/media/destination/slider/mobile/paris2_0.jpg"
   },
   {
+    "id": 4,
     "minPrice": 1200,
     "from": "WAW",
-    "to": "MLE"
+    "to": "MLE",
+    "temperature": 30,
+    "imageUrl": "https://www.fairmont.com/assets/0/137/21638/21662/21664/21719/ce1adb0d-12d1-4b40-92bc-84e4764d0fad.jpg"
   },
-   {
+  {
+    "id": 5,
     "minPrice": 640,
     "from": "KTW",
-    "to": "BCN"
+    "to": "BCN",
+    "temperature": 26,
+    "imageUrl": "https://lonelyplanetimages.imgix.net/a/g/hi/t/c81f09d36451a030f40f459726f31a96-barcelona.jpeg?sharp=10&vib=20&w=400"
+
   },
   {
+    "id": 6,
     "minPrice": 770,
     "from": "KTW",
-    "to": "TFS"
+    "to": "TFS",
+    "temperature": 29,
+    "imageUrl": "https://lonelyplanetwp.imgix.net/2016/04/GettyImages-498874871_master_1.jpg?crop=entropy&fit=crop&sharp=10&vib=20&w=400"
   },
   {
+    "id": 7,
     "minPrice": 900,
     "from": "KTW",
-    "to": "CDG"
+    "to": "CDG",
+    "temperature": 20,
+    "imageUrl": "https://www.lonelyplanet.fr/sites/lonelyplanet/files/styles/manual_crop/public/media/destination/slider/mobile/paris2_0.jpg"
   },
   {
+    "id": 8,
     "minPrice": 1250,
     "from": "KTW",
-    "to": "MLE"
+    "to": "MLE",
+    "temperature": 30,
+    "imageUrl": "https://www.fairmont.com/assets/0/137/21638/21662/21664/21719/ce1adb0d-12d1-4b40-92bc-84e4764d0fad.jpg"
   },
   {
+    "id": 9,
     "minPrice": 650,
     "from": "GDN",
-    "to": "BCN"
+    "to": "BCN",
+    "temperature": 26,
+    "imageUrl": "https://lonelyplanetimages.imgix.net/a/g/hi/t/c81f09d36451a030f40f459726f31a96-barcelona.jpeg?sharp=10&vib=20&w=400"
   },
   {
+    "id": 10,
     "minPrice": 750,
     "from": "GDN",
-    "to": "TFS"
+    "to": "TFS",
+    "temperature": 29,
+    "imageUrl": "https://lonelyplanetwp.imgix.net/2016/04/GettyImages-498874871_master_1.jpg?crop=entropy&fit=crop&sharp=10&vib=20&w=400"
   },
   {
+    "id": 11,
     "minPrice": 850,
     "from": "GDN",
-    "to": "CDG"
+    "to": "CDG",
+    "temperature": 20,
+    "imageUrl": "https://www.lonelyplanet.fr/sites/lonelyplanet/files/styles/manual_crop/public/media/destination/slider/mobile/paris2_0.jpg"
   },
   {
+    "id": 12,
     "minPrice": 1500,
     "from": "GDN",
-    "to": "MLE"
+    "to": "MLE",
+    "temperature": 30,
+    "imageUrl": "https://www.fairmont.com/assets/0/137/21638/21662/21664/21719/ce1adb0d-12d1-4b40-92bc-84e4764d0fad.jpg"
   },
   {
+    "id": 13,
     "minPrice": 690,
     "from": "WRO",
-    "to": "BCN"
+    "to": "BCN",
+    "temperature": 26,
+    "imageUrl": "https://lonelyplanetimages.imgix.net/a/g/hi/t/c81f09d36451a030f40f459726f31a96-barcelona.jpeg?sharp=10&vib=20&w=400"
   },
   {
+    "id": 14,
     "minPrice": 620,
     "from": "WRO",
-    "to": "TFS"
+    "to": "TFS",
+    "temperature": 29,
+    "imageUrl": "https://lonelyplanetwp.imgix.net/2016/04/GettyImages-498874871_master_1.jpg?crop=entropy&fit=crop&sharp=10&vib=20&w=400"
   },
   {
+    "id": 15,
     "minPrice": 730,
     "from": "WRO",
-    "to": "CDG"
+    "to": "CDG",
+    "temperature": 20,
+    "imageUrl": "https://www.lonelyplanet.fr/sites/lonelyplanet/files/styles/manual_crop/public/media/destination/slider/mobile/paris2_0.jpg"
   },
   {
+    "id": 16,
     "minPrice": 1100,
     "from": "WRO",
-    "to": "MLE"
+    "to": "MLE",
+    "temperature": 30,
+    "imageUrl": "https://www.fairmont.com/assets/0/137/21638/21662/21664/21719/ce1adb0d-12d1-4b40-92bc-84e4764d0fad.jpg"
   }
 ]
