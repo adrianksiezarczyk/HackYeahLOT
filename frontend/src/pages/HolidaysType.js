@@ -1,5 +1,4 @@
-import React, { useEffect } from "react"
-import { connect } from "react-redux"
+import React from "react"
 import styled from "styled-components"
 import { Container, Row, Col } from "react-bootstrap"
 
@@ -75,13 +74,8 @@ const Dropdowns = styled.div`
   }
 `
 
-const HolidaysType = ({ fetchInfo, info }) => {
-  
-  useEffect(() => {
-    fetchInfo()
-  }, [fetchInfo])
-
-  console.log("TEST", info)
+const HolidaysType = ({ test }) => {
+  console.log("TEST", test)
   return (
     <StyledHolidaysTypeSection>
       <Container>
@@ -107,11 +101,4 @@ const HolidaysType = ({ fetchInfo, info }) => {
   )
 }
 
-export default connect(
-  state => ({
-    info: state.lot.info
-  }),
-  dispatch => ({
-    fetchInfo: dispatch.lot.fetchInfo
-  })
-)(HolidaysType)
+export default HolidaysType

@@ -7,6 +7,7 @@ import FourthPage from "./pages/FourthPage"
 import { ArrowUp, ArrowDown } from "react-feather"
 import Header from "./pages/layout/Header"
 import HolidaysType from "./pages/HolidaysType"
+import LocalStore from "./services/LocalStore"
 
 const Layout = styled.div`
   width: 100vw;
@@ -47,13 +48,16 @@ function App() {
   return (
     <Layout>
       <Header />
-      <ReactPageScroller ref={scrollerRef} animationTimer={300}>
-        <HolidaysType />
-        <SecondPage />
-        <RealizationDataPage />
-        <FourthPage />
-      </ReactPageScroller>
-
+      <LocalStore>
+        {(test) => (
+          <ReactPageScroller ref={scrollerRef} animationTimer={300}>
+            <HolidaysType test={test} />
+            <SecondPage />
+            <RealizationDataPage />
+            <FourthPage />
+          </ReactPageScroller>
+        )}
+      </LocalStore>
       <ScrollerArrows>
         <Arrow>
           <ArrowUp
