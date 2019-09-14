@@ -1,0 +1,1 @@
+/domains/takeshop.pl/www/prestashop/modules/pshowimporter/upload

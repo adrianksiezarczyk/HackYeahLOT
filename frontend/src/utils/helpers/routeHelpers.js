@@ -1,0 +1,1 @@
+export const getRegexFromRouteObject = (routeObject) => '\\'+Object.values(routeObject).join("|")

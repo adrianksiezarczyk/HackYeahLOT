@@ -1,0 +1,28 @@
+{
+    "stories": "Stories",
+    "are you sure?": "Jesteś pewien?",
+    "restore default styles": "Przywroć domyślne style",
+    "cancel": "Anuluj",
+    "save": "Zapisz",
+    "remove": "Usuń",
+
+
+    "remove story":"Usuń story",
+    "add":"Dodaj",
+    "Author":"Autor",
+    "Rating":"Ocena",
+    "Product Id":"Id produktu",
+    "edit":"Edytuj",
+    "Add story":"Dodaj story",
+    "Edit story":"Edytuj story",
+    "shop-main-page":"Główna strona sklepu", 
+    "name":"Nazwa",
+    "url":"Url",
+    "selected":"Wybrany",
+    "remove main page":"Usuń stronę główną",
+    "shop pages":"Strony główne sklepu",
+    "new main page":"Nowa strona główna",
+    "drag and drop":"Przeciągnij i upuść pliki lub naciśnij, aby je wybrać",
+    "Accepted files":"Załadowane pliki",
+    "Rejected files":"Odrzucone pliki"
+}
