@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using LOT.Services.FlightService;
+using LOT.Services.FlightService.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 
 namespace LOT.Api.Controllers
 {
@@ -16,9 +19,6 @@ namespace LOT.Api.Controllers
         }
 
         [HttpGet, Route("")]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "Siema", "Elo" };
-        }
+        public async Task<IEnumerable<FlightModel>> Get([FromQuery] GetFlightsRequest request) => await flightService.GetFlights(request);
     }
 }

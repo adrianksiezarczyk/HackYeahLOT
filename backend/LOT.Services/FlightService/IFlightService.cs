@@ -1,13 +1,12 @@
 ﻿using LOT.Services.FlightService.Models;
-using System;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LOT.Services.FlightService
 {
     public interface IFlightService
     {
-        Task<FlightModel> GetFlight();
+        Task<IEnumerable<FlightModel>> GetFlights(GetFlightsRequest request);
     }
 }

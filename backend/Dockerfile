@@ -6,7 +6,9 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
 WORKDIR /src
 COPY ["./LOT.Api/LOT.Api.csproj", "LOT.Api/"]
+COPY ["./LOT.Common/LOT.Common.csproj", "LOT.Common/"]
 COPY ["./LOT.Services/LOT.Services.csproj", "LOT.Services/"]
+COPY ["./LOT.Api/Mock", "LOT.Api/Mock"]
 RUN dotnet restore "LOT.Api/LOT.Api.csproj"
 COPY . .
 WORKDIR "/src/LOT.Api"
