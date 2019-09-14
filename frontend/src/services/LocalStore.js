@@ -1,9 +1,25 @@
-import React, { useState } from "react"
+import React, { useState } from 'react';
 
+const TITLES = ['From', 'When'];
 const LocalStore = ({ children }) => {
-  const [DANE, SETDANE] = useState({ a: "123" })
+  const [loading, setLoading] = useState(false);
+  const [selectedCity, setSelectedCity] = useState({
+    name: TITLES[0],
+    code: ''
+  });
+  const [selectedTime, setSelectedTime] = useState(TITLES[1]);
+  const [availableFlights, setAvailableFlights] = useState([]);
 
-  return children(DANE)
-}
+  return children(
+    loading,
+    setLoading,
+    selectedCity,
+    setSelectedCity,
+    selectedTime,
+    setSelectedTime,
+    availableFlights,
+    setAvailableFlights
+  );
+};
 
-export default LocalStore
+export default LocalStore;

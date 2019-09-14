@@ -54,10 +54,31 @@ function App() {
       <Header />
 
       <LocalStore>
-        {test => (
+        {(
+          loading,
+          setLoading,
+          selectedCity,
+          setSelectedCity,
+          selectedTime,
+          setSelectedTime,
+          availableFlights,
+          setAvailableFlights
+        ) => (
           <ReactPageScroller ref={scrollerRef} animationTimer={300}>
-            <HolidaysType test={test} />
-            <SecondPage />
+            <HolidaysType
+              selectedCity={selectedCity}
+              setSelectedCity={setSelectedCity}
+              selectedTime={selectedTime}
+              setSelectedTime={setSelectedTime}
+              setLoading={setLoading}
+              setAvailableFlights={setAvailableFlights}
+              goToPage={goToPage}
+              currentPage={currentPage}
+            />
+            <HolidaysOptions
+              loading={loading}
+              availableFlights={availableFlights}
+            />
             <RealizationDataPage />
             <FourthPage />
           </ReactPageScroller>

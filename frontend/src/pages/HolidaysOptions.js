@@ -78,9 +78,6 @@ const StyledHolidaysOptionsSection = styled.section`
   margin-top: 60px;
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   .dropdown-row {
     margin-bottom: 20px;
@@ -95,7 +92,7 @@ const StyledHolidaysOptionsSection = styled.section`
   }
 `;
 
-const HolidaysOptions = () => {
+const HolidaysOptions = props => {
   const [selectedBtn, setSelectedBtn] = useState(MODES.ACTIVE);
 
   const handleClick = e => setSelectedBtn(parseInt(e.target.value));
@@ -103,7 +100,7 @@ const HolidaysOptions = () => {
   return (
     <StyledHolidaysOptionsSection>
       <Container>
-        <Row>
+        {/* <Row>
           {data.map((action, i) => (
             <SelectButton
               key={action.text}
@@ -113,9 +110,9 @@ const HolidaysOptions = () => {
               {action.text}
             </SelectButton>
           ))}
-        </Row>
+        </Row> */}
         <Row>
-          <CitiesTable />
+          <CitiesTable availableFlights={props.availableFlights} />
         </Row>
       </Container>
     </StyledHolidaysOptionsSection>

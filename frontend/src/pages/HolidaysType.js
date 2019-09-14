@@ -10,8 +10,6 @@ import Surprise from '../assets/images/surprise.png';
 import Summer from '../assets/images/wakajki.jpg';
 import backgroundImg from '../assets/images/backgroundImg.png';
 
-const TITLES = ['From', 'When'];
-
 const whenAnswers = ['Kiedykolwiek', 'Jutro', 'Pojutrze'];
 
 const texts = {
@@ -39,7 +37,6 @@ const StyledHolidaysTypeSection = styled.section`
   background-size: cover;
 
   position: relative;
-  margin-top: 60px;
   width: 100%;
   height: 100%;
   display: flex;
@@ -91,15 +88,17 @@ const BackgroundSquare = styled.div`
   background: rgba(9, 52, 121, 0.85);
 `;
 
-const HolidaysType = () => {
+const HolidaysType = ({
+  selectedCity,
+  setSelectedCity,
+  selectedTime,
+  setSelectedTime,
+  setLoading,
+  setAvailableFlights,
+  goToPage,
+  currentPage
+}) => {
   const [cities, setCities] = useState([]);
-  const [selectedCity, setSelectedCity] = useState({
-    name: TITLES[0],
-    code: ''
-  });
-  const [selectedTime, setSelectedTime] = useState(TITLES[1]);
-  const [loading, setLoading] = useState(false);
-  const [availableFlights, setAvailableFlights] = useState([]);
 
   useEffect(() => {
     fetch('http://134.209.248.19:8080/Airport')
@@ -123,7 +122,7 @@ const HolidaysType = () => {
       .then(res => res.json())
       .then(flights => {
         setAvailableFlights(flights);
-        console.log(flights);
+        goToPage(1);
         setLoading(false);
       });
   };
