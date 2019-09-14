@@ -24,8 +24,8 @@ namespace LOT.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IFlightService, FlightService>();
-            services.AddScoped<ILotApiClient, LotApiClient>();
-            services.AddScoped<IAirportService, AirportService>();
+            services.AddScoped<ILotApiClient, MockLotApiClient>();
+            services.AddScoped<IAirportService, MockAirportService>();
 
             services.AddOptions();
             services.Configure<LotApiConfiguration>(Configuration.GetSection(nameof(LotApiConfiguration)));

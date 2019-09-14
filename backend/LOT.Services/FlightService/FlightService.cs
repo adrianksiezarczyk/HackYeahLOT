@@ -1,8 +1,8 @@
-﻿using LOT.Services.FlightService.Models;
+﻿using LOT.Common.Extensions;
+using LOT.Services.FlightService.Models;
 using LOT.Services.LotApiClient;
-using System;
+using LOT.Services.LotApiClient.Models;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LOT.Services.FlightService
@@ -16,10 +16,23 @@ namespace LOT.Services.FlightService
             this.lotApiClient = lotApiClient;
         }
 
-        public Task<FlightModel> GetFlight()
+        public async Task<IEnumerable<FlightModel>> GetFlights(GetFlightsRequest request)
         {
-            return null;
-            //return lotApiClient.
+            var from = new string[] { request.From };
+            var to = new string[] { request.To };
+
+            return await lotApiClient.GetOffers(new GetOffersRequest()
+            {
+                GetOffersRequestParam = new GetOffersRequestParam()
+                {
+                    Origin = from,
+                    Destination = to,
+                    DepartureDate = new List<string>() { request.Date.ToLotFormat() },
+                    TripType = request.OneWay ? "O" : "R",
+                    ReturnDate = request.Date.AddDays(7).ToLotFormat(),
+                    NumberOfAdultsOver16 = request.NumberOfAdultsOver16
+                }
+            });
         }
     }
 }

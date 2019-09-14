@@ -18,4 +18,13 @@
     <ProjectReference Include="..\LOT.Services\LOT.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Mock\airports.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Mock\flights.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

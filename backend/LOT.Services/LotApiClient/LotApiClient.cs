@@ -1,10 +1,14 @@
 ﻿using LOT.Common.Configuration;
+using LOT.Common.Extensions;
 using LOT.Services.FlightService.Models;
+using LOT.Services.LotApiClient.Models;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
-using System.Text;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace LOT.Services.LotApiClient
@@ -18,11 +22,30 @@ namespace LOT.Services.LotApiClient
             this.lotApiConfig = lotApiConfig.Value;
         }
 
-        public async Task<FlightModel> GetFlight()
+        public async Task<IEnumerable<FlightModel>> GetOffers(GetOffersRequest request)
         {
-            return new FlightModel()
+            var authToken = await GetAuthToken();
+
+            using (var http = GetHttpClient())
             {
-                Content = await GetAuthToken()
+                http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
+
+                var x = request.Stringify();
+                var response = await http.PostAsync("booking/availability", request.AsJson());
+
+                var stringResponse = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                    throw new Exception($"Unable to get flights! Error: {stringResponse}");
+
+                var parsed = JsonConvert.DeserializeObject<GetOffersResponse>(stringResponse);
+                var allOffers = parsed.FlightsGroupedByPrice.SelectMany(a => a);
+
+                 var grouped = allOffers.GroupBy(a => a.Outbound.Segments.Last().ArrivalAirport);
+
+                var res = new List<FlightModel>();
+
+                return res;
             };
         }
 
@@ -30,8 +53,17 @@ namespace LOT.Services.LotApiClient
         {
             using (var http = GetHttpClient())
             {
-                var response = await http.PostAsync("auth/token/get", null);
-                return await response.Content.ReadAsStringAsync();
+                var response = await http.PostAsync("auth/token/get", new
+                {
+                    secret_key = lotApiConfig.Secret
+                }.AsJson());
+
+                if (!response.IsSuccessStatusCode)
+                    throw new Exception("Unable to get access token!");
+
+                var deserialized = JsonConvert.DeserializeObject<AuthTokenModel>(await response.Content.ReadAsStringAsync());
+
+                return deserialized.AccessToken;
             }
         }
 

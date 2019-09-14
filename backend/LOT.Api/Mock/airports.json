@@ -1,0 +1,30 @@
+﻿[
+  {
+    "code": "WAW",
+    "name": "Warszawa Okęcie"
+  },
+  {
+    "code": "GDN",
+    "name": "Gdańsk"
+  },
+  {
+    "code": "KTW",
+    "name": "Katowice"
+  },
+  {
+    "code": "WRO",
+    "name": "Wrocław"
+  },
+  {
+    "code": "BCN",
+    "name": "Barcelona"
+  },
+  {
+    "code": "TFS",
+    "name": "Teneryfa"
+  }, 
+  {
+    "code": "CDG",
+    "name": "Paryż"
+  }  
+]

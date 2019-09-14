@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LOT.Services.FlightService.Models
+﻿namespace LOT.Services.FlightService.Models
 {
     public class FlightModel
     {
-        public string Content { get; set; }
+        public decimal MinPrice { get; set; }
+        public string From { get; set; }
+        public string To { get; set; }
     }
 }

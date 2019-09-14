@@ -1,10 +1,12 @@
-﻿using System;
+﻿using LOT.Services.FlightService.Models;
+using LOT.Services.LotApiClient.Models;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace LOT.Services.LotApiClient
 {
     public interface ILotApiClient
     {
+        Task<IEnumerable<FlightModel>> GetOffers(GetOffersRequest request);
     }
 }
