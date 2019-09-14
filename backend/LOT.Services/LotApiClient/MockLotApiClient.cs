@@ -66,8 +66,6 @@ namespace LOT.Services.LotApiClient
             if (!string.IsNullOrEmpty(to))
                 data = data.Where(a => a.DestinationCode == to);
 
-            if (data.Count() > 9)
-                data = data.Take(9);
 
             return data;
         }
