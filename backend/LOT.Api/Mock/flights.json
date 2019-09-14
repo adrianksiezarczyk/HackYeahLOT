@@ -7,7 +7,7 @@
     "destinationCode": "BCN",
     "destinationName": "Barcelona",
     "temperature": 26,
-    "tags": [ "hot" ],
+    "tags": [ "hot", "touring" ],
     "imageUrl": "https://lonelyplanetimages.imgix.net/a/g/hi/t/c81f09d36451a030f40f459726f31a96-barcelona.jpeg?sharp=10&vib=20&w=400"
   },
   {
@@ -18,7 +18,7 @@
     "destinationCode": "TFS",
     "destinationName": "Teneryfa",
     "temperature": 29,
-    "tags": [ "hot" ],
+    "tags": [ "hot", "active" ],
     "imageUrl": "https://lonelyplanetwp.imgix.net/2016/04/GettyImages-498874871_master_1.jpg?crop=entropy&fit=crop&sharp=10&vib=20&w=400"
   },
   {
@@ -29,7 +29,7 @@
     "destinationCode": "CDG",
     "destinationName": "Paryż",
     "temperature": 20,
-    "tags": [ "hot" ],
+    "tags": [ "hot", "touring" ],
     "imageUrl": "https://www.lonelyplanet.fr/sites/lonelyplanet/files/styles/manual_crop/public/media/destination/slider/mobile/paris2_0.jpg"
   },
   {
@@ -40,7 +40,7 @@
     "destinationCode": "MLE",
     "destinationName": "Malediwy",
     "temperature": 30,
-    "tags": [ "hot" ],
+    "tags": [ "hot", "repose" ],
     "imageUrl": "https://www.fairmont.com/assets/0/137/21638/21662/21664/21719/ce1adb0d-12d1-4b40-92bc-84e4764d0fad.jpg"
   },
   {
@@ -51,7 +51,7 @@
     "destinationCode": "BCN",
     "destinationName": "Barcelona",
     "temperature": 26,
-    "tags": [ "hot" ],
+    "tags": [ "hot", "touring" ],
     "imageUrl": "https://lonelyplanetimages.imgix.net/a/g/hi/t/c81f09d36451a030f40f459726f31a96-barcelona.jpeg?sharp=10&vib=20&w=400"
 
   },
@@ -63,7 +63,7 @@
     "destinationCode": "TFS",
     "destinationName": "Teneryfa",
     "temperature": 29,
-    "tags": [ "hot" ],
+    "tags": [ "hot", "active" ],
     "imageUrl": "https://lonelyplanetwp.imgix.net/2016/04/GettyImages-498874871_master_1.jpg?crop=entropy&fit=crop&sharp=10&vib=20&w=400"
   },
   {
@@ -74,7 +74,7 @@
     "destinationCode": "CDG",
     "destinationName": "Paryż",
     "temperature": 20,
-    "tags": [ "hot" ],
+    "tags": [ "hot", "touring" ],
     "imageUrl": "https://www.lonelyplanet.fr/sites/lonelyplanet/files/styles/manual_crop/public/media/destination/slider/mobile/paris2_0.jpg"
   },
   {
@@ -85,7 +85,7 @@
     "destinationCode": "MLE",
     "destinationName": "Malediwy",
     "temperature": 30,
-    "tags": [ "hot" ],
+    "tags": [ "hot", "repose" ],
     "imageUrl": "https://www.fairmont.com/assets/0/137/21638/21662/21664/21719/ce1adb0d-12d1-4b40-92bc-84e4764d0fad.jpg"
   },
   {
@@ -96,7 +96,7 @@
     "destinationCode": "BCN",
     "destinationName": "Barcelona",
     "temperature": 26,
-    "tags": [ "hot" ],
+    "tags": [ "hot", "touring" ],
     "imageUrl": "https://lonelyplanetimages.imgix.net/a/g/hi/t/c81f09d36451a030f40f459726f31a96-barcelona.jpeg?sharp=10&vib=20&w=400"
   },
   {
@@ -107,7 +107,7 @@
     "destinationCode": "TFS",
     "destinationName": "Teneryfa",
     "temperature": 29,
-    "tags": [ "hot" ],
+    "tags": [ "hot", "active" ],
     "imageUrl": "https://lonelyplanetwp.imgix.net/2016/04/GettyImages-498874871_master_1.jpg?crop=entropy&fit=crop&sharp=10&vib=20&w=400"
   },
   {
@@ -118,7 +118,7 @@
     "destinationCode": "CDG",
     "destinationName": "Paryż",
     "temperature": 20,
-    "tags": [ "hot" ],
+    "tags": [ "hot", "touring" ],
     "imageUrl": "https://www.lonelyplanet.fr/sites/lonelyplanet/files/styles/manual_crop/public/media/destination/slider/mobile/paris2_0.jpg"
   },
   {
@@ -129,7 +129,7 @@
     "destinationCode": "MLE",
     "destinationName": "Malediwy",
     "temperature": 30,
-    "tags": [ "hot" ],
+    "tags": [ "hot", "repose" ],
     "imageUrl": "https://www.fairmont.com/assets/0/137/21638/21662/21664/21719/ce1adb0d-12d1-4b40-92bc-84e4764d0fad.jpg"
   },
   {
@@ -140,7 +140,7 @@
     "destinationCode": "BCN",
     "destinationName": "Barcelona",
     "temperature": 26,
-    "tags": [ "hot" ],
+    "tags": [ "hot", "touring" ],
     "imageUrl": "https://lonelyplanetimages.imgix.net/a/g/hi/t/c81f09d36451a030f40f459726f31a96-barcelona.jpeg?sharp=10&vib=20&w=400"
   },
   {
@@ -151,7 +151,7 @@
     "destinationCode": "TFS",
     "destinationName": "Teneryfa",
     "temperature": 29,
-    "tags": [ "hot" ],
+    "tags": [ "hot", "active" ],
     "imageUrl": "https://lonelyplanetwp.imgix.net/2016/04/GettyImages-498874871_master_1.jpg?crop=entropy&fit=crop&sharp=10&vib=20&w=400"
   },
   {
@@ -162,7 +162,7 @@
     "destinationCode": "CDG",
     "destinationName": "Paryż",
     "temperature": 20,
-    "tags": [ "hot" ],
+    "tags": [ "hot", "touring" ],
     "imageUrl": "https://www.lonelyplanet.fr/sites/lonelyplanet/files/styles/manual_crop/public/media/destination/slider/mobile/paris2_0.jpg"
   },
   {
@@ -173,7 +173,7 @@
     "destinationCode": "MLE",
     "destinationName": "Malediwy",
     "temperature": 30,
-    "tags": [ "hot" ],
+    "tags": [ "hot", "repose" ],
     "imageUrl": "https://www.fairmont.com/assets/0/137/21638/21662/21664/21719/ce1adb0d-12d1-4b40-92bc-84e4764d0fad.jpg"
   },
   {
@@ -184,7 +184,7 @@
     "destinationCode": "OSL",
     "destinationName": "Oslo",
     "temperature": -3,
-    "tags": [ "cold" ],
+    "tags": [ "cold", "active" ],
     "imageUrl": "https://worlderingaround.com/wp-content/uploads/2018/01/norway-winter-road-trip-itinerary-7-2.jpg"
   },
   {
@@ -195,7 +195,7 @@
     "destinationCode": "INN",
     "destinationName": "Innsbruck",
     "temperature": 2,
-    "tags": [ "cold" ],
+    "tags": [ "cold", "active" ],
     "imageUrl": "https://podrozniczo.pl/wp-content/uploads/2016/01/austria-alpy-widok.jpg"
   },
   {
@@ -206,7 +206,7 @@
     "destinationCode": "IKT",
     "destinationName": "Irkutsk",
     "temperature": -15,
-    "tags": [ "cold" ],
+    "tags": [ "cold", "repose" ],
     "imageUrl": "https://media.istockphoto.com/photos/church-picture-id638858942?k=6&m=638858942&s=612x612&w=0&h=MYTZgUbfPQSDefmoC2B1tNhTbxe7V7F4IT5F3J1-E0s="
   },
   {
@@ -217,7 +217,7 @@
     "destinationCode": "HEL",
     "destinationName": "Helsinki",
     "temperature": 4,
-    "tags": [ "cold" ],
+    "tags": [ "cold", "repose" ],
     "imageUrl": "http://www.hel.fi/wps/wcm/connect/46292c16-fd6c-45ca-8075-6ed648a1fb51/matkailu-menestykseen.jpg?MOD=AJPERES&CACHEID=ROOTWORKSPACE-46292c16-fd6c-45ca-8075-6ed648a1fb51-m6TGhxu"
   },
   {
@@ -228,7 +228,7 @@
     "destinationCode": "AEY",
     "destinationName": "Islandia",
     "temperature": 2,
-    "tags": [ "cold" ],
+    "tags": [ "cold", "active" ],
     "imageUrl": "https://image.redbull.com/rbcom/010/2014-06-18/1331659433016_8/0012/0/310/0/2278/3499/1050/1/wodospad-aldeyjarfoss-islandia.jpg"
   },
   {
@@ -239,7 +239,7 @@
     "destinationCode": "FAE",
     "destinationName": "Wyspy Owcze",
     "temperature": 0,
-    "tags": [ "cold" ],
+    "tags": [ "cold", "touring" ],
     "imageUrl": "https://dzieckowdrodze.com/wp-content/uploads/2017/12/Faroe-16.jpg"
   }
 ]

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace LOT.Services.FlightService.Models
 {
@@ -10,5 +11,6 @@ namespace LOT.Services.FlightService.Models
         public bool OneWay { get; set; }
         public DateTime Date { get; set; }
         public string Mode { get; set; }
+        public IEnumerable<string> Tags { get; set; }
     }
 }

@@ -36,6 +36,9 @@ namespace LOT.Services.FlightService
             if (!string.IsNullOrEmpty(request.Mode))
                 res = res.Where(a => a.Tags.Contains(request.Mode));
 
+            if (request.Tags != null && request.Tags.Any())
+                res = res.Where(a => !request.Tags.Except(a.Tags).Any());
+
             res = res.OrderBy(a => Guid.NewGuid()).ToList();
 
             if (res.Count() > 9)
