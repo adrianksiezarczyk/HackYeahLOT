@@ -1,0 +1,112 @@
+<div id="content">
+    <div class="row">
+        <sa-big-breadcrumbs
+            [items]="['Product edition']"
+            icon="shopping-cart"
+            class="col-xs-12 col-sm-7 col-md-7 col-lg-4"
+        ></sa-big-breadcrumbs>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <button
+                *ngIf="hasUserPermission('CanUpdateGlobalProduct')"
+                style="margin-bottom: 20px;"
+                class="btn btn-md btn-success"
+                data-toggle="tooltip"
+                title="{{ 'update product' | i18n }}"
+                (click)="forceUpdate(product.id)"
+            >
+                <i class="fa fa-refresh"></i> Wymuś update
+            </button>
+            <button
+                *ngIf="hasUserPermission('CanUpdateGlobalProduct')"
+                style="margin-bottom: 20px;"
+                class="btn btn-md btn-warning"
+                data-toggle="tooltip"
+                title="{{ 'update product' | i18n }}"
+                (click)="forceHardUpdate(product.id)"
+            >
+                <i class="fa fa-refresh"></i> <i class="fa fa-warning"></i> Wymuś hard update
+            </button>
+            <a
+                class="btn  btn-md btn-info "
+                style="margin-bottom: 20px;"
+                target="_blank "
+                href="http://www.aliprice.com/Index/search.html?link=http://www.aliexpress.com/item//{{
+                    product.aliExpressOfferId
+                }}.html "
+            >
+                <i class="fa fa-fw fa-usd"></i>
+            </a>
+        </div>
+        <div class="col-sm-12">
+            <error-box [serverError]="serverError"></error-box>
+
+            <div *ngIf="!isLoading">
+                <ul id="myTab1" class="nav nav-tabs bordered">
+                    <li [class.active]="currentTab == 'desc'">
+                        <a (click)="currentTab = 'desc'">
+                            <i class="fa fa-fw fa-lg fa-text-height"></i> {{ 'Name and description' | i18n }}</a
+                        >
+                    </li>
+                    <li [class.active]="currentTab == 'general'">
+                        <a (click)="currentTab = 'general'">
+                            <i class="fa fa-fw fa-lg fa-info"></i> {{ 'General' | i18n }}</a
+                        >
+                    </li>
+                    <li [class.active]="currentTab == 'photos'">
+                        <a (click)="currentTab = 'photos'">
+                            <i class="fa fa-fw fa-lg fa-picture-o"></i> {{ 'Photos' | i18n }}</a
+                        >
+                    </li>
+                    <li [class.active]="currentTab == 'feautures'">
+                        <a (click)="currentTab = 'feautures'">
+                            <i class="fa fa-fw fa-lg fa-circle-thin"></i> {{ 'Feautures' | i18n }}</a
+                        >
+                    </li>
+                    <li [class.active]="currentTab == 'combinations'">
+                        <a (click)="currentTab = 'combinations'">
+                            <i class="fa fa-fw fa-lg fa-list-ul"></i> {{ 'Combinations' | i18n }}</a
+                        >
+                    </li>
+                    <li [class.active]="currentTab == 'categories'">
+                        <a (click)="currentTab = 'categories'">
+                            <i class="fa fa-fw fa-lg fa-tags"></i> {{ 'Categories' | i18n }}</a
+                        >
+                    </li>
+                    <li [class.active]="currentTab == 'price'">
+                        <a (click)="currentTab = 'price'">
+                            <i class="fa fa-fw fa-lg fa-money"></i> {{ 'Price' | i18n }}</a
+                        >
+                    </li>
+                </ul>
+                <tabset class="padding-10">
+                    <tab [active]="currentTab == 'desc'">
+                        <description-settings
+                            [productId]="product.id"
+                            [hiddenDescriptionPhotos]="product.hiddenDescriptionPhotos"
+                        ></description-settings>
+                    </tab>
+                    <tab [active]="currentTab == 'general'">
+                        <general-settings [product]="product" (refresh)="ngOnInit()"></general-settings>
+                    </tab>
+                    <tab [active]="currentTab == 'photos'">
+                        <photos-settings [product]="product" (refresh)="ngOnInit()"></photos-settings>
+                    </tab>
+                    <tab [active]="currentTab == 'feautures'">
+                        <feautures-settings [product]="product"></feautures-settings>
+                    </tab>
+                    <tab [active]="currentTab == 'combinations'">
+                        <combinations-settings [product]="product"></combinations-settings>
+                    </tab>
+                    <tab [active]="currentTab == 'categories'">
+                        <categories-settings [product]="product"></categories-settings>
+                    </tab>
+                    <tab [active]="currentTab == 'price'">
+                        <price-settings [product]="product"></price-settings>
+                    </tab>
+                </tabset>
+            </div>
+        </div>
+    </div>
+</div>

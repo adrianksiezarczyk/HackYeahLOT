@@ -1,0 +1,359 @@
+<div id="content">
+    <div class="row">
+        <sa-big-breadcrumbs
+            [items]="['Settings']"
+            icon="cogs"
+            class="col-xs-12 col-sm-7 col-md-7 col-lg-4"
+        ></sa-big-breadcrumbs>
+    </div>
+    <div class="row">
+        <div class="col-sm-12" style="margin-bottom:10px;">
+            <button class="btn btn-default" (click)="init()">
+                <i class="fa fa-refresh"></i> {{ 'Refresh' | i18n }}
+            </button>
+        </div>
+        <div class="col-sm-12">
+            <error-box [serverError]="serverError"></error-box>
+            <loader [isLoading]="isLoading"></loader>
+
+            <ul id="myTab1" class="nav nav-tabs bordered">
+                <li [class.active]="currentTab == 'settings'">
+                    <a (click)="currentTab = 'settings'"> {{ 'Name and description' | i18n }}</a>
+                </li>
+                <li [class.active]="currentTab == 'documents'">
+                    <a (click)="currentTab = 'documents'"> {{ 'Documents' | i18n }}</a>
+                </li>
+                <li [class.active]="currentTab == 'domain'">
+                    <a (click)="currentTab = 'domain'"> {{ 'Domain' | i18n }}</a>
+                </li>
+                <li [class.active]="currentTab == 'export'">
+                    <a (click)="currentTab = 'export'"> {{ 'Export' | i18n }}</a>
+                </li>
+                <li [class.active]="currentTab == 'payments'">
+                    <a (click)="currentTab = 'payments'"> {{ 'Payments' | i18n }}</a>
+                </li>
+                <li [class.active]="currentTab == 'shop'">
+                    <a (click)="currentTab = 'shop'"> {{ 'Shop' | i18n }}</a>
+                </li>
+            </ul>
+            <tabset class="padding-10">
+                <tab [active]="currentTab == 'settings'">
+                    <div *ngFor="let group of groups">
+                        <h2>{{ group || 'Others' | i18n }}</h2>
+                        <p *ngIf="group=='MetaTags'">{{ 'To substitute a product or category name, put [product_name] or [category_name] in the appropriate place' | i18n}}</p>
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <td style="width:40%">{{ 'Key' | i18n }}</td>
+                                    <td style="width:60%">{{ 'Value' | i18n }}</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let configuration of configurations | settingsGroupFilter: group">
+                                    <td>{{ configuration.key }}</td>
+                                    <td>
+                                        <span *ngIf="!editMode">{{ configuration.value }} </span>
+                                        <input
+                                            *ngIf="editMode"
+                                            class="form-control"
+                                            name="email"
+                                            [disabled]="configuration.isReadOnly"
+                                            [(ngModel)]="configuration.value"
+                                            type="text"
+                                        />
+                                       
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="pull-right">
+                                            <button
+                                                *ngIf="!editMode"
+                                                class="btn btn-success"
+                                                type="button"
+                                                (click)="editMode = true"
+                                            >
+                                                {{ 'Edit' | i18n }}
+                                            </button>
+                                            <button
+                                                *ngIf="editMode"
+                                                class="btn btn-default"
+                                                type="button"
+                                                (click)="editMode = false"
+                                            >
+                                                {{ 'Cancel' | i18n }}
+                                            </button>
+                                            <button
+                                                *ngIf="editMode"
+                                                class="btn btn-primary"
+                                                type="button"
+                                                (click)="save()"
+                                            >
+                                                <i class="fa fa-save"></i> {{ 'Save' | i18n }}
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </tab>
+                <tab [active]="currentTab == 'documents'">
+                    <h2>{{ 'Documents' || i18n }}</h2>
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <td>{{ 'Id' | i18n }}</td>
+                                <td>{{ 'Name' | i18n }}</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let document of documents">
+                                <td>{{ document.id }}</td>
+                                <td>{{ document.name }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-default" routerLink="{{ document.id }}">
+                                        <i class="glyphicon glyphicon-edit"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </tab>
+                <tab [active]="currentTab == 'domain'">
+                    <div class="col-sm-6">
+                        <form class="form-horizontal">
+                            <h3>{{ 'Your domain' | i18n }}: {{ domain.domain }}</h3>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">{{ 'Domain name' | i18n }} </label>
+                                    <div class="col-md-5">
+                                        <input
+                                            class="form-control"
+                                            name="domain"
+                                            [(ngModel)]="domain.domain"
+                                            type="text"
+                                        />
+                                    </div>
+                                    <button class="btn btn-success" (click)="canUserChangeDomain() ? changeDomain() : notAvailableModal.init()">
+                                        {{ 'Save' | i18n }}
+                                    </button>
+                                </div>
+                                <br />
+                                <button (click)="domain.domain = domain.internalDomain" class="btn btn-warning">
+                                    Przywróć domenę domyślną
+                                </button>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="col-sm-6">
+                        <div style="border:1px solid #ddd; padding:15px">
+                            <h3>{{ 'To connect your own domain, you must redirect DNS to addresses' | i18n }}:</h3>
+                            <p *ngFor="let dnsServer of domain.dnsServers">{{dnsServer}}</p>
+                            <p *ngIf="!domain.dnsServers || !domain.dnsServers.length">{{ 'addresses will appear after checking and saving the newly given domain' | i18n }}</p>
+                            <p>
+                                {{
+                                    'Then add the domain to the settings. After about 24h the store will be visible at the new address'
+                                        | i18n
+                                }}.
+                            </p>
+                            <h6>
+                                Stan propagacji zmian w DNS można z pewnym przybliżeniem sprawdzić tutaj
+                                <a target="_blank" href="https://dnschecker.org/#NS/{{ domain.domain }}"
+                                    >https://dnschecker.org/#NS/{{ domain.domain }}</a
+                                >. Wszystkie lokalizacje powinny wskazywać na serwery podane powyżej.
+                            </h6>
+                            <p>
+                                <strong>Certyfikat SSL</strong> zostanie wygenerowany automatycznie gdy propagacja DNS
+                                się zakończy.
+                            </p>
+                        </div>
+                    </div>
+                </tab>
+                <tab [active]="currentTab == 'export'">
+                    <div class="col-sm-12">
+                        <h2>{{ 'Facebook feed' | i18n }}</h2>
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <td style="width:40%">{{ 'Description' | i18n }}</td>
+                                    <td style="width:60%">{{ 'URL' | i18n }}</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let page of feedTotalPages; let i = index">
+                                    <td>{{ 'Facebook feed products page' | i18n }} {{ i }}</td>
+                                    <td>
+                                        <a
+                                            target="_blank"
+                                            href="https://s1.take.shop/export/facebookFeed?shopId={{
+                                                currentShop.id
+                                            }}&currentPage={{ i }}&pageSize=500&accessToken={{
+                                                currentSet.accessToken
+                                            }}"
+                                            >https://s1.take.shop/export/facebookFeed?shopId={{
+                                                currentShop.id
+                                            }}&currentPage={{ i }}&pageSize=500&accessToken={{
+                                                currentSet.accessToken
+                                            }}</a
+                                        >
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h2>{{ 'Google feed' | i18n }}</h2>
+                        {{ currentSet.accessToken }}
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <td style="width:40%">{{ 'Description' | i18n }}</td>
+                                    <td style="width:60%">{{ 'URL' | i18n }}</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let page of feedTotalPages; let i = index">
+                                    <td>{{ 'Google feed products page' | i18n }} {{ i }}</td>
+                                    <td>
+                                        <a
+                                            target="_blank"
+                                            href="https://api.take.shop/export/facebookFeed?shopId={{
+                                                currentShop.id
+                                            }}&currentPage={{ i }}&pageSize=500&google=true&accessToken={{
+                                                currentSet.accessToken
+                                            }}"
+                                            >https://api.take.shop/export/facebookFeed?shopId={{
+                                                currentShop.id
+                                            }}&currentPage={{ i }}&pageSize=500&google=true&accessToken={{
+                                                currentSet.accessToken
+                                            }}</a
+                                        >
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h2>{{ 'SiteMap' | i18n }}</h2>
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <td style="width:40%">{{ 'Description' | i18n }}</td>
+                                    <td style="width:60%">{{ 'URL' | i18n }}</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{ 'Categories sitemap' | i18n }}</td>
+                                    <td>
+                                        <a
+                                            target="_blank"
+                                            href="https://{{ currentShop.domain }}/sitemap.xml?shopId={{
+                                                currentShop.id
+                                            }}&currentPage=0&pageSize=0&accessToken={{ currentSet.accessToken }}"
+                                            >https://{{ currentShop.domain }}/sitemap.xml?shopId={{
+                                                currentShop.id
+                                            }}&currentPage={{ 0 }}&pageSize=0&accessToken={{
+                                                currentSet.accessToken
+                                            }}</a
+                                        >
+                                    </td>
+                                </tr>
+                                <tr *ngFor="let page of siteMapTotalPages; let i = index">
+                                    <td>{{ 'Products sitemap page' | i18n }} {{ i + 1 }}</td>
+                                    <td>
+                                        <a
+                                            target="_blank"
+                                            href="https://{{ currentShop.domain }}/sitemap.xml?shopId={{
+                                                currentShop.id
+                                            }}&currentPage={{ i + 1 }}&pageSize=50000&accessToken={{
+                                                currentSet.accessToken
+                                            }}"
+                                            >https://{{ currentShop.domain }}/sitemap.xml?shopId={{
+                                                currentShop.id
+                                            }}&currentPage={{ i + 1 }}&pageSize=50000&accessToken={{
+                                                currentSet.accessToken
+                                            }}</a
+                                        >
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </tab>
+                <tab [active]="currentTab == 'payments'">
+                    <div class="col-sm-6">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <td style="width:40%">{{ 'Name' | i18n }}</td>
+                                    <td style="width:60%">{{ 'On/Off' | i18n }}</td>
+                                    <td style="width:60%">{{ 'Settings' | i18n }}</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let paymentType of paymentTypes">
+                                    <td>{{ paymentType.name }}</td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            [(ngModel)]="paymentType.isEnabled"
+                                            (click)="changePaymentTypeEnabledStatus(paymentType)"
+                                        />
+                                    </td>
+                                    <td>
+                                        <button
+                                            class="btn btn-default"
+                                            (click)="paymentSettingsModal.init(paymentType)"
+                                        >
+                                            <i class="fa fa-cogs"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </tab>
+                <tab [active]="currentTab == 'shop'">
+                    <div class="col-sm-3">
+                        <h5>{{ 'Notification email' | i18n }}</h5>
+                        <div class="form-group" style="display:flex;">
+                            <input
+                                class="form-control"
+                                [(ngModel)]="shop.notificationEmail"
+                                [disabled]="!notificationEmailEdit"
+                            />
+                            <button
+                                type="button"
+                                class="btn btn-sm btn-default"
+                                (click)="notificationEmailEdit = !notificationEmailEdit"
+                            >
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </button>
+                        </div>
+                        <div>
+                            <button
+                                *ngIf="notificationEmailEdit"
+                                type="button"
+                                class="btn btn-sm btn-success"
+                                (click)="saveNotificationEmail(); notificationEmailEdit = false"
+                            >
+                                {{ 'Save' | i18n }}
+                            </button>
+                            <button
+                                *ngIf="notificationEmailEdit"
+                                type="button"
+                                class="btn btn-sm btn-danger"
+                                (click)="notificationEmailEdit = false"
+                            >
+                                {{ 'Cancel' | i18n }}
+                            </button>
+                        </div>
+                    </div>
+                </tab>
+            </tabset>
+        </div>
+    </div>
+</div>
+<payment-settings-modal #paymentSettingsModal (close)="init()"></payment-settings-modal>
+<not-available-modal-component #notAvailableModal (close)="init()"></not-available-modal-component>

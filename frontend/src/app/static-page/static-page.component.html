@@ -1,0 +1,93 @@
+<div id="content">
+    <div class="row">
+        <sa-big-breadcrumbs
+            [items]="['Strony statyczne']"
+            icon="file-text"
+            class="col-xs-12 col-sm-7 col-md-7 col-lg-4"
+        ></sa-big-breadcrumbs>
+    </div>
+    <div class="row">
+        <div class="col-sm-6" *ngIf="!canUserManageArticles()">
+            <p style="font-size: 16px;">{{ 'Do you want to have articles in your store?' | i18n }}</p>
+            <img style="width: 100%; margin-bottom:5px;" src="{{ json.staticPagesBase64 }}" />
+            <button class="btn btn-success" routerLink="/profile">{{ 'Change the package' | i18n }}</button>
+        </div>
+        <div class="col-sm-12" *ngIf="canUserManageArticles()">
+            <error-box [serverError]="serverError"></error-box>
+            <loader [isLoading]="isLoading"></loader>
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <td>{{ 'Id' | i18n }}</td>
+                        <td>{{ 'Photo' | i18n }}</td>
+                        <td>{{ 'Title' | i18n }}</td>
+                        <td>{{ 'URL' | i18n }}</td>
+                        <td>{{ 'Is on article list' | i18n }}</td>
+                        <td>
+                            <button (click)="init()" class="btn btn-info btn-xs">
+                                <i class="fa fa-refresh"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let page of staticPages">
+                        <td>{{ page.id }}</td>
+                        <td>
+                            <div class="productImageDiv ">
+                                <div class="thumbnail">
+                                    <img
+                                        src="https://takeshop.ams3.cdn.digitaloceanspaces.com/{{
+                                            page.photoUrl
+                                        }}_50x50.jpg_.webp"
+                                        class="img-thumbnail rounded mx-auto d-block "
+                                    />
+                                    <span>
+                                        <img
+                                            src="https://takeshop.ams3.cdn.digitaloceanspaces.com/{{
+                                                page.photoUrl
+                                            }}_350x350.jpg_.webp"
+                                            style="top: 15px !important"
+                                            class="rounded mx-auto d-block"
+                                        />
+                                    </span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            {{ page.title }}
+                        </td>
+                        <td>
+                            {{ page.url }}
+                        </td>
+                        <td>
+                            <input class="form-control" type="checkbox" [(ngModel)]="page.isOnArticleList" disabled />
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-xs btn-default" (click)="detailsModal.init(page)">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <button type="button" class="btn btn-xs btn-danger" (click)="delete(page.id)">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                            <button
+                                type="button"
+                                class="btn btn-sm btn-default pull-right"
+                                (click)="detailsModal.init()"
+                            >
+                                <i class="fa fa-plus"></i> {{ 'Add' | i18n }}
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<static-page-details-modal-component #detailsModal (close)="init($event)"></static-page-details-modal-component>

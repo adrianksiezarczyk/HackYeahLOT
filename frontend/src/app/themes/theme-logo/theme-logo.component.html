@@ -1,0 +1,33 @@
+<div class="col-sm-6">
+    <error-box [serverError]="serverError"></error-box>
+    <loader [isLoading]="isLoading"></loader>
+
+    <div class="row">
+        <div class="col-sm-6" style="margin-bottom:20px">
+            <h4>{{ 'Logo' | i18n }}</h4>
+            <div class="col-sm-12">
+                <img src="{{ logoUrl }}" style="width: 100%;" />
+            </div>
+            <input style="margin-top:5px; float:left" accept=".svg, .jpg, .png" [(ngModel)]="logoFilePath" type="file" #logoFile />
+            <button [disabled]="!logoFilePath" class="btn btn-default" (click)="uploadLogo()">
+                {{ 'Save logo' | i18n }}
+            </button>
+        </div>
+        <div class="col-sm-6" style="margin-bottom:20px">
+            <h4>{{ 'Favicon' | i18n }}</h4>
+            <div class="col-sm-12">
+                <img src="{{ faviconUrl }}" style="width: 100%;" />
+            </div>
+            <input
+                style="margin-top:5px; float:left"
+                accept=".ico, .jpg, .png"
+                [(ngModel)]="faviconFilePath"
+                type="file"
+                #faviconFile
+            />
+            <button [disabled]="!faviconFilePath" class="btn btn-default" (click)="uploadFavicon()">
+                {{ 'Save favicon' | i18n }}
+            </button>
+        </div>
+    </div>
+</div>

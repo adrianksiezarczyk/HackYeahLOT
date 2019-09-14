@@ -1,0 +1,171 @@
+<div id="content">
+    <div class="row">
+        <sa-big-breadcrumbs
+            [items]="['Offers' | i18n]"
+            icon="cart-arrow-down"
+            class="col-xs-12 col-sm-7 col-md-7 col-lg-4"
+        ></sa-big-breadcrumbs>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 relative">
+            <loader [isLoading]="isLoading"></loader>
+            <error-box [serverError]="serverError"></error-box>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover table-striped verticalMiddle">
+                            <thead>
+                                <tr>
+                                    <td>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="ID"
+                                            [(ngModel)]="request.filter.id"
+                                            [debounce]="500"
+                                            (onDebounce)="init()"
+                                        />
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="{{'Shop ID'|i18n}}"
+                                            [(ngModel)]="request.filter.shopId"
+                                            [debounce]="500"
+                                            (onDebounce)="init()"
+                                        />
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <span>Categories/Tags: </span>
+                                        <select
+                                            id="tags-select"
+                                            select2
+                                            multiple
+                                            [options]="{ tags: true }"
+                                            class="select2"
+                                            style="width: 300px; border: 1px solid #ccc; z-index: 0;"
+                                        >
+                                        </select>
+                                        <button class="btn btn-sm" (click)="init()">Search</button>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="text-center">
+                                    <td class="orderable" (click)="setOrder($event)" name="id">
+                                        {{ 'ID' | i18n }} <i [ngClass]="orderRuleClass"></i>
+                                    </td>
+                                    <td class="orderable" (click)="setOrder($event)" name="order">
+                                        {{ 'Order' | i18n }} <i [ngClass]="orderRuleClass"></i>
+                                    </td>
+                                    <td class="orderable" (click)="setOrder($event)" name="shopId">
+                                        {{ 'Shop ID' | i18n }} <i [ngClass]="orderRuleClass"></i>
+                                    </td>
+                                    <td name="photoUrl">
+                                        {{ 'Photo url' | i18n }}
+                                    </td>
+                                    <td name="tags">
+                                        {{ 'Tags' | i18n }}
+                                    </td>
+                                    <td>{{ 'Price' | i18n }}</td>
+                                    <td>{{ 'Products Count' | i18n }}</td>
+                                    <td>
+                                        <button
+                                            [disabled]="isLoading"
+                                            class="btn btn-default btn-xs"
+                                            style="width:100%"
+                                            (click)="init()"
+                                        >
+                                            <i class="fa fa-refresh"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngIf="!isLoading && response.data.length == 0">
+                                    <td colspan="8">
+                                        <div class="text-center">{{ 'No results' | i18n }}</div>
+                                    </td>
+                                </tr>
+                                <tr
+                                    class="text-center"
+                                    *ngFor="
+                                        let offer of (response.data
+                                            | paginate
+                                                : {
+                                                      itemsPerPage: itemsPerPage,
+                                                      currentPage: request.currentPage,
+                                                      totalItems: response.totalItems,
+                                                      id: 'orders'
+                                                  })
+                                    "
+                                >
+                                    <td>{{ offer.id }}</td>
+                                    <td>{{ offer.order }}</td>
+                                    <td>
+                                        {{ offer.shopId }}
+                                    </td>
+                                    <td>
+                                        <div class="productImageDiv ">
+                                            <div class="thumbnail">
+                                                <img
+                                                    src="https://takeshop.ams3.cdn.digitaloceanspaces.com/{{
+                                                        offer.photoUrl
+                                                    }}_50x50.jpg_.webp"
+                                                    class="img-thumbnail rounded mx-auto d-block "
+                                                />
+                                                <span>
+                                                    <img
+                                                        src="https://takeshop.ams3.cdn.digitaloceanspaces.com/{{
+                                                            offer.photoUrl
+                                                        }}_350x350.jpg_.webp"
+                                                        class="rounded mx-auto d-block "
+                                                    />
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>{{ offer.tags }}</td>
+                                    <td>
+                                        {{ offer.price }}
+                                    </td>
+                                    <td>{{ offer.productsCount }}</td>
+                                    <td>
+                                        <button class="btn btn-md btn-default" (click)="detailsModal.init(offer)">
+                                            <i class="glyphicon glyphicon-edit "></i>
+                                        </button>
+                                        <button class="btn btn-md btn-danger " (click)="delete(offer.id)">
+                                            <i class="glyphicon glyphicon-trash "></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="8">
+                                        <button class="btn pull-right" (click)="detailsModal.init({})">
+                                            <i class="fa fa-plus"></i> {{ 'Add' | i18n }}
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr class="pagination-row">
+                                    <td colspan="8">
+                                        <pagination-wrapper
+                                            (pageChange)="pageChange($event)"
+                                            id="orders"
+                                        ></pagination-wrapper>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<offer-details-modal-component #detailsModal (close)="init($event)"></offer-details-modal-component>

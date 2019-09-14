@@ -1,0 +1,334 @@
+.login__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #fff;
+}
+
+.login__logo {
+    max-width: 218px;
+    margin-top: 15px;
+}
+
+.login__title {
+    font-size: 24px;
+    color: #0f0d67;
+    margin-bottom: 30px;
+    margin-top: 27px;
+    text-align: center;
+    position: relative;
+    left: 3px;
+}
+@media (max-width: 720px) {
+    .login__title {
+        margin-bottom: 60px;
+    }
+}
+
+.login {
+    max-width: 965px;
+    width: 100%;
+    min-height: 570px;
+    background: #005abc;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 50px;
+    display: flex;
+    box-shadow: 0 2px 16px 0 rgba(8, 39, 102, 0.39);
+    position: relative;
+}
+
+.login::after {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    content: '';
+    background-color: #fff;
+    bottom: 61px;
+    left: -20px;
+    z-index: 2;
+}
+
+@media (max-width: 480px) {
+    .login::after {
+        display: none;
+    }
+}
+
+.login-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.login-bg::before {
+    position: absolute;
+    right: 0px;
+    bottom: -94px;
+    width: 229px;
+    height: calc(100% + 244px);
+    transform: rotate(-30deg);
+    content: '';
+    opacity: 0.04;
+    background-color: #fff;
+}
+
+.login-bg::after {
+    position: absolute;
+    right: 253px;
+    bottom: -113px;
+    width: 229px;
+    height: calc(100% + 244px);
+    transform: rotate(-30deg);
+    content: '';
+    opacity: 0.02;
+    background-color: #fff;
+}
+
+@media (max-width: 1140px) {
+    .login {
+        max-width: calc(100% - 150px);
+    }
+}
+@media (max-width: 720px) {
+    .login {
+        flex-direction: column;
+        max-width: none;
+        width: auto;
+        min-height: 0;
+    }
+}
+
+.login__image {
+    flex: 1 2 60%;
+    position: relative;
+    margin-bottom: 60px;
+    margin-left: 50px;
+    margin-top: 20px;
+    max-width: 100%;
+}
+@media (max-width: 1140px) {
+    .login__image {
+        flex: 1 1 260px;
+        max-width: 100%;
+        min-width: 0;
+        margin-left: 25px;
+    }
+}
+@media (max-width: 720px) {
+    .login__image {
+        max-width: 250px;
+        align-self: center;
+        margin-bottom: 0;
+        margin-left: 0;
+        margin-top: -40px;
+        flex-basis: 0;
+    }
+}
+
+.login__form {
+    flex: 1 0 280px;
+    max-width: 300px;
+    margin-right: 100px;
+    align-self: flex-end;
+    margin-bottom: 49px;
+    position: relative;
+    z-index: 4;
+}
+@media (max-width: 1140px) {
+    .login__form {
+        margin-right: 25px;
+    }
+}
+@media (max-width: 720px) {
+    .login__form {
+        align-self: center;
+        margin-left: 25px;
+        margin-bottom: 10px;
+        flex-basis: 0;
+    }
+}
+@media (max-width: 360px) {
+    .login__form {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+}
+
+.login__error {
+    background-color: #db3949;
+    color: #fff;
+    margin-left: 19px;
+    margin-right: 19px;
+    font-weight: 600;
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 11px 30px;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.login__input {
+    border-radius: 24px;
+    font-size: 14px;
+    padding: 12px 22px;
+    width: 100%;
+    outline: none;
+    border: solid 1px rgba(97, 113, 145, 0.7);
+}
+.login__input.register {
+    margin-top: 24px;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px #eee inset;
+}
+
+.login__passwordContainer {
+    position: relative;
+    margin-top: 24px;
+}
+
+.login__showPassword {
+    position: absolute;
+    top: 15px;
+    right: 24px;
+    cursor: pointer;
+}
+
+.login__forgottenPassword {
+    font-size: 14px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: right;
+    display: block;
+    color: #fff;
+    text-decoration: underline;
+    padding-right: 20px;
+}
+.login__forgottenPassword:hover {
+    color: #fff;
+}
+
+.login__loading {
+    height: 42px;
+    margin-top: 28px;
+    margin-bottom: 43px;
+    text-align: center;
+    position: relative;
+    top: 10px;
+}
+.login__loading .sk-three-bounce > div {
+    width: 12px;
+    height: 12px;
+    margin-left: 2px;
+    margin-right: 1px;
+}
+
+.login__submit {
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 11px 22px;
+    border: none;
+    background-color: #f25f0c;
+    color: #fff;
+    display: block;
+    width: calc(100% - 38px);
+    margin-left: 19px;
+    margin-right: 19px;
+    margin-top: 28px;
+    margin-bottom: 43px;
+    font-weight: 600;
+    box-shadow: 0px 2px 16px 0px rgba(37, 78, 163, 0.7);
+    transition: background-color 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+}
+.login__submit:hover {
+    background-color: hsl(22, 91%, 55%);
+}
+.login__submit:active {
+    background-color: hsl(22, 91%, 47%);
+}
+@media (max-width: 720px) {
+    .login__submit {
+        margin-bottom: 10px;
+        margin-top: 0px;
+    }
+}
+
+.login__terms {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login__termLink {
+    font-size: 12px;
+    padding: 12px;
+    text-align: right;
+    color: #fff;
+}
+.login__termLink:hover {
+    color: #fff;
+}
+
+.login__termLinkDivider {
+    height: 20px;
+    border-right: 1px solid #fff;
+}
+
+.login__decorator {
+    position: absolute;
+    left: -88px;
+    bottom: -18px;
+    z-index: 3;
+}
+
+@media (max-width: 480px) {
+    .login__decorator {
+        display: none;
+    }
+}
+
+.login__goToRegister {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.login__goToRegisterTitle {
+    font-size: 12px;
+    color: #494458;
+    margin-bottom: 18px;
+    margin-top: 36px;
+    position: relative;
+    left: 2px;
+}
+
+.login__goToRegisterButton {
+    font-size: 14px;
+    color: #0072ee;
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+    border: 2px solid #0072ee;
+    padding: 12px 37px;
+    display: block;
+    font-weight: 600;
+    transition: background-color 0.3s cubic-bezier(0.55, 0, 0.1, 1);
+}
+.login__goToRegisterButton:hover {
+    background-color: #0072ee;
+    color: #fff;
+    text-decoration: none;
+}
+
+button:disabled,
+button[disabled] {
+    background-color: #afbbd5;
+}

@@ -1,0 +1,70 @@
+<div id="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <error-box [serverError]="serverError"></error-box>
+            <loader [isLoading]="isLoading"></loader>
+            <div class="col-sm-8">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <td>{{ 'Language' | i18n }}</td>
+                            <td>{{ 'Link' | i18n }}</td>
+                            <td>{{ 'Photo' | i18n }}</td>
+                            <td>{{ 'Hidden' | i18n }}</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let banner of banners">
+                            <td style="width:30%">{{ banner.languageCode }}</td>
+                            <td style="width:30%">{{ banner.link }}</td>
+                            <td style="width:20%">{{ banner.imageUrl }}</td>
+                            <td style="width:10%">
+                                <input
+                                    type="checkbox"
+                                    [(ngModel)]="banner.isHidden"
+                                    (click)="banner.isHidden = !banner.isHidden; updateBanner(banner)"
+                                />
+                            </td>
+                            <td style="width:10%">
+                                <button class="btn btn-xs btn-danger" (click)="deleteBanner(banner.id)">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr *ngIf="addNew">
+                            <td>
+                                <language ngDefaultControl [(ngModel)]="newBanner.languageId"></language>
+                            </td>
+                            <td><input class="form-control" type="text" [(ngModel)]="newBanner.link" /></td>
+                            <td colspan="3">
+                                <input
+                                    style="margin-top:5px;"
+                                    accept=".svg"
+                                    [(ngModel)]="bannerFilePath"
+                                    type="file"
+                                    #bannerFile
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                <button *ngIf="!addNew" (click)="addNew = true" class="btn btn-xs btn-default">
+                                    <i class="fa fa-plus"></i> {{ 'Add' | i18n }}
+                                </button>
+                                <button *ngIf="addNew" (click)="addNew = false" class="btn btn-xs btn-danger">
+                                    <i class="fa fa-times"></i> {{ 'Cancel' | i18n }}
+                                </button>
+                                <button *ngIf="addNew" (click)="save()" class="btn btn-xs btn-default">
+                                    <i class="fa fa-save"></i> {{ 'Save' | i18n }}
+                                </button>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

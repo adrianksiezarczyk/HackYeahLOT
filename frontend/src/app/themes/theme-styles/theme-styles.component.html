@@ -1,0 +1,47 @@
+<div class="col-sm-6">
+    <error-box [serverError]="serverError"></error-box>
+    <loader [isLoading]="isLoading"></loader>
+
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <td style="width:40%">{{ 'Key' | i18n }}</td>
+                <td style="width:60%">{{ 'Value' | i18n }}</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let themeRecord of themeArray">
+                <td>{{ themeRecord.key }}</td>
+                <td>
+                    <span *ngIf="!editMode">{{ themeRecord.value }} </span>
+                    <input *ngIf="editMode" class="form-control" [(ngModel)]="themeRecord.value" type="text" />
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2">
+                    <div style="display:flex; justify-content: space-between;">
+                        <div>
+                            <button class="btn btn-warning" type="button" (click)="setDefaultTheme()">
+                                {{ 'Default settings' | i18n }}
+                            </button>
+                        </div>
+                        <div class="pull-right">
+                            <button *ngIf="!editMode" class="btn btn-success" type="button" (click)="canUserChangeTheme() ? editMode = true : notAvailableModal.init()">
+                                {{ 'Edit' | i18n }}
+                            </button>
+                            <button *ngIf="editMode" class="btn btn-default" type="button" (click)="editMode = false">
+                                {{ 'Cancel' | i18n }}
+                            </button>
+                            <button *ngIf="editMode" class="btn btn-primary" type="button" (click)="save()">
+                                <i class="fa fa-save"></i> {{ 'Save' | i18n }}
+                            </button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<not-available-modal-component #notAvailableModal (close)="init()"></not-available-modal-component>

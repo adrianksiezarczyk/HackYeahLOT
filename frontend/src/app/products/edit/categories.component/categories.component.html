@@ -1,0 +1,126 @@
+<div class="row">
+    <div class="col-sm-12">
+        <error-box [serverError]="serverError"></error-box>
+        <div class="col-sm-6">
+            <p>
+                {{ 'Current product category' | i18n }}: {{ getName(productCategory) }} (id:
+                {{ product.shopCategoryId ? product.shopCategoryId : '' }})
+            </p>
+            <div style="font-size: 20px; margin-bottom:20px;">
+                <a (click)="setCategories(null)"> <i class="fa fa-home"></i> {{'Back to main categories'|i18n}}</a>
+
+                <!-- <span *ngFor="let breadcrumb of breadcrumbs; let i = index">
+                    <i class="fa fa-long-arrow-right"></i>
+                    <a *ngIf="i == breadcrumbs.length - 2" (click)="setCategories(breadcrumb.id)">
+                        {{ breadcrumb.name }}</a
+                    >
+                    <span *ngIf="i != breadcrumbs.length - 2"> {{ breadcrumb.name }}</span>
+                </span> -->
+                <span>{{ getName(category) }}</span>
+            </div>
+            <loader [isLoading]="isLoading"></loader>
+
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <td></td>
+                        <td colspan="2">
+                            <language
+                                ngDefaultControl
+                                name="lang"
+                                (ngModelChange)="languageChanged()"
+                                [(ngModel)]="selectedLanguage"
+                            ></language>
+                        </td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>Id</td>
+                        <td>{{ 'Name' | i18n }}</td>
+                        <td>{{ 'Set' | i18n }}</td>
+                        <td style="width:10%">
+                            <button style="width:50px" (click)="init()" class="btn btn-default btn-xs">
+                                <i class="fa fa-refresh"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="{{ 'Name' | i18n }}"
+                                [(ngModel)]="request.filter.name"
+                                [debounce]="500"
+                                (onDebounce)="init()"
+                            />
+                        </td>
+                        <td>
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="{{ 'Prefix' | i18n }}"
+                                [(ngModel)]="request.filter.prefix"
+                                [debounce]="500"
+                                (onDebounce)="init()"
+                            />
+                        </td>
+                        <td colspan="2"></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        *ngFor="
+                            let category of response.data
+                                | paginate
+                                    : {
+                                          itemsPerPage: itemsPerPage,
+                                          currentPage: request.currentPage,
+                                          totalItems: response.totalItems,
+                                          id: 'allCategories'
+                                      }
+                        "
+                    >
+                        <td
+                            [ngStyle]="{ color: category.hasChildren ? 'green' : 'initial' }"
+                            style="cursor: pointer"
+                            (click)="setCategories(category.id)"
+                        >
+                            {{ category.id }}
+                        </td>
+                        <td style="cursor: pointer" (click)="setCategories(category.id)">
+                            {{ getName(category) }}
+                        </td>
+                        <td style="cursor: pointer" (click)="setCategories(category.id)">
+                            <span *ngIf="category.excludedFromFacebookFeed" class="label label-danger">{{
+                                'Excluded from Facebook Feed' | i18n
+                            }}</span>
+                            <span *ngIf="category.hidden" class="label label-danger">{{ 'Hidden' | i18n }}</span>
+                        </td>
+                        <td>
+                            <button
+                                class="btn btn-sm btn-success"
+                                [hidden]="productCategory && productCategory.id == category.id"
+                                (click)="update(category)"
+                            >
+                                {{ 'Set' | i18n }}
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="pagination-row">
+                        <td colspan="11">
+                            <pagination-wrapper
+                                (pageChange)="pageChange($event)"
+                                id="allCategories"
+                            ></pagination-wrapper>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

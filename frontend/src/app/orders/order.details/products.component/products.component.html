@@ -1,0 +1,69 @@
+<div class="table-responsive ">
+    <table class="table table-bordered table-hover ">
+        <thead>
+            <tr>
+                <td style="width:10% ">{{ 'Photo' | i18n }}</td>
+                <td style="width:5% ">Id</td>
+                <td style="width:20% ">{{ 'Name' | i18n }}</td>
+                <td style="width:25% ">{{ 'Combination' | i18n }}</td>
+                <td style="width:15% ">{{ 'Quantity' | i18n }}</td>
+                <td style="width:15% ">{{ 'Price' | i18n }}</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of order.products">
+                <td style="cursor: pointer" routerLink="/products/{{ product.id }}">
+                    <img
+                        *ngIf="getProductCombinationPhoto(product.variants)"
+                        [src]="getProductCombinationPhoto(product.variants)"
+                        class="img-thumbnail rounded mx-auto d-block "
+                        style="margin:0 auto"
+                    />
+                </td>
+                <td class="text-center" style="cursor: pointer" routerLink="/products/{{ product.id }}">
+                    {{ product.id }}
+                </td>
+                <td style="cursor: pointer">
+                    <div>{{ product.name }}</div>
+                    <div style="text-align: right; margin-top: 20px;">
+                        <a
+                            class="btn btn-info btn-xs"
+                            target="_blank"
+                            href="https://aliexpress.com/item/{{ product.aliExpressId }}/{{
+                                product.aliExpressId
+                            }}.html?lan=en&aff_platform=link-c-tool&cpt=1562243112246&sk=bZQxguWG&aff_trace_key=e04bfd37b811434688ea074e72bda57a-1562243112246-05533-bZQxguWG&terminal_id=50b6c8fdef034d578263d31cb29ca538"
+                        >
+                            Otwórz w aliexpress
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="!product.editMode" style="cursor: pointer" routerLink="/products/{{ product.id }}">
+                        {{ getProductCombinationName(product) }}
+                    </div>
+                </td>
+                <td style="cursor: pointer" routerLink="/products/{{ product.id }}">{{ product.quantity }}</td>
+                <td class="text-center" style="cursor: pointer" routerLink="/products/{{ product.id }}">
+                    {{ product.price }} {{ order.currencyCode }}
+                </td>
+                <td>
+                    <button
+                        class="btn btn-success"
+                        type="button"
+                        (click)="
+                            combinationModal.init({
+                                orderProductVariants: product.variants,
+                                orderProductId: product.orderProductId
+                            })
+                        "
+                    >
+                        {{ 'Edit' | i18n }}
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<combination-modal-component #combinationModal (close)="init()"></combination-modal-component>

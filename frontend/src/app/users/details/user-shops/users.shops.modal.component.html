@@ -1,0 +1,30 @@
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog  modal-md ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ 'Assign shop' | i18n }} {{ shop.name }}
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <error-box [serverError]="serverError"></error-box>
+                    <loader [isLoading]="isLoading"></loader>
+                    <div class="col-sm-12">
+                        <p>{{ 'Select the set to which the store will be assigned' }}:</p>
+                        <select [(ngModel)]="selectedSetId">
+                            <option [value]="set.id" *ngFor="let set of sets">{{ set.id }} {{ set.name }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button " class="btn btn-danger" (click)="cancel()">{{ 'Cancel' | i18n }}</button>
+                <button type="button " class="btn btn-success" (click)="save()">
+                    <i class=" fa fa-check"></i> {{ 'Save' | i18n }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

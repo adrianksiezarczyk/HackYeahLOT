@@ -1,0 +1,109 @@
+<div>
+    <div class="col-sm-12">
+        <error-box [serverError]="serverError"></error-box>
+        <loader [isLoading]="isLoading"></loader>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <td style="width:14%">
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="{{ 'Code' | i18n }}"
+                            [(ngModel)]="request.filter.name"
+                            [debounce]="500"
+                            (onDebounce)="ngOnInit()"
+                        />
+                    </td>
+                    <td style="width:14%"></td>
+                    <td style="width:14%"></td>
+                    <td style="width:14%"></td>
+                    <td style="width:14%"></td>
+                    <td style="width:14%">
+                        <label style="margin-top:5px;">
+                            <input
+                                type="checkbox"
+                                class="checkbox"
+                                [debounce]="100"
+                                (onDebounce)="ngOnInit()"
+                                [checked]="request.filter.onlyAny"
+                                [(ngModel)]="request.filter.onlyAny"
+                            />
+                            <span>{{ 'Unused only' | i18n }}</span>
+                        </label>
+                    </td>
+                    <td style="width:4%"></td>
+                </tr>
+                <tr>
+                    <td>{{ 'Code' | i18n }}</td>
+                    <td>{{ 'Value' | i18n }}</td>
+                    <td>{{ 'Min order value' | i18n }}</td>
+                    <td>{{ 'Expiration date from' | i18n }}</td>
+                    <td>{{ 'Expiration date to' | i18n }}</td>
+                    <td>{{ 'Remaining amount' | i18n }}</td>
+                    <td>
+                        <button style="width:50px" (click)="ngOnInit()" class="btn btn-default btn-xs">
+                            <i class="fa fa-refresh"></i>
+                        </button>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    *ngFor="
+                        let discount of (response.data
+                            | paginate
+                                : {
+                                      itemsPerPage: itemsPerPage,
+                                      currentPage: request.currentPage,
+                                      totalItems: response.totalItems,
+                                      id: 'discounts'
+                                  })
+                    "
+                >
+                    <td>{{ discount.code }}</td>
+                    <td>{{ discount.value }} {{ discount.discountType == 1 ? discount.currencySymbol : '%' }}</td>
+                    <td>
+                        <span [ngClass]="{ danger: discount.minOrderValue == 0 }">
+                            {{ discount.minOrderValue | number: '0.2-2' }} {{ discount.currencySymbol }}
+                        </span>
+                    </td>
+                    <td>{{ discount.startDate | date: 'shortDate' }}</td>
+                    <td>{{ discount.endDate | date: 'shortDate' }}</td>
+                    <td>{{ discount.leftQuantity }}</td>
+                    <td>
+                        <a
+                            class="
+                    btn btn-default btn-xs"
+                            (click)="discountModal.init(discount)"
+                            ><i class="fa fa-edit"></i
+                        ></a>
+                        <a class="btn btn-danger btn-xs" (click)="deleteDiscount(discount.id)"
+                            ><i class="fa fa-trash"></i
+                        ></a>
+                    </td>
+                </tr>
+
+                <tr></tr>
+            </tbody>
+
+            <tfoot>
+                <tr class="pagination-row">
+                    <td colspan="8">
+                        <pagination-wrapper (pageChange)="pageChange($event)" id="discounts"></pagination-wrapper>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="col-sm-10">
+        <div class="pull-right">
+            <button class="btn btn-success" (click)="discountModal.init({ discountType: null })">
+                <i class="fa fa-plus"></i> {{ 'Add' | i18n }}
+            </button>
+        </div>
+    </div>
+</div>
+
+<newdiscount-modal-component #discountModal (close)="ngOnInit($event)"></newdiscount-modal-component>

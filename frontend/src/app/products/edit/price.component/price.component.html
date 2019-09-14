@@ -1,0 +1,76 @@
+<loader [isLoading]="isLoading"></loader>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="table-responsive ">
+            <table class="table table-bordered table-hover verticalMiddle ">
+                <thead>
+                    <tr>
+                        <td colspan="2 ">{{ 'Settings' | i18n }}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- <tr>
+                        <td>
+                            <div class="settingsRow">{{ 'Commission' | i18n }}</div>
+                        </td>
+                        <td>
+                            <select
+                                class="form-control select"
+                                name="comissionTypeId"
+                                [(ngModel)]="product.commissionTypeId"
+                            >
+                                <option *ngFor="let commissionType of commissionTypes" [ngValue]="commissionType.id">{{
+                                    commissionType.name
+                                }}</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'Discount' | i18n }}</td>
+                        <td>
+                            <div class="checkbox ">
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        class="checkbox"
+                                        [(ngModel)]="product.hasPromotion"
+                                        [checked]="product.hasPromotion"
+                                    />
+                                    <span>{{'Configure the promotional price' |i18n}}</span>
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr [ngClass]="{ opacity03: !product.hasPromotion }">
+                        <td><span class="pull-right"> {{'Increase the price by' | i18n}} (%) </span></td>
+                        <td><input class="form-control" type="number " /></td>
+                    </tr>
+                    <tr [ngClass]="{ opacity03: !product.hasPromotion }">
+                        <td><span class="pull-right"> {{'Then reduce by' | i18n}} (%) </span></td>
+                        <td><input class="form-control" type="number " /></td>
+                    </tr>
+                    <tr [ngClass]="{ opacity03: !product.hasPromotion }">
+                        <td><span class="pull-right"> {{'Example' | i18n}}: </span></td>
+                        <td>
+                            {{'Price before promotion' | i18n}}: <strong>12 zł</strong> <br />
+                            {{'A visible reduction' | i18n}}: {{'of'}} <strong>20 zł</strong> {{'on' | i18n}} <strong>14 zł</strong>
+                        </td>
+                    </tr> -->
+                    <tr>
+                        <td>{{ 'Additional margin' | i18n }}</td>
+                        <td><input class="form-control" type="number" [(ngModel)]="product.additionalMargin" /></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2">
+                            <button type="button" class="btn btn-success pull-right" (click)="save()">
+                                <i class=" fa fa-check"></i> {{ 'Save' | i18n }}
+                            </button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

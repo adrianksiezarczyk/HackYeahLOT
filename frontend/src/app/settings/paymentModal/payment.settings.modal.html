@@ -1,0 +1,49 @@
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog  modal-md ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ 'Settings for chosen payment type' | i18n }}
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <error-box [serverError]="serverError"></error-box>
+                    <loader [isLoading]="isLoading"></loader>
+                    <div class="col-sm-12">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <td style="width:40%">{{ 'Key' | i18n }}</td>
+                                    <td style="width:60%">{{ 'Value' | i18n }}</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let configuration of paymentType.configurations">
+                                    <td>{{ configuration.key }}</td>
+                                    <td>
+                                        <input
+                                            class="form-control"
+                                            name="email"
+                                            [(ngModel)]="configuration.value"
+                                            type="text"
+                                        />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" (click)="hide()">
+                    {{ 'Cancel' | i18n }}
+                </button>
+                <button type="button " class="btn btn-success" (click)="save()">
+                    {{ 'Save' | i18n }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

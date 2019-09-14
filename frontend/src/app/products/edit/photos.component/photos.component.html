@@ -1,0 +1,30 @@
+<loader [isLoading]="isLoading"></loader>
+<error-box [serverError]="serverError"></error-box>
+
+<div class="row" *ngIf="!isLoading">
+    <div class="col-sm-12">
+        <div class="product-img-container" *ngFor="let photo of product.photos">
+            <span *ngIf="photo.default" class="default-label label label-success"> {{ 'Default' | i18n }} </span>
+            <img
+                class="rounded float-left"
+                style="max-width:100px "
+                class="productImage "
+                [ngClass]="{ active: !photo.hidden }"
+                [src]="photo.imageUrl"
+            />
+            <br />
+            <div class="pull-right">
+                <button class="btn btn-xs btn-danger" (click)="deletePhoto(photo)"><i class="fa fa-times"></i></button>
+                <button *ngIf="!photo.default" class="btn btn-xs btn-success" (click)="setAsDefault(photo)">
+                    <i class="fa fa-check"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12" style="margin-top:20px" >
+        <button class="btn btn-success" (click)="addPhotoModal.init()">
+        <span>{{ 'Add' | i18n }} </span>
+    </button>
+    </div>
+</div>
+<add-photo-modal-component #addPhotoModal (close)="this.refresh.emit()" [productId]="product.id"></add-photo-modal-component>

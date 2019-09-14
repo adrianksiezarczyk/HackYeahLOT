@@ -1,0 +1,62 @@
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog  modal-md ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ 'Utwórz płatność za plan' | i18n }}
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <error-box [serverError]="serverError"></error-box>
+                    <loader [isLoading]="isLoading"></loader>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Plan*</label>
+                            <select name="planId" class="form-control" [(ngModel)]="planId">
+                                <option value="1">Starter</option>
+                                <option value="2">Basic</option>
+                                <option value="3">Pro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Kwota</label>
+                            <input name="amount" type="number" class="form-control" [(ngModel)]="amount" />
+                        </div>
+                        <div class="form-group">
+                            <label>Data od</label>
+                            <input
+                                name="dateStart"
+                                placeholder="{{ 'From' | i18n }}"
+                                class="form-control datepicker"
+                                [saUiDatepicker]
+                                [ngModel]="dateStart | date: 'shortDate'"
+                                (ngModelChange)="dateStart = $event"
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label>Data do</label>
+                            <input
+                                name="dateEnd"
+                                placeholder="{{ 'To' | i18n }}"
+                                class="form-control datepicker"
+                                [saUiDatepicker]
+                                [ngModel]="dateEnd | date: 'shortDate'"
+                                (ngModelChange)="dateEnd = $event"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" (click)="hide()">
+                    {{ 'Cancel' | i18n }}
+                </button>
+                <button (click)="createInternalOrder()" type="submit" class="btn btn-success">
+                    {{ 'Create' | i18n }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

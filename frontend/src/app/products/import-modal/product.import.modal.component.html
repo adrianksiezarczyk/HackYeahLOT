@@ -1,0 +1,59 @@
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog  modal-md ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ 'Import product by URL or ID' | i18n }}
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <error-box [serverError]="serverError"></error-box>
+                    <loader [isLoading]="isLoading"></loader>
+                    <div class="col-sm-12" *ngIf="hasPermissionToImport">
+                        <div class="form-group" style="position: relative">
+                            <label style="font-weight: bold;    color: #666;">{{ 'Product URL' | i18n }}</label
+                            ><br />
+                            <input
+                                [(ngModel)]="importModel.productUrl"
+                                name="productUrl"
+                                style="width:100%;border: 1px solid #d1d1d1;border-radius: 3px;"
+                            />
+                        </div>
+                        <p>{{ 'or' | i18n }}</p>
+                        <div class="form-group" style="position: relative">
+                            <label style="font-weight: bold;    color: #666;">{{ 'Product ID' | i18n }}</label
+                            ><br /><input
+                                [(ngModel)]="importModel.productId"
+                                name="productId"
+                                style="width:100%;border: 1px solid #d1d1d1;border-radius: 3px;"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-sm-12" *ngIf="!hasPermissionToImport">
+                        <h3>
+                            {{
+                                'Your package does not allow you to import from Aliexpress. Use the following in the product database or change the package'
+                                    | i18n
+                            }}.
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" (click)="hide()">
+                    {{ 'Cancel' | i18n }}
+                </button>
+                <button *ngIf="hasPermissionToImport" type="button " class="btn btn-success" (click)="import()">
+                    {{ 'Import' | i18n }}
+                </button>
+                <a href="/profile">
+                    <button *ngIf="!hasPermissionToImport" type="button " class="btn btn-success">
+                        {{ 'Change plan' | i18n }}
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

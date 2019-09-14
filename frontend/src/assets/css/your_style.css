@@ -1,0 +1,429 @@
+.login-info .name {
+    font-size: 16px;
+    color: black;
+    height: 21px;
+    text-align: center;
+}
+
+form .error-message {
+    color: red;
+    font-size: 14px;
+    font-weight: 600;
+    position: absolute;
+}
+
+.well {
+    overflow: auto;
+}
+
+button[hidden] {
+    display: none !important;
+}
+
+table.verticalMiddle td {
+    vertical-align: middle !important;
+}
+
+input.form-control.ng-touched.ng-invalid,
+.input-group-addon.ng-invalid {
+    border: 1px solid #b94a48;
+}
+.input-group-addon.ng-invalid {
+    border-right: none;
+}
+.help-block.error {
+    color: #b94a48;
+}
+.loader .blue {
+    background-color: #0b78ef;
+}
+.loader .login {
+    background-color: #b5d9ff;
+}
+.loader-container {
+    text-align: center;
+    margin-top: 8px;
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 10px);
+    padding-top: 160px;
+    z-index: 20;
+    background-color: rgba(255, 255, 255, 0.5);
+    left: 0;
+    right: 0;
+    top: -10px;
+}
+.note-editable {
+    max-height: 700px;
+}
+.cost {
+    color: #db4a67;
+}
+.receivedMoney {
+    color: #23c1e5;
+}
+.profit {
+    color: #739e73;
+}
+
+.checkbox.inline-block {
+    display: inline-block;
+}
+
+li.parent_li span {
+    width: 400px !important;
+}
+
+i.expand {
+    margin-top: 0px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+.order-details-text {
+    font-size: 16px;
+    margin-top: 3px;
+    display: block;
+}
+.orderDetails_productName {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#header {
+    border-bottom: 1px solid #bbb;
+    background-color: #fcfcfc !important;
+}
+.btn-header i {
+    color: #555 !important;
+}
+.btn-header i:hover {
+    color: #aaa !important;
+}
+
+.orderDetails_productList {
+    list-style-position: inside;
+    list-style: none;
+    -webkit-padding-start: 0;
+    padding-left: 0;
+}
+
+.productImageDiv {
+    text-align: center;
+    min-height: 58px;
+}
+
+.relative-center-column {
+    text-align: center;
+    position: relative;
+}
+
+.relative-center-column:hover .editBtn {
+    display: block;
+}
+
+.editBtn {
+    float: right;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: none;
+    cursor: pointer;
+}
+.editBtn.btn {
+    position: absolute;
+    top: 5px;
+    left: auto;
+}
+img.productImage {
+    opacity: 0.15;
+    cursor: pointer;
+}
+img.productImage.active {
+    opacity: 1;
+}
+.feauture {
+    cursor: pointer;
+}
+
+.label-xs {
+    margin-top: -4px;
+}
+span.label-block {
+    margin-top: 15px;
+    padding: 6px;
+    display: block;
+}
+
+td.align-right {
+    text-align: right;
+}
+
+.small-link {
+    font-size: 10px;
+}
+
+.orders-table td {
+    padding-bottom: 3px !important;
+    padding-top: 3px !important;
+}
+
+.thumbnail {
+    position: relative;
+    z-index: 0;
+    cursor: pointer;
+    background: none;
+    border: none;
+    margin-bottom: 0px;
+}
+
+.thumbnail:hover {
+    background-color: transparent;
+    z-index: 50;
+}
+
+.thumbnail span {
+    /*CSS for enlarged image*/
+    position: absolute;
+    left: -1000px;
+
+    visibility: hidden;
+    max-width: 300px;
+}
+span.danger {
+    color: red;
+    font-weight: bold;
+}
+.thumbnail span img {
+    /*CSS for enlarged image*/
+    max-width: 300px;
+    top: -235px;
+    position: absolute;
+    z-index: 100;
+    left: 23px;
+    border: 1px solid #ccc;
+}
+
+.thumbnail:hover span {
+    /*CSS for enlarged image on hover*/
+    visibility: visible;
+    top: 0;
+    left: 60px; /*position where enlarged image should offset horizontally */
+}
+
+.progress-wrapper {
+    position: relative;
+    margin: 20px auto;
+    font-size: 30px;
+    pointer-events: none;
+}
+
+.current-progress {
+    top: 50%;
+    color: #aaa;
+    text-align: center;
+    left: 50%;
+    position: absolute;
+    transform: translateY(-50%) translateX(-50%);
+}
+.flip-clock-wrapper {
+    display: inline-block;
+    width: initial !important;
+}
+
+.note-editable {
+    min-height: 200px;
+}
+
+.form-control[readonly] {
+    background: #fff;
+}
+
+.moreOrders {
+    position: absolute;
+    bottom: -4px;
+    font-size: 14px;
+    right: -7px;
+}
+.aliOfferProductUrl {
+    display: block;
+    margin-top: -6px;
+}
+
+.flip-clock-wrapper {
+    zoom: 0.8;
+    -moz-transform: scale(0.8);
+}
+
+@media (min-width: 992px) {
+    .modal-lg {
+        width: 1200px;
+    }
+}
+.verticalMiddle .checkbox {
+    position: relative;
+}
+.verticalMiddle .checkbox label {
+    position: absolute;
+    left: 2px;
+    top: -14px;
+}
+
+.settingsRow {
+    height: 22px;
+}
+
+.opacity03 {
+    opacity: 0.3;
+}
+
+.product-img-container {
+    float: left;
+    overflow: hidden;
+    position: relative;
+}
+.product-img-container .default-label {
+    position: absolute;
+    right: 2px;
+    top: 2px;
+}
+
+.product-img-container {
+    border: 1px solid #aaa;
+    margin: 2px;
+    padding: 2px;
+}
+
+.orderable {
+    cursor: pointer;
+}
+.orderable i {
+    display: none;
+}
+.orderable.active i {
+    display: inline;
+}
+
+.ngx-pagination {
+    font-size: 13px;
+}
+.ngx-pagination .current {
+    background: #56879c !important;
+}
+
+.ngx-pagination a,
+.ngx-pagination a:hover,
+.ngx-pagination button:hover,
+.ngx-pagination .current {
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+}
+
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+tfoot tr.pagination-row td {
+    padding-bottom: 0px;
+}
+
+.shop-url-button:hover {
+    color: red;
+    font-weight: bold;
+}
+.green-check {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #21c421;
+}
+.green-check i {
+    color: white;
+    padding: 4px;
+}
+.profile-table tr {
+    height: 40px;
+}
+.profile-table td,
+.profile-table th {
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+}
+.profile-table tr > th:first-child,
+.profile-table tr > td:first-child {
+    text-align: left;
+    font-weight: 400;
+}
+.profile-table tr > th {
+    text-align: left;
+    font-size: 14px;
+}
+.profile-table tr > th:first-child {
+    color: #bbb;
+    font-weight: bold;
+}
+.question-circle {
+    float: right;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #bbb;
+}
+.question-circle i {
+    padding: 5px;
+    padding-top: 0px;
+}
+
+.blue-select-btn {
+    width: 150px;
+    background-color: #25b8d8;
+    color: white;
+    padding: 5px 25px;
+    border-radius: 10px;
+}
+
+.profile-plan-data-input {
+    height: 25px;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #aaa;
+    padding-left: 100px;
+    padding-bottom: 8px;
+    font-size: 16px;
+}
+.domain-p {
+    cursor: pointer;
+}
+.domain-p:hover {
+    background-color: #e1e1e1;
+    border-radius: 3px;
+}
+.disabledNav {
+    background-color: #aaa;
+    cursor: default !important;
+    pointer-events: none !important;
+}
+.disabledNav:hover a {
+    color: #69737a !important;
+}
+.account-valid-danger{
+    color: #6b1110;
+    background-color: #f5d2d2;
+    border-color: #f1c1c0;
+}
+.account-valid-warning{
+    color: #7d6608;
+    background-color: #fcf3cf;
+    border-color: #fbeebc;
+}

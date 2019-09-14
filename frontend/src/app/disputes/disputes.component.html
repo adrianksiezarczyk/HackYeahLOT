@@ -1,0 +1,212 @@
+<div id="content">
+    <div class="row">
+        <sa-big-breadcrumbs [items]="['Disputy']" icon="exclamation-circle" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></sa-big-breadcrumbs>
+    </div>
+    <div class="row">
+            <div class="col-sm-6" *ngIf="!canUserSeeDisputes()">
+                    <p style="font-size: 16px;">{{ 'This functionality is available in a higher package' | i18n }}</p>
+                    <button class="btn btn-success" routerLink="/profile">{{ 'Change the package' | i18n }}</button>
+    
+            </div>
+        <div class="col-sm-12" *ngIf="canUserSeeDisputes()">
+            <table class="table table-bordered table-striped verticalMiddle">
+                <thead>
+                    <tr>
+                        <td style="width:100px">{{'Total posts' |i18n}}</td>
+                        <td style="width:100px">{{'Accepted' |i18n}}</td>
+                        <td style="width:100px">{{'Rejected' |i18n}}</td>
+                        <td style="width:100px">{{'The sum of the expected amounts' |i18n}}</td>
+                        <td style="width:100px">{{'The sum of the amounts received' |i18n}}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            {{response.totalItems}}
+                        </td>
+                        <td>
+                            {{response.totalAccepted}}
+                        </td>
+                        <td>
+                            {{response.totalRejected}}
+
+                        </td>
+                        <td>
+                            {{response.totalAmountExpceted | number: '0.2-2' }} $
+                        </td>
+                        <td>
+                            {{response.totalAmountReceived | number: '0.2-2' }} $
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3"></td>
+                        <td>
+                            <div class="input-group">
+                                <input readonly placeholder="{{'Date from' |i18n}}" class="form-control datepicker" [saUiDatepicker]
+                                    [ngModel]="request.filter.dateFrom | date:'shortDate'" (ngModelChange)="request.filter.dateFrom = $event"
+                                    [debounce]="500" (onDebounce)="init()" />
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="button" (click)="request.filter.dateFrom = null">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-group">
+                                <input readonly placeholder="{{'Date to' |i18n}}" class="form-control datepicker" [saUiDatepicker]
+                                    [ngModel]="request.filter.dateTo | date:'shortDate'" (ngModelChange)="request.filter.dateTo = $event"
+                                    [debounce]="500" (onDebounce)="init()" />
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="button" (click)="request.filter.dateTo = null">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+
+        </div>
+
+        <div class="col-sm-12 relative" *ngIf="canUserSeeDisputes()">
+            <loader [isLoading]="isLoading"></loader>
+            <error-box [serverError]="serverError"></error-box>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered table-hover table-striped verticalMiddle">
+                        <thead>
+                            <tr>
+                                <td>
+                                    <div class="input-group">
+                                        <input readonly placeholder="{{'Data' |i18n}}" class="form-control datepicker"
+                                            [saUiDatepicker] [ngModel]="request.filter.date | date:'shortDate'"
+                                            (ngModelChange)="request.filter.date = $event" [debounce]="500"
+                                            (onDebounce)="init()" />
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-default" type="button" (click)="request.filter.date = null">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" placeholder="{{'Case number' |i18n}}" [(ngModel)]="request.filter.issuesIds">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" placeholder="{{'BaseLinker ID' |i18n}}" [(ngModel)]="request.filter.baseLinkerOrderId"
+                                        [debounce]="500" (onDebounce)="init()">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" placeholder="{{'AliExpress ID' |i18n}}" [(ngModel)]="request.filter.aliExpressOrderNumber"
+                                        [debounce]="500" (onDebounce)="init()">
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <input type="text" class="form-control" placeholder="{{'Created by' |i18n}}" [(ngModel)]="request.filter.createdBy"
+                                        [debounce]="500" (onDebounce)="init()">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" placeholder="{{'Verified by' |i18n}}"
+                                        [(ngModel)]="request.filter.verifiedBy" [debounce]="500" (onDebounce)="init()">
+                                </td>
+                                <td><input type="text" class="form-control" placeholder="{{'AliExpress account' |i18n}}" [(ngModel)]="request.filter.aliExpressUser"
+                                        [debounce]="500" (onDebounce)="init()">
+                                </td>
+                                <td></td>
+                                <td>
+
+                                </td>
+                            </tr>
+                            <tr class="text-center">
+                                <td style="width:10%" class="text-center">{{'Date' |i18n}}</td>
+                                <td style="width:10%" class="text-center">{{'Case number' |i18n}}</td>
+                                <td style="width:8%" class="text-center">{{'BaseLinker ID' |i18n}}</td>
+                                <td style="width:10%" class="text-center">{{'AliExpress ID' |i18n}}</td>
+                                <td style="width:5%" class="text-center">{{'The amount applied for' |i18n}}</td>
+                                <td style="width:5%" class="text-center">{{'The amount received' |i18n}} </td>
+                                <td style="width:15%" class="text-center">{{'Created by' |i18n}}</td>
+                                <td style="width:15%" class="text-center">{{'Verified by' |i18n}} </td>
+                                <td style="width:10%">{{'AliExpress account' |i18n}} </td>
+                                <td style="width:7%">{{'Status' |i18n}}</td>
+                                <td style="width:5%">
+                                    <button style="width:50px" (click)="init()" class="btn btn-default btn-xs">
+                                        <i class="fa fa-refresh"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="!isLoading && response.data.length == 0">
+                                <td colspan="11">
+                                    <div class="text-center">
+                                        {{'There are no results that match your criteria' |i18n}}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngFor="let dispute of response.data | paginate: { itemsPerPage: itemsPerPage, currentPage: request.currentPage, totalItems:response.totalItems, id:'disputes' }">
+
+                                <td class="text-center">
+                                    {{dispute.date | date: 'short'}}
+                                </td>
+                                <td class="text-center">
+                                    <span *ngFor="let issue of dispute.issuesIds.split(',')">
+                                        <a target="_blank" href="https://trade.aliexpress.com/issue/fastissue/Detail.htm?issueId={{issue}}">
+                                            {{issue}}</a>
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <a href="https://panel.baselinker.com/orders.php#order:{{dispute.baseLinkerOrderId}}"
+                                        target="_blank">{{dispute.baseLinkerOrderId}}</a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="https://trade.aliexpress.com/order_detail.htm?orderId={{dispute.aliExpressOrderNumber}}"
+                                        target="_blank">{{dispute.aliExpressOrderNumber}}</a>
+                                </td>
+                                <td class="text-center">
+                                    {{dispute.requestedAmount | number: '0.2-2' }}$
+                                </td>
+                                <td class="text-center">
+                                    <span *ngIf="dispute.receivedAmount !== null">
+                                        {{dispute.receivedAmount | number: '0.2-2' }}$
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    {{dispute.createdBy}}
+                                </td>
+                                <td class="text-center">
+                                    {{dispute.approvedBy}}
+                                </td>
+                                <td class="text-center">
+                                    {{dispute.aliExpressUser}}
+                                </td>
+                                <td class="text-center">
+                                    <span ngClass="{{getStatusLabel(dispute)}}">{{dispute.statusDisplayName}}</span>
+                                </td>
+                                <td class="text-center">
+
+                                    <button class="btn btn-xs btn-success" *ngIf="dispute.statusId !== DisputeStatusId.Approved"
+                                        (click)="verify(dispute.id)">
+                                        <i class="fa fa-check-circle"></i> {{'Confirm' |i18n}}
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="pagination-row">
+                                <td colspan="11">
+                                    <pagination-wrapper (pageChange)="pageChange($event)" id="disputes"></pagination-wrapper>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

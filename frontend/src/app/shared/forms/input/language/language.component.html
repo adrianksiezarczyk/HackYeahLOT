@@ -1,0 +1,5 @@
+<select class="form-control form-control-sm">
+    <option [value]="language.id" *ngFor="let language of languages">
+        {{ language.name | i18n }}
+    </option>
+</select>

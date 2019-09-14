@@ -1,0 +1,83 @@
+<div class="row">
+    <div class="col-sm-8">
+        <div class="table-responsive ">
+            <table class="table table-bordered table-hover ">
+                <thead>
+                    <tr>
+                        <td></td>
+                        <td style="width:12% ">
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="ID"
+                                [(ngModel)]="request.filter.combinationId"
+                                [debounce]="500"
+                                (onDebounce)="ngOnInit()"
+                            />
+                        </td>
+                        <td colspan="4"></td>
+                    </tr>
+                    <tr>
+                        <td style="width:5% ">{{ 'Photo' | i18n }}</td>
+                        <td class="orderable" (click)="setOrder($event)" name="id" width="120px">
+                            {{ 'ID' | i18n }} <i [ngClass]="orderRuleClass"></i>
+                        </td>
+                        <td class="orderable" (click)="setOrder($event)" name="aliExpressCombinationId" width="120px">
+                            {{ 'AliExpress ID' | i18n }} <i [ngClass]="orderRuleClass"></i>
+                        </td>
+                        <td style="width:22% ">{{ 'Variants' | i18n }}</td>
+                        <td style="width:22% ">{{ 'Price' | i18n }}</td>
+                        <td style="width:22% ">{{ 'Quantity available' | i18n }}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        *ngFor="
+                            let combination of (response.data
+                                | paginate
+                                    : {
+                                          itemsPerPage: itemsPerPage,
+                                          currentPage: request.currentPage,
+                                          totalItems: response.totalItems,
+                                          id: 'allCombinations'
+                                      })
+                        "
+                    >
+                        <td class="text-center ">
+                            <img
+                                class="img-thumbnail rounded mx-auto d-block "
+                                style="max-width:40px;margin:0auto"
+                                *ngIf="combination.photo"
+                                [src]="combination.photo?.imageUrl"
+                            />
+                        </td>
+                        <td>{{ combination.id }}</td>
+                        <td>{{ combination.aliExpressCombinationId }}</td>
+                        <td>
+                            <div>
+                                <span *ngFor="let variant of combination.variants">
+                                    {{ variant.name }}: {{ variant.value }} <br />
+                                </span>
+                            </div>
+                        </td>
+                        <td>
+                            {{ combination.combinationPrice.price | number: '0.2-2' }}
+                            {{ combination.combinationPrice.currencySymbol }}
+                        </td>
+                        <td>{{ combination.quantity }}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="pagination-row">
+                        <td colspan="6">
+                            <pagination-wrapper
+                                (pageChange)="pageChange($event)"
+                                id="allCombinations"
+                            ></pagination-wrapper>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

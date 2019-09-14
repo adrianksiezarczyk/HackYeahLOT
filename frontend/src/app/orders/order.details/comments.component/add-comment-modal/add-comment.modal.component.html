@@ -1,0 +1,33 @@
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ 'Add comment' | i18n }}
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <error-box [serverError]="serverError"></error-box>
+                    <loader [isLoading]="isLoading"></loader>
+
+                    <div class="col-md-12" *ngIf="!isLoading">
+                        <div class="form-group">
+                            <span class="control-label"> {{ 'Content' | i18n }}</span>
+                            <div style="margin-top:8px">
+                                <div [summernote] [text]="comment.content" (change)="contentChanged($event)"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button " class="btn btn-danger" (click)="hide()">{{ 'Cancel' | i18n }}</button>
+                <button type="button " class="btn btn-success" (click)="save()">
+                    <i class=" fa fa-check"></i> {{ 'Save' | i18n }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

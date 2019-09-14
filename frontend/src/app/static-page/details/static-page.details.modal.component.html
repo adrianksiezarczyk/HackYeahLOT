@@ -1,0 +1,88 @@
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ 'Static page edit' | i18n }}
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <error-box [serverError]="serverError"></error-box>
+                    <loader [isLoading]="isLoading"></loader>
+
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <label class="control-label">{{ 'Page title' | i18n }}</label>
+                            <input class="form-control" [(ngModel)]="page.title" (ngModelChange)="updateTitle()" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">{{ 'Page url' | i18n }}</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">/</span>
+                                <input class="form-control" [(ngModel)]="page.url" (ngModelChange)="formatTitle()" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">{{ 'Image' | i18n }}</label>
+                            <input
+                                class="form-control"
+                                accept="image/*"
+                                [(ngModel)]="imageFilePath"
+                                type="file"
+                                #imageFile
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">{{ 'Is on article list' | i18n }}</label>
+                            <input
+                                class="form-control"
+                                type="checkbox"
+                                [(ngModel)]="page.isOnArticleList"
+                                
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">{{ 'Page meta title' | i18n }}</label>
+                            <input class="form-control" [(ngModel)]="page.metaTitle" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">{{ 'Page meta description' | i18n }}</label>
+                            <textarea class="form-control" [(ngModel)]="page.metaDescription"></textarea>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label class="control-label">{{ 'Email template name' | i18n }}</label>
+
+                            <select
+                                class="form-control"
+                                name="status"
+                                id="select-1"
+                                [(ngModel)]="status.emailTemplateId"
+                            >
+                                <option [ngValue]="null">{{ 'None in list' | i18n }}</option>
+                                <option *ngFor="let template of templates" [ngValue]="template.id">{{
+                                    template.name
+                                }}</option>
+                            </select>
+                        </div> -->
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12" *ngIf="!isLoading">
+                            <span class="control-label"> {{ 'Content' | i18n }}</span>
+                            <div style="margin-top:8px">
+                                <div [summernote] [text]="page.content" (change)="contentChanged($event)"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button " class="btn btn-danger" (click)="hide()">{{ 'Cancel' | i18n }}</button>
+                <button type="button " class="btn btn-success" (click)="save()">
+                    <i class=" fa fa-check"></i> {{ 'Save' | i18n }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

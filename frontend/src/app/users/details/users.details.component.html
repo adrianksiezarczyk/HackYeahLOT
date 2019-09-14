@@ -1,0 +1,41 @@
+<div id="content">
+    <div class="row">
+        <sa-big-breadcrumbs
+            [items]="['Users', 'Details']"
+            icon="paint-brush"
+            class="col-xs-12 col-sm-7 col-md-7 col-lg-4"
+        ></sa-big-breadcrumbs>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <ul id="myTab3" class="nav nav-tabs bordered">
+                <li [class.active]="currentTab == 'info'">
+                    <a (click)="currentTab = 'info'">
+                        <i class="fa fa-fw fa-lg fa-shopping-cart"></i>{{ 'Informations' | i18n }}</a
+                    >
+                </li>
+                <li [class.active]="currentTab == 'edit'">
+                    <a (click)="currentTab = 'edit'">
+                        <i class="fa fa-fw fa-lg fa-dropbox"></i> {{ 'Edition' | i18n }}</a
+                    >
+                </li>
+                <li [class.active]="currentTab == 'shops'">
+                    <a (click)="currentTab = 'shops'">
+                        <i class="fa fa-fw fa-lg fa-dropbox"></i> {{ 'Shops' | i18n }}</a
+                    >
+                </li>
+            </ul>
+            <tabset class="padding-10">
+                <tab [active]="currentTab == 'info'">
+                    <user-info [user]="user"></user-info>
+                </tab>
+                <tab [active]="currentTab == 'edit'">
+                    <user-edit [user]="user" [permissions]="permissions" (refresh)="init()"></user-edit>
+                </tab>
+                <tab [active]="currentTab == 'shops'">
+                    <user-shops [shopSets]="user.sets" (refresh)="init()"></user-shops>
+                </tab>
+            </tabset>
+        </div>
+    </div>
+</div>

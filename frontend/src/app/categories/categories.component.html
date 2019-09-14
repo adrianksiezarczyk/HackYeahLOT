@@ -1,0 +1,187 @@
+<div id="content">
+    <div class="row">
+        <sa-big-breadcrumbs
+            [items]="['Categories' | i18n]"
+            icon="tags"
+            class="col-xs-12 col-sm-7 col-md-7 col-lg-4"
+        ></sa-big-breadcrumbs>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <error-box [serverError]="serverError"></error-box>
+            <loader [isLoading]="isLoading"></loader>
+            <div class="col-sm-12">
+                <div style="font-size: 20px; margin-bottom:20px;">
+                    <a (click)="setCategories(null)"> <i class="fa fa-home"></i></a>
+
+                    <span *ngFor="let breadcrumb of breadcrumbs; let i = index">
+                        <i class="fa fa-long-arrow-right"></i>
+                        <a *ngIf="i == breadcrumbs.length - 2" (click)="setCategories(breadcrumb.id)">
+                            {{ breadcrumb.name }}</a
+                        >
+                        <span *ngIf="i != breadcrumbs.length - 2"> {{ breadcrumb.name }}</span>
+                    </span>
+                </div>
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td colspan="2">
+                                <select class="form-control" [(ngModel)]="selectedLanguage">
+                                    <option value="pl">{{ 'Polish' | i18n }}</option>
+                                    <option value="en">{{ 'English' | i18n }}</option>
+                                </select>
+                            </td>
+                            <td colspan="6"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Id</td>
+                            <td>{{ 'Name' | i18n }}</td>
+                            <td>{{ 'Product prefix' | i18n }}</td>
+                            <td>{{ 'AliExpress global category' | i18n }}</td>
+                            <td>{{ 'AliExpress shop category' | i18n }}</td>
+                            <td></td>
+                            <td>{{ 'Categories order' | i18n }}</td>
+                            <td style="width:10%">
+                                <button style="width:50px" (click)="init()" class="btn btn-default btn-xs">
+                                    <i class="fa fa-refresh"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Id"
+                                    [(ngModel)]="request.filter.id"
+                                    [debounce]="500"
+                                    (onDebounce)="init()"
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="{{ 'Name' | i18n }}"
+                                    [(ngModel)]="request.filter.name"
+                                    [debounce]="500"
+                                    (onDebounce)="init()"
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="{{ 'Prefix' | i18n }}"
+                                    [(ngModel)]="request.filter.prefix"
+                                    [debounce]="500"
+                                    (onDebounce)="init()"
+                                />
+                            </td>
+                            <td colspan="3"></td>
+                            <td >   <button
+                                *ngIf="!editOrder"
+                                class="btn btn-xs btn-default"
+                                (click)="editOrder=true"
+                            >
+                                <i class="fa fa-edit"></i><span>{{'Edit'|i18n}}</span>
+                            </button>
+                            <button
+                            *ngIf="editOrder"
+                            class="btn btn-xs btn-success"
+                            (click)="editOrder=false; updateCategoriesOrder();"
+                        >
+                            <i class="fa fa-check"></i>
+                        </button>
+                            <button
+                            *ngIf="editOrder"
+                            class="btn btn-xs btn-danger"
+                            (click)="editOrder=false; init();"
+                        >
+                            <i class="fa fa-times"></i>
+                        </button>
+                        </td>
+                            <td ></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="
+                                let category of response.data
+                                    | paginate
+                                        : {
+                                              itemsPerPage: itemsPerPage,
+                                              currentPage: request.currentPage,
+                                              totalItems: response.totalItems,
+                                              id: 'allCategories'
+                                          }
+                            "
+                            style="cursor: pointer"
+                        >
+                            <td
+                                [ngStyle]="{ color: category.hasChildren ? 'green' : 'initial' }"
+                                (click)="setCategories(category.id)"
+                            >
+                                {{ category.id }}
+                            </td>
+                            <td (click)="setCategories(category.id)">{{ getName(category) }}</td>
+                            <td (click)="setCategories(category.id)">{{ getPrefix(category) }}</td>
+                            <td (click)="setCategories(category.id)">{{ category.aliExpressGloablCategoryId }}</td>
+                            <td (click)="setCategories(category.id)">{{ category.aliExpressShopCategoryId }}</td>
+                            <td (click)="setCategories(category.id)">
+                                <span *ngIf="category.excludedFromFacebookFeed" class="label label-danger">{{
+                                    'Excluded from Facebook Feed' | i18n
+                                }}</span>
+                                <span *ngIf="category.hidden" class="label label-danger">{{ 'Hidden' | i18n }}</span>
+                            </td>
+                            <td >
+                                <span *ngIf="editOrder"><input [(ngModel)]="category.order" type="number" style="max-width: 60px;"/></span>
+                                <span *ngIf="!editOrder">{{ category.order }}</span>
+                            </td>
+                            <td>
+                                <button
+                                    class="btn btn-xs btn-default"
+                                    (click)="detailsModal.init(category); $event.stopPropagation()"
+                                >
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <button class="btn btn-xs btn-danger" (click)="delete(category.id)">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr class="pagination-row">
+                            <td colspan="11">
+                                <pagination-wrapper
+                                    (pageChange)="pageChange($event)"
+                                    id="allCategories"
+                                ></pagination-wrapper>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="9">
+                                <button
+                                    class="btn btn-default pull-right"
+                                    (click)="
+                                        detailsModal.init({
+                                            parentId: breadcrumbs[breadcrumbs.length - 1]
+                                                ? breadcrumbs[breadcrumbs.length - 1].id
+                                                : null
+                                        })
+                                    "
+                                >
+                                    <i class="fa fa-plus"></i> {{ 'Add' | i18n }}
+                                </button>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<category-details-modal-component #detailsModal (close)="update($event)"></category-details-modal-component>
