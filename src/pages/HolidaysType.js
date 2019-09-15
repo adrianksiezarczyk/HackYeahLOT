@@ -23,7 +23,7 @@ const texts = {
     desc: 'Wybierz się w mroźne rejony'
   },
   surprise: {
-    header: 'Losowo',
+    header: 'Inspiracja',
     text: 'Zaskocz mnie!',
     desc: 'Pozwól nam zająć się Twoimi wakacjami'
   },
@@ -176,7 +176,7 @@ const HolidaysType = ({
     const modeString = MODES[mode] === null ? '' : `&Mode=${MODES[mode]}`;
 
     fetch(
-      `https://api.zainspirujlot.tk//Flight?From=${selectedCity.code}${modeString}`
+      `https://api.zainspirujlot.tk/Flight?From=${selectedCity.code}${modeString}`
     )
       .then(res => res.json())
       .then(flights => {
