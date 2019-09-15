@@ -14,17 +14,5 @@
   {
     "code": "WRO",
     "name": "Wrocław"
-  },
-  {
-    "code": "BCN",
-    "name": "Barcelona"
-  },
-  {
-    "code": "TFS",
-    "name": "Teneryfa"
-  }, 
-  {
-    "code": "CDG",
-    "name": "Paryż"
-  }  
+  }
 ]
