@@ -1,15 +1,17 @@
-import { useState } from 'react';
+import { useState } from "react"
 
-const TITLES = ['Skąd chcesz wylecieć?', 'Kiedy planujesz podróż?'];
+const TITLES = ["Skąd chcesz wylecieć?", "Kiedy planujesz podróż?"]
 const LocalStore = ({ children }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
   const [selectedCity, setSelectedCity] = useState({
     name: TITLES[0],
-    code: ''
-  });
-  const [selectedTime, setSelectedTime] = useState(TITLES[1]);
-  const [availableFlights, setAvailableFlights] = useState([]);
-  const [selectedFlight, setSelectedFlight] = useState(null);
+    code: ""
+  })
+  const [selectedTime, setSelectedTime] = useState(TITLES[1])
+  const [availableFlights, setAvailableFlights] = useState([])
+  const [selectedFlight, setSelectedFlight] = useState(null)
+
+  console.log("selecFlight", selectedFlight)
   return children(
     loading,
     setLoading,
@@ -21,7 +23,7 @@ const LocalStore = ({ children }) => {
     setAvailableFlights,
     selectedFlight,
     setSelectedFlight
-  );
-};
+  )
+}
 
-export default LocalStore;
+export default LocalStore

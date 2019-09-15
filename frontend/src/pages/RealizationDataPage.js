@@ -46,6 +46,10 @@ const LuggageButton = styled.div`
   text-align: center;
   margin-top: 30px;
 `
+const Price = styled.h3`
+  text-align: center;
+  font-size: 30px;
+`
 const Heading = styled.h3`
   text-align: center;
   margin-bottom: 30px;
@@ -85,7 +89,7 @@ const RealizationDataPage = ({ selectedFlight, selectedCity }) => {
     <Page>
       <Container>
         <Content>
-          <Heading>Kierunek podróży: {selectedFlight.originName}</Heading>
+          <Heading>Kierunek podróży: {selectedFlight.destinationName}</Heading>
           <Row>
             <Col>
               <Form>
@@ -108,6 +112,7 @@ const RealizationDataPage = ({ selectedFlight, selectedCity }) => {
               )}
             </Col>
           </Row>
+          <Price>{selectedFlight && selectedFlight.minPrice}zł</Price>
           <LuggageButton>Potrzebujesz bagaż?</LuggageButton>
         </Content>
       </Container>
