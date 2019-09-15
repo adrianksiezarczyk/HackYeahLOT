@@ -1,34 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { Container, Row, Col } from 'react-bootstrap';
+import React, { useState, useEffect } from "react"
+import styled from "styled-components"
+import { Container, Row, Col } from "react-bootstrap"
 
-import Dropdown from '../components/Inputs/Dropdown';
+import Dropdown from "../components/Inputs/Dropdown"
 
-import HolidayCard from './holidayType/HolidayCard';
-import Cat from '../assets/images/cat.jpg';
-import Surprise from '../assets/images/surprise.png';
-import Summer from '../assets/images/wakajki.jpg';
-import backgroundImg from '../assets/images/backgroundImg.png';
+import HolidayCard from "./holidayType/HolidayCard"
+import Cat from "../assets/images/cat.jpg"
+import Surprise from "../assets/images/surprise.png"
+import Summer from "../assets/images/wakajki.jpg"
+import backgroundImg from "../assets/images/backgroundImg.png"
 
-const whenAnswers = ['Kiedykolwiek', 'Jutro', 'Pojutrze'];
+const whenAnswers = ["Kiedykolwiek", "Jutro", "Pojutrze"]
 
 const texts = {
   winter: {
-    header: 'Zimno',
-    text: 'Zimowe szaleństwo',
-    desc: 'Wybierz się w mroźne rejony'
+    header: "Zimno",
+    text: "Zimowe szaleństwo",
+    desc: "Wybierz się w mroźne rejony"
   },
   surprise: {
-    header: 'Obojętne',
-    text: 'Zaskocz mnie!',
-    desc: 'Pozwól nam zająć się Twoimi wakacjami'
+    header: "Obojętne",
+    text: "Zaskocz mnie!",
+    desc: "Pozwól nam zająć się Twoimi wakacjami"
   },
   summer: {
-    header: 'Ciepło',
-    text: 'Letnie opalanko',
-    desc: 'Wyleguj się na słonecznych plażach'
+    header: "Ciepło",
+    text: "Letnie opalanko",
+    desc: "Wyleguj się na słonecznych plażach"
   }
-};
+}
 
 const StyledHolidaysTypeSection = styled.section`
   background-image: url(${backgroundImg});
@@ -36,6 +36,7 @@ const StyledHolidaysTypeSection = styled.section`
   background-position: center;
   background-size: cover;
 
+  margin-top: 60px;
   position: relative;
   width: 100%;
   height: 100%;
@@ -54,7 +55,7 @@ const StyledHolidaysTypeSection = styled.section`
   .no-padding-left {
     padding-left: 0;
   }
-`;
+`
 
 const Dropdowns = styled.div`
   display: flex;
@@ -82,11 +83,11 @@ const Dropdowns = styled.div`
       width: 100%;
     }
   }
-`;
+`
 
 const BackgroundSquare = styled.div`
   background: rgba(9, 52, 121, 0.85);
-`;
+`
 
 const HolidaysType = ({
   selectedCity,
@@ -98,76 +99,81 @@ const HolidaysType = ({
   goToPage,
   currentPage
 }) => {
-  const [cities, setCities] = useState([]);
+  const [cities, setCities] = useState([])
 
   useEffect(() => {
-    fetch('http://134.209.248.19:8080/Airport')
+    fetch("http://134.209.248.19:8080/Airport")
       .then(res => res.json())
-      .then(data => setCities(data));
-  }, []);
+      .then(data => setCities(data))
+  }, [])
 
   const handleDropdownClick = (e, id) => {
     if (id === 2) {
       setSelectedCity({
         name: e.target.innerText,
         code: e.target.attributes[0].value
-      });
-    } else setSelectedTime(e.target.innerText);
-  };
+      })
+    } else setSelectedTime(e.target.innerText)
+  }
 
   const handleCardClick = props => {
-    setLoading(true);
+    setLoading(true)
 
     fetch(`http://134.209.248.19:8080/Flight?From=${selectedCity.code}`)
       .then(res => res.json())
       .then(flights => {
-        setAvailableFlights(flights);
-        goToPage(1);
-        setLoading(false);
-      });
-  };
+        setAvailableFlights(flights)
+        goToPage(1)
+        setLoading(false)
+      })
+  }
 
   return (
     <StyledHolidaysTypeSection>
       {/* <BackgroundSquare /> */}
       <Container>
-        <Row className='dropdown-row'>
+        <Row className="dropdown-row">
           <Dropdowns>
             <Dropdown
               handleClick={handleDropdownClick}
               id={1}
               answers={whenAnswers}
-              title={selectedTime}></Dropdown>
+              title={selectedTime}
+            ></Dropdown>
             <Dropdown
               handleClick={handleDropdownClick}
               id={2}
               answers={cities}
-              title={selectedCity.name}></Dropdown>
+              title={selectedCity.name}
+            ></Dropdown>
           </Dropdowns>
         </Row>
         <Row>
-          <Col className='no-padding-left'>
+          <Col className="no-padding-left">
             <HolidayCard
               onClick={handleCardClick}
               image={Cat}
-              text={texts.winter}></HolidayCard>
+              text={texts.winter}
+            ></HolidayCard>
           </Col>
           <Col>
             <HolidayCard
               onClick={handleCardClick}
               image={Surprise}
-              text={texts.surprise}></HolidayCard>
+              text={texts.surprise}
+            ></HolidayCard>
           </Col>
-          <Col className='no-padding-right'>
+          <Col className="no-padding-right">
             <HolidayCard
               onClick={handleCardClick}
               image={Summer}
-              text={texts.summer}></HolidayCard>
+              text={texts.summer}
+            ></HolidayCard>
           </Col>
         </Row>
       </Container>
     </StyledHolidaysTypeSection>
-  );
-};
+  )
+}
 
-export default HolidaysType;
+export default HolidaysType

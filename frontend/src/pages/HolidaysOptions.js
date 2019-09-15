@@ -1,81 +1,81 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Container, Row } from 'react-bootstrap';
+import React, { useState } from "react"
+import styled from "styled-components"
+import { Container, Row } from "react-bootstrap"
 
-import SelectButton from './holidaysOptions/SelectButton';
-import CitiesTable from './holidaysOptions/CitiesTable';
+import SelectButton from "./holidaysOptions/SelectButton"
+import CitiesTable from "./holidaysOptions/CitiesTable"
 
-const MODES = { ACTIVE: 0, SIGHTSEEING: 1, REST: 2 };
+const MODES = { ACTIVE: 0, SIGHTSEEING: 1, REST: 2 }
 
 const data = [
   {
-    text: 'Aktywnie',
+    text: "Aktywnie",
     cities: [
       {
-        city: 'USA',
+        city: "USA",
         price: 200
       },
       {
-        city: 'Monako',
+        city: "Monako",
         price: 20
       },
       {
-        city: 'Polska',
+        city: "Polska",
         price: 3000
       },
       {
-        city: 'Estonia',
+        city: "Estonia",
         price: 300
       }
     ]
   },
   {
-    text: 'Zwiedzanie',
+    text: "Zwiedzanie",
     cities: [
       {
-        city: 'Włochy',
+        city: "Włochy",
         price: 200
       },
       {
-        city: 'Niemcy',
+        city: "Niemcy",
         price: 100
       },
       {
-        city: 'Rosja',
+        city: "Rosja",
         price: 50900340
       },
       {
-        city: 'Brazylia',
+        city: "Brazylia",
         price: 200
       }
     ]
   },
   {
-    text: 'Wypoczynek',
+    text: "Wypoczynek",
     cities: [
       {
-        city: 'Hiszpania',
+        city: "Hiszpania",
         price: 3000
       },
       {
-        city: 'Hawaje',
+        city: "Hawaje",
         price: 100000
       },
       {
-        city: 'Wenezuela',
+        city: "Wenezuela",
         price: 200
       },
       {
-        city: 'Wisła',
+        city: "Wisła",
         price: 50000
       }
     ]
   }
-];
+]
 
 const StyledHolidaysOptionsSection = styled.section`
   position: relative;
-  margin-top: 60px;
+
   width: 100%;
   height: 100%;
 
@@ -90,12 +90,17 @@ const StyledHolidaysOptionsSection = styled.section`
   .no-padding-left {
     padding-left: 0;
   }
-`;
+`
 
-const HolidaysOptions = props => {
-  const [selectedBtn, setSelectedBtn] = useState(MODES.ACTIVE);
+const HolidaysOptions = ({ availableFlights, goToPage, setSelectedFlight }) => {
+  const [selectedBtn, setSelectedBtn] = useState(MODES.ACTIVE)
 
-  const handleClick = e => setSelectedBtn(parseInt(e.target.value));
+  const handleClick = e => setSelectedBtn(parseInt(e.target.value))
+
+  const selectFlight = flight => {
+    setSelectedFlight(flight)
+    goToPage(2)
+  }
 
   return (
     <StyledHolidaysOptionsSection>
@@ -112,11 +117,14 @@ const HolidaysOptions = props => {
           ))}
         </Row> */}
         <Row>
-          <CitiesTable availableFlights={props.availableFlights} />
+          <CitiesTable
+            availableFlights={availableFlights}
+            selectFlight={selectFlight}
+          />
         </Row>
       </Container>
     </StyledHolidaysOptionsSection>
-  );
-};
+  )
+}
 
-export default HolidaysOptions;
+export default HolidaysOptions

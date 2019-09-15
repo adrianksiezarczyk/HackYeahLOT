@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState } from "react"
 
-const TITLES = ['From', 'When'];
+const TITLES = ["From", "When"]
 const LocalStore = ({ children }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
   const [selectedCity, setSelectedCity] = useState({
     name: TITLES[0],
-    code: ''
-  });
-  const [selectedTime, setSelectedTime] = useState(TITLES[1]);
-  const [availableFlights, setAvailableFlights] = useState([]);
-
+    code: ""
+  })
+  const [selectedTime, setSelectedTime] = useState(TITLES[1])
+  const [availableFlights, setAvailableFlights] = useState([])
+  const [selectedFlight, setSelectedFlight] = useState(null)
   return children(
     loading,
     setLoading,
@@ -18,8 +18,10 @@ const LocalStore = ({ children }) => {
     selectedTime,
     setSelectedTime,
     availableFlights,
-    setAvailableFlights
-  );
-};
+    setAvailableFlights,
+    selectedFlight,
+    setSelectedFlight
+  )
+}
 
-export default LocalStore;
+export default LocalStore
