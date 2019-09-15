@@ -1,77 +1,8 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Container, Row } from 'react-bootstrap';
+import React from "react"
+import styled from "styled-components"
+import { Container, Row } from "react-bootstrap"
 
-import SelectButton from './holidaysOptions/SelectButton';
-import CitiesTable from './holidaysOptions/CitiesTable';
-
-const MODES = { ACTIVE: 0, SIGHTSEEING: 1, REST: 2 };
-
-const data = [
-  {
-    text: 'Aktywnie',
-    cities: [
-      {
-        city: 'USA',
-        price: 200
-      },
-      {
-        city: 'Monako',
-        price: 20
-      },
-      {
-        city: 'Polska',
-        price: 3000
-      },
-      {
-        city: 'Estonia',
-        price: 300
-      }
-    ]
-  },
-  {
-    text: 'Zwiedzanie',
-    cities: [
-      {
-        city: 'Włochy',
-        price: 200
-      },
-      {
-        city: 'Niemcy',
-        price: 100
-      },
-      {
-        city: 'Rosja',
-        price: 50900340
-      },
-      {
-        city: 'Brazylia',
-        price: 200
-      }
-    ]
-  },
-  {
-    text: 'Wypoczynek',
-    cities: [
-      {
-        city: 'Hiszpania',
-        price: 3000
-      },
-      {
-        city: 'Hawaje',
-        price: 100000
-      },
-      {
-        city: 'Wenezuela',
-        price: 200
-      },
-      {
-        city: 'Wisła',
-        price: 50000
-      }
-    ]
-  }
-];
+import CitiesTable from "./holidaysOptions/CitiesTable"
 
 const StyledHolidaysOptionsSection = styled.section`
   position: relative;
@@ -91,17 +22,13 @@ const StyledHolidaysOptionsSection = styled.section`
   .no-padding-left {
     padding-left: 0;
   }
-`;
+`
 
 const HolidaysOptions = ({ availableFlights, goToPage, setSelectedFlight }) => {
-  const [selectedBtn, setSelectedBtn] = useState(MODES.ACTIVE);
-
-  const handleClick = e => setSelectedBtn(parseInt(e.target.value));
-
   const selectFlight = flight => {
-    setSelectedFlight(flight);
-    goToPage(2);
-  };
+    setSelectedFlight(flight)
+    goToPage(2)
+  }
 
   return (
     <StyledHolidaysOptionsSection>
@@ -125,7 +52,7 @@ const HolidaysOptions = ({ availableFlights, goToPage, setSelectedFlight }) => {
         </Row>
       </Container>
     </StyledHolidaysOptionsSection>
-  );
-};
+  )
+}
 
-export default HolidaysOptions;
+export default HolidaysOptions

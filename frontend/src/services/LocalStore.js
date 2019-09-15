@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const TITLES = ['Skąd chcesz wylecieć?', 'Kiedy planujesz podróż?'];
 const LocalStore = ({ children }) => {

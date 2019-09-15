@@ -26,7 +26,6 @@ const TabContent = styled.div`
   justify-content: center;
 `
 const TabContent2 = styled(TabContent)``
-const Image = styled.div``
 
 const PlanePlaces = ({ places, peopleCount }) => {
   const [loading, setLoading] = useState(false)
