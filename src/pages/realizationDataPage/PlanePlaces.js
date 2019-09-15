@@ -5,8 +5,20 @@ import SeatPicker from "react-seat-picker"
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  .seat-enabled {
-    background-color: #0069d9;
+  .seat {
+    background-color: #0069d9de;
+  }
+  .seat--selected {
+    background-color: #45b4ff;
+  }
+  .seat--enabled {
+    background-color: #0069d9de;
+    &:hover {
+      background-color: #0677ecd1;
+    }
+  }
+  .seat--reserved {
+    background-color: #e0e0e0 !important;
   }
 `
 const TabsHeader = styled.div`
@@ -21,7 +33,8 @@ const TabHeader = styled.div`
   display: block;
   text-align: center;
   cursor: pointer;
-  ${props => props.active && `background-color:#d9d9d9;`}
+  ${props => props.active && `background-color:#d9d9d978;`}
+  border-radius: 5px;
 `
 const TabsContent = styled.div``
 const TabContent = styled.div`

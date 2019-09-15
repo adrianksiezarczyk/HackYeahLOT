@@ -9,11 +9,10 @@ const Input = styled.div`
 `;
 const StyledLabel = styled(Form.Label)`
   position: relative;
-  bottom: 5px;
   margin-right: 5px;
   margin-bottom: 0;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 16px;
   text-transform: uppercase;
   color: #083377;
   display: block;
@@ -47,7 +46,7 @@ const People = ({ peopleCount, setPeopleCount, peopleData, setPeopleData }) => {
         {[...Array(peopleCount)].map((e, i) => {
           return (
             <div style={{ display: 'flex' }} key={i}>
-              <Input style={{ flexBasis: '100%' }}>
+              <Input style={{ flexBasis: '195px', marginTop: 0 }}>
                 <Form.Control
                   key={i}
                   placeholder='Imię i nazwisko'

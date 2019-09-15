@@ -10,23 +10,28 @@ import LotApi from '../services/lot/api';
 import MediaQuery from 'react-responsive';
 
 const Page = styled.div`
+  position: relative;
   height: 100%;
   background: #fff;
+  display: flex;
+  align-items: center;
   @media (max-width: 767px) {
     min-height: 500px;
   }
-
   .container {
-    height: 100%;
-    padding-bottom: 60px;
+    position: relative;
+    bottom: 45px;
+    z-index: 2;
   }
 `;
 const Content = styled.div`
-  background: #f1f2f4;
+  background: #fbfbfb;
   padding: 30px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+  //background: #f1f2f447;
+  border: 2px solid #f1f2f4;
+  border-radius: 3px;
+  box-shadow: 0px 5px 10px -8px rgba(0, 0, 0, 0.75);
+  padding: 30px;
 `;
 const Side = styled.div`
   //  padding: 24px 40px 20px;
@@ -54,6 +59,7 @@ const LuggageButton = styled.div`
   padding: 0 0.55556em 0;
   line-height: 2.05556em;
   background-color: #063778;
+  /* background-color: #6393c5; */
   color: #fff;
   text-align: center;
 `;
@@ -61,6 +67,8 @@ const PayButton = styled(LuggageButton)`
   margin-left: 30px;
   background-color: #063778;
 `;
+// background-color: #0069d9de;
+
 const Footer = styled.div`
   display: flex;
   justify-content: space-between;
