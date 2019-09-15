@@ -34,6 +34,10 @@ function App() {
       //if (pageNumber === 2) pageAnchor = document.getElementById("page3Anchor")
       pageAnchor.scrollIntoView({ behavior: "smooth", block: "start" })
     }
+
+    if (pageNumber < 0 || pageNumber > 2) return
+    setCurrentPage(pageNumber)
+    scrollerRef.current.goToPage(pageNumber)
   }
 
   return (
