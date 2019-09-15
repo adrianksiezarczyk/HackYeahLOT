@@ -7,7 +7,9 @@ import CitiesTable from "./holidaysOptions/CitiesTable"
 const StyledHolidaysOptionsSection = styled.section`
   position: relative;
   margin-top: 60px;
-
+  @media (max-width: 767px) {
+    margin-top: 0;
+  }
   width: 100%;
   height: 100%;
 

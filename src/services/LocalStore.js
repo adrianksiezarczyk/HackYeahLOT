@@ -16,7 +16,7 @@ const LocalStore = ({ children }) => {
   const [peopleData, setPeopleData] = useImmerState(() => [initialPersonData]);
   const [luggageCount, setLuggageCount] = useState(0);
 
-  return children(
+  return children({
     loading,
     setLoading,
     selectedCity,
@@ -31,7 +31,7 @@ const LocalStore = ({ children }) => {
     setPeopleData,
     luggageCount,
     setLuggageCount
-  );
+  });
 };
 
 export default LocalStore;
