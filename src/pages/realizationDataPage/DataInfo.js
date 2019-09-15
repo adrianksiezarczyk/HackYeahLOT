@@ -10,7 +10,7 @@ const Content = styled.div`
   margin-bottom: 15px;
   label {
     font-weight: 500;
-    font-size: 20px;
+    font-size: 16px;
     text-transform: uppercase;
     color: #083377;
     display: block;
@@ -42,6 +42,7 @@ const InputStyles = styled.div`
     width: 100%;
     margin: 0;
     max-width: 100%;
+    border: 1px solid #ced4da;
   }
 `
 const CheckboxStyles = styled.div`

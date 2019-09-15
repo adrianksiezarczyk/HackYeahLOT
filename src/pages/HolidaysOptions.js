@@ -5,8 +5,13 @@ import { Container, Row } from "react-bootstrap"
 import CitiesTable from "./holidaysOptions/CitiesTable"
 
 const StyledHolidaysOptionsSection = styled.section`
+  z-index: 2;
   position: relative;
   margin-top: 60px;
+  display: flex;
+  align-items: center;
+  outline: 1px solid white;
+  border-top: 1px solid white;
   @media (max-width: 767px) {
     margin-top: 0;
   }
