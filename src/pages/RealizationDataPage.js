@@ -77,6 +77,7 @@ const Footer = styled.div`
   position: relative;
   justify-self: flex-end;
   margin-top: auto;
+  margin-top: 13px;
 
   .luggage-counter {
     position: absolute;
