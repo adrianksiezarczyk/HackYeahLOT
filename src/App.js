@@ -8,6 +8,7 @@ import HolidaysOptions from './pages/HolidaysOptions';
 import RealizationDataPage from './pages/RealizationDataPage';
 import Header from './pages/layout/Header';
 import LocalStore from './services/LocalStore';
+import Luggage from './pages/Luggage';
 
 const Layout = styled.div`
   width: 100vw;
@@ -20,7 +21,7 @@ function App() {
   const scrollerRef = useRef(null);
 
   const goToPage = pageNumber => {
-    if (pageNumber < 0 || pageNumber > 2) return;
+    if (pageNumber < 0 || pageNumber > 3) return;
     setCurrentPage(pageNumber);
     scrollerRef.current.goToPage(pageNumber);
   };
@@ -40,7 +41,11 @@ function App() {
           availableFlights,
           setAvailableFlights,
           selectedFlight,
-          setSelectedFlight
+          setSelectedFlight,
+          peopleData,
+          setPeopleData,
+          luggageCount,
+          setLuggageCount
         ) => (
           <ReactPageScroller
             blockScrollDown={availableFlights.length === 0}
@@ -65,8 +70,18 @@ function App() {
             <RealizationDataPage
               selectedFlight={selectedFlight}
               selectedCity={selectedCity}
+              peopleData={peopleData}
+              setPeopleData={setPeopleData}
+              goToPage={goToPage}
+              luggageCount={luggageCount}
             />
-            <FourthPage />
+            <Luggage
+              goToPage={goToPage}
+              peopleData={peopleData}
+              setPeopleData={setPeopleData}
+              setLuggageCount={setLuggageCount}
+              luggageCount={luggageCount}
+            />
           </ReactPageScroller>
         )}
       </LocalStore>

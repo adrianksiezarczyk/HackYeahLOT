@@ -1,12 +1,12 @@
-import React from "react"
-import styled from "styled-components"
-import {  Minus } from "react-feather"
-import { Form } from "react-bootstrap"
-import useImmerState from "../../hooks/useImmerState"
+import React from 'react';
+import styled from 'styled-components';
+import { Minus } from 'react-feather';
+import { Form } from 'react-bootstrap';
+import useImmerState from '../../hooks/useImmerState';
 
 const Input = styled.div`
   margin-top: 10px;
-`
+`;
 const StyledLabel = styled(Form.Label)`
   position: relative;
   bottom: 5px;
@@ -22,11 +22,11 @@ const StyledLabel = styled(Form.Label)`
   line-height: 1.2;
   margin-bottom: 5px;
   position: relative;
-`
+`;
 const AddPassenger = styled.a`
   float: right;
   margin-top: 15px;
-`
+`;
 const MinusIcon = styled.div`
   display: flex;
   justify-content: center;
@@ -34,11 +34,9 @@ const MinusIcon = styled.div`
   margin-top: 5px;
   margin-left: 5px;
   cursor: pointer;
-`
-const initialPersonData = { fullName: "" }
-const People = ({ peopleCount, setPeopleCount }) => {
-  const [peopleData, setPeopleData] = useImmerState(() => [initialPersonData])
-
+`;
+const initialPersonData = { fullName: '' };
+const People = ({ peopleCount, setPeopleCount, peopleData, setPeopleData }) => {
   return (
     <div>
       <Form.Group>
@@ -46,17 +44,17 @@ const People = ({ peopleCount, setPeopleCount }) => {
 
         {[...Array(peopleCount)].map((e, i) => {
           return (
-            <div style={{ display: "flex" }} key={i}>
-              <Input style={{ flexBasis: "100%" }}>
+            <div style={{ display: 'flex' }} key={i}>
+              <Input style={{ flexBasis: '100%' }}>
                 <Form.Control
                   key={i}
-                  placeholder="Imię i nazwisko"
+                  placeholder='Imię i nazwisko'
                   value={peopleData[i].fullName}
                   onChange={e => {
-                    e.persist()
+                    e.persist();
                     setPeopleData(draft => {
-                      draft[i].fullName = e.target.value
-                    })
+                      draft[i].fullName = e.target.value;
+                    });
                   }}
                 />
               </Input>
@@ -66,32 +64,31 @@ const People = ({ peopleCount, setPeopleCount }) => {
                     onClick={() => {
                       if (peopleCount > 1) {
                         setPeopleData(draft => {
-                          draft.splice(i, 1)
-                        })
-                        setPeopleCount(peopleCount - 1)
+                          draft.splice(i, 1);
+                        });
+                        setPeopleCount(peopleCount - 1);
                       }
                     }}
                   />
                 </MinusIcon>
               )}
             </div>
-          )
+          );
         })}
         <AddPassenger
-          href=""
+          href=''
           onClick={e => {
-            e.preventDefault()
+            e.preventDefault();
             setPeopleData(draft => {
-              draft.push(initialPersonData)
-            })
-            setPeopleCount(peopleCount + 1)
-          }}
-        >
+              draft.push(initialPersonData);
+            });
+            setPeopleCount(peopleCount + 1);
+          }}>
           Dodaj kolejnego pasażera
         </AddPassenger>
       </Form.Group>
     </div>
-  )
-}
+  );
+};
 
-export default People
+export default People;

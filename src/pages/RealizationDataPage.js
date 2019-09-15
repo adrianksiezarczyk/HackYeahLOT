@@ -1,24 +1,24 @@
-import React, { useState } from "react"
+import React, { useState } from 'react';
 
-import styled from "styled-components"
-import { Container, Row, Col, Form } from "react-bootstrap"
-import DataInfo from "./realizationDataPage/DataInfo"
-import People from "./realizationDataPage/People"
-import PlanePlaces from "./realizationDataPage/PlanePlaces"
-import Loader from "react-loader-spinner"
-import LotApi from "../services/lot/api"
+import styled from 'styled-components';
+import { Container, Row, Col, Form } from 'react-bootstrap';
+import DataInfo from './realizationDataPage/DataInfo';
+import People from './realizationDataPage/People';
+import PlanePlaces from './realizationDataPage/PlanePlaces';
+import Loader from 'react-loader-spinner';
+import LotApi from '../services/lot/api';
 
 const Page = styled.div`
   height: 100%;
   background: #fff;
-`
+`;
 const Content = styled.div`
   background: #f1f2f4;
   padding: 30px;
-`
+`;
 const Side = styled.div`
   //  padding: 24px 40px 20px;
-`
+`;
 const LuggageButton = styled.div`
   background-color: #e22730;
   color: #fff;
@@ -45,19 +45,25 @@ const LuggageButton = styled.div`
   color: #fff;
   text-align: center;
   margin-top: 30px;
-`
+`;
 const Price = styled.h3`
   text-align: center;
   font-size: 30px;
-`
+`;
 const Heading = styled.h3`
   text-align: center;
   margin-bottom: 30px;
-`
-const RealizationDataPage = ({ selectedFlight, selectedCity }) => {
-  const [isLoading, setLoading] = useState(true)
-  const [details, setDetails] = useState(null)
-  const [peopleCount, setPeopleCount] = useState(1)
+`;
+const RealizationDataPage = ({
+  selectedFlight,
+  selectedCity,
+  peopleData,
+  setPeopleData,
+  goToPage
+}) => {
+  const [isLoading, setLoading] = useState(true);
+  const [details, setDetails] = useState(null);
+  const [peopleCount, setPeopleCount] = useState(1);
 
   const onDateChange = async (fromDate, toDate) => {
     try {
@@ -67,24 +73,24 @@ const RealizationDataPage = ({ selectedFlight, selectedCity }) => {
         OriginCode: selectedFlight.originCode,
         DestinationCode: selectedFlight.destinationCode,
         NumberOfAdults: peopleCount
-      })
-      setDetails(data)
+      });
+      setDetails(data);
     } catch (e) {
-      console.error("err", e)
+      console.error('err', e);
     }
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
   if (!selectedFlight)
     return (
       <Loader
-        type="TailSpin"
-        color="#063778"
+        type='TailSpin'
+        color='#063778'
         height={100}
         width={100}
         timeout={3000}
       />
-    )
+    );
   return (
     <Page>
       <Container>
@@ -98,6 +104,8 @@ const RealizationDataPage = ({ selectedFlight, selectedCity }) => {
                   <People
                     peopleCount={peopleCount}
                     setPeopleCount={setPeopleCount}
+                    peopleData={peopleData}
+                    setPeopleData={setPeopleData}
                   />
                 </Side>
               </Form>
@@ -113,11 +121,13 @@ const RealizationDataPage = ({ selectedFlight, selectedCity }) => {
             </Col>
           </Row>
           <Price>{selectedFlight && selectedFlight.minPrice}zł</Price>
-          <LuggageButton>Potrzebujesz bagaż?</LuggageButton>
+          <LuggageButton onClick={() => goToPage(3)}>
+            Potrzebujesz bagaż?
+          </LuggageButton>
         </Content>
       </Container>
     </Page>
-  )
-}
+  );
+};
 
-export default RealizationDataPage
+export default RealizationDataPage;
