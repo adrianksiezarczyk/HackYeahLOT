@@ -45,12 +45,12 @@ namespace LOT.Services.LotApiClient
             var result = new List<PlaneSeat>();
             for (var i = 'A'; i < 'Z'; i++)
             {
-                var ran = new Random().Next(0, 10);
+                var ran = new Random().Next(0, 100);
                 foreach (var seat in setsNumber)
                 {
                     result.Add(new PlaneSeat()
                     {
-                        Available = ran % 2 == 0,
+                        Available = ran % 4 == 0,
                         Name = $"{i}{seat}",
                         Class = i > 'L' ? "F" : "E"
                     });
