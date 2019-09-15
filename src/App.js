@@ -8,11 +8,15 @@ import HolidaysOptions from "./pages/HolidaysOptions"
 import RealizationDataPage from "./pages/RealizationDataPage"
 import Header from "./pages/layout/Header"
 import LocalStore from "./services/LocalStore"
+import MediaQuery from "react-responsive"
 
 const Layout = styled.div`
   width: 100vw;
   padding: 0 !important;
   margin: 0 !important;
+`
+const BreakWall = styled.div`
+  height: 120px;
 `
 
 function App() {
@@ -22,15 +26,21 @@ function App() {
   const goToPage = pageNumber => {
     if (pageNumber < 0 || pageNumber > 2) return
     setCurrentPage(pageNumber)
-    scrollerRef.current.goToPage(pageNumber)
+    if (scrollerRef.current) scrollerRef.current.goToPage(pageNumber)
+    else {
+      let pageAnchor = null
+      if (pageNumber === 1) pageAnchor = document.getElementById("page2Anchor")
+      if (pageNumber === 2) pageAnchor = document.getElementById("page3Anchor")
+      //if (pageNumber === 2) pageAnchor = document.getElementById("page3Anchor")
+      pageAnchor.scrollIntoView({ behavior: "smooth", block: "start" })
+    }
   }
 
   return (
     <Layout>
       <Header />
-
       <LocalStore>
-        {(
+        {({
           loading,
           setLoading,
           selectedCity,
@@ -41,37 +51,70 @@ function App() {
           setAvailableFlights,
           selectedFlight,
           setSelectedFlight
-        ) => (
-          <ReactPageScroller
-            blockScrollDown={
-              availableFlights.length === 0 ||
-              (currentPage === 1 && selectedFlight === null)
-            }
-            ref={scrollerRef}
-            animationTimer={300}
-          >
-            <HolidaysType
-              selectedCity={selectedCity}
-              setSelectedCity={setSelectedCity}
-              selectedTime={selectedTime}
-              setSelectedTime={setSelectedTime}
-              setLoading={setLoading}
-              setAvailableFlights={setAvailableFlights}
-              goToPage={goToPage}
-              currentPage={currentPage}
-            />
-            <HolidaysOptions
-              loading={loading}
-              availableFlights={availableFlights}
-              goToPage={goToPage}
-              setSelectedFlight={setSelectedFlight}
-            />
-            <RealizationDataPage
-              selectedFlight={selectedFlight}
-              selectedCity={selectedCity}
-            />
-            <FourthPage />
-          </ReactPageScroller>
+        }) => (
+          <>
+            <MediaQuery minWidth={768}>
+              <ReactPageScroller
+                blockScrollDown={
+                  availableFlights.length === 0 ||
+                  (currentPage === 1 && selectedFlight === null)
+                }
+                ref={scrollerRef}
+                animationTimer={300}
+              >
+                <HolidaysType
+                  selectedCity={selectedCity}
+                  setSelectedCity={setSelectedCity}
+                  selectedTime={selectedTime}
+                  setSelectedTime={setSelectedTime}
+                  setLoading={setLoading}
+                  setAvailableFlights={setAvailableFlights}
+                  goToPage={goToPage}
+                  currentPage={currentPage}
+                />
+                <HolidaysOptions
+                  loading={loading}
+                  availableFlights={availableFlights}
+                  goToPage={goToPage}
+                  setSelectedFlight={setSelectedFlight}
+                />
+                <RealizationDataPage
+                  selectedFlight={selectedFlight}
+                  selectedCity={selectedCity}
+                />
+                <FourthPage />
+              </ReactPageScroller>
+            </MediaQuery>
+            <MediaQuery maxWidth={767}>
+              <HolidaysType
+                selectedCity={selectedCity}
+                setSelectedCity={setSelectedCity}
+                selectedTime={selectedTime}
+                setSelectedTime={setSelectedTime}
+                setLoading={setLoading}
+                setAvailableFlights={setAvailableFlights}
+                goToPage={goToPage}
+                currentPage={currentPage}
+              />
+              <BreakWall />
+              <div id="page2Anchor" />
+              <HolidaysOptions
+                loading={loading}
+                availableFlights={availableFlights}
+                goToPage={goToPage}
+                setSelectedFlight={setSelectedFlight}
+              />
+              <BreakWall />
+              <div id="page3Anchor" />
+              <RealizationDataPage
+                selectedFlight={selectedFlight}
+                selectedCity={selectedCity}
+                goToPage={goToPage}
+              />
+
+              <FourthPage />
+            </MediaQuery>
+          </>
         )}
       </LocalStore>
     </Layout>

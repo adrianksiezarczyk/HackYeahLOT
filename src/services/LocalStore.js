@@ -11,8 +11,7 @@ const LocalStore = ({ children }) => {
   const [availableFlights, setAvailableFlights] = useState([])
   const [selectedFlight, setSelectedFlight] = useState(null)
 
-  console.log("selecFlight", selectedFlight)
-  return children(
+  return children({
     loading,
     setLoading,
     selectedCity,
@@ -23,7 +22,7 @@ const LocalStore = ({ children }) => {
     setAvailableFlights,
     selectedFlight,
     setSelectedFlight
-  )
+  })
 }
 
 export default LocalStore

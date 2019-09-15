@@ -7,10 +7,14 @@ import People from "./realizationDataPage/People"
 import PlanePlaces from "./realizationDataPage/PlanePlaces"
 import Loader from "react-loader-spinner"
 import LotApi from "../services/lot/api"
+import MediaQuery from "react-responsive"
 
 const Page = styled.div`
   height: 100%;
   background: #fff;
+  @media (max-width: 767px) {
+    min-height: 500px;
+  }
 `
 const Content = styled.div`
   background: #f1f2f4;
@@ -41,32 +45,52 @@ const LuggageButton = styled.div`
   font-size: 1.28571em;
   padding: 0 0.55556em 0;
   line-height: 2.05556em;
-  background-color: #4fcd3f;
+  background-color: #3a99ff;
   color: #fff;
   text-align: center;
+`
+const PayButton = styled(LuggageButton)`
+  margin-left: 30px;
+  background-color: #0069d9;
+`
+const Footer = styled.div`
+  display: flex;
+  justify-content: space-between;
   margin-top: 30px;
 `
 const Price = styled.h3`
-  text-align: center;
-  font-size: 30px;
+  font-size: 36px;
 `
 const Heading = styled.h3`
-  text-align: center;
   margin-bottom: 30px;
 `
-const RealizationDataPage = ({ selectedFlight, selectedCity }) => {
+const SeatsHeading = styled(Heading)`
+  text-align: center;
+  font-size: 24px;
+`
+
+const RealizationDataPage = ({ selectedFlight, selectedCity, goToPage }) => {
   const [isLoading, setLoading] = useState(true)
   const [details, setDetails] = useState(null)
   const [peopleCount, setPeopleCount] = useState(1)
+  const [twoWayDirection, setTwoWayDirection] = useState(false)
 
-  const onDateChange = async (fromDate, toDate) => {
+  const [fromDate, setFromDate] = useState(null)
+  const [toDate, setToDate] = useState(null)
+
+  const changePeopleCount = count => {
+    fetchData({ _peopleCount: count })
+    setPeopleCount(count)
+  }
+
+  const fetchData = async ({ _fromDate, _toDate, _peopleCount }) => {
     try {
       const data = await LotApi.getFlightDetails({
-        DepartueDate: fromDate,
-        ReturnDate: toDate,
+        DepartueDate: _fromDate || fromDate,
+        ReturnDate: _toDate || toDate,
         OriginCode: selectedFlight.originCode,
         DestinationCode: selectedFlight.destinationCode,
-        NumberOfAdults: peopleCount
+        NumberOfAdults: _peopleCount || peopleCount
       })
       setDetails(data)
     } catch (e) {
@@ -75,47 +99,98 @@ const RealizationDataPage = ({ selectedFlight, selectedCity }) => {
     setLoading(false)
   }
 
-  if (!selectedFlight)
-    return (
-      <Loader
-        type="TailSpin"
-        color="#063778"
-        height={100}
-        width={100}
-        timeout={3000}
-      />
-    )
+  const onDateChange = async (fromDate, toDate) => {
+    setFromDate(fromDate)
+    setToDate(toDate)
+    fetchData({ _fromDate: fromDate, _toDate: toDate })
+  }
+
   return (
     <Page>
-      <Container>
-        <Content>
-          <Heading>Kierunek podróży: {selectedFlight.destinationName}</Heading>
-          <Row>
-            <Col>
-              <Form>
-                <Side>
-                  <DataInfo onDateChange={onDateChange} />
-                  <People
-                    peopleCount={peopleCount}
-                    setPeopleCount={setPeopleCount}
-                  />
-                </Side>
-              </Form>
-            </Col>
-            <Col></Col>
-            <Col>
-              {!isLoading && (
-                <PlanePlaces
-                  places={details && details.departuePlaneSeats}
-                  peopleCount={peopleCount}
-                />
+      {!selectedFlight ? (
+        <MediaQuery minWidth={768}>
+          <Loader
+            type="TailSpin"
+            color="#063778"
+            height={100}
+            width={100}
+            timeout={3000}
+          />
+        </MediaQuery>
+      ) : (
+        <Container>
+          <Content>
+            <Heading>
+              Kierunek podróży: {selectedFlight.destinationName}
+            </Heading>
+            <Row>
+              <Col>
+                <Form>
+                  <Side>
+                    <DataInfo
+                      onDateChange={onDateChange}
+                      twoWayDirection={twoWayDirection}
+                      setTwoWayDirection={setTwoWayDirection}
+                    />
+                    <People
+                      peopleCount={peopleCount}
+                      setPeopleCount={changePeopleCount}
+                    />
+                  </Side>
+                </Form>
+              </Col>
+              <Col>
+                {!isLoading && (
+                  <>
+                    <SeatsHeading>
+                      {selectedFlight.originName} -{" "}
+                      {selectedFlight.destinationName}
+                    </SeatsHeading>
+                    <PlanePlaces
+                      places={details && details.departuePlaneSeats}
+                      peopleCount={peopleCount}
+                    />
+                  </>
+                )}
+              </Col>
+              <Col>
+                {twoWayDirection &&
+                  !isLoading &&
+                  details &&
+                  details.returnPlaneSeats && (
+                    <>
+                      <SeatsHeading>
+                        {selectedFlight.destinationName} -{" "}
+                        {selectedFlight.originName}
+                      </SeatsHeading>
+                      <PlanePlaces
+                        places={details && details.returnPlaneSeats}
+                        peopleCount={peopleCount}
+                      />
+                    </>
+                  )}
+              </Col>
+            </Row>
+            <Footer>
+              <LuggageButton onClick={() => goToPage(3)}>
+                Potrzebujesz dodatkowy bagaż?
+              </LuggageButton>
+              {details && (
+                <div style={{ display: "flex" }}>
+                  <Price>Łącznie do zapłaty: {details.totalPrice}zł </Price>
+                  <PayButton
+                    onClick={() => {
+                      window.location.href = `${details.deepLink}`
+                    }}
+                  >
+                    Przechodzę do rezerwacji
+                  </PayButton>
+                </div>
               )}
-            </Col>
-          </Row>
-          <Price>{selectedFlight && selectedFlight.minPrice}zł</Price>
-          <LuggageButton>Potrzebujesz bagaż?</LuggageButton>
-        </Content>
-      </Container>
+            </Footer>
+          </Content>
+        </Container>
+      )}
     </Page>
   )
 }

@@ -5,6 +5,9 @@ import SeatPicker from "react-seat-picker"
 const Content = styled.div`
   display: flex;
   flex-direction: column;
+  .seat-enabled {
+    background-color: #0069d9;
+  }
 `
 const TabsHeader = styled.div`
   display: flex;

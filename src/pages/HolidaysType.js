@@ -52,10 +52,24 @@ const StyledHolidaysTypeSection = styled.section`
     color: rgba(255, 255, 255, 0.8);
     text-align: center;
     position: relative;
-    bottom: 100px;
     font-weight: 300;
+    bottom: 100px;
+    @media (max-width: 767px) {
+      font-size: 24px;
+      font-weight: 400;
+      top: -20px;
+      bottom: unset;
+    }
   }
 
+  .col {
+    @media (max-width: 767px) {
+      flex-basis: auto;
+      padding-left: 15px !important;
+      padding-right: 15px !important;
+      margin-bottom: 30px;
+    }
+  }
   .row {
     margin: 0;
   }
@@ -93,6 +107,9 @@ const Dropdowns = styled.div`
   width: 100%;
   margin: 0 auto;
   justify-content: space-between;
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
 
   .dropdown-menu {
     width: 100%;
@@ -121,7 +138,10 @@ const Dropdowns = styled.div`
 
   .dropdown {
     width: 47%;
-
+    @media (max-width: 767px) {
+      width: 100%;
+      margin-bottom: 5px;
+    }
     &:nth-child(1) {
       margin-right: 10px;
     }
@@ -129,6 +149,10 @@ const Dropdowns = styled.div`
     button {
       display: block;
       width: 100%;
+      @media (max-width: 767px) {
+        padding: 10px;
+        font-size: 12px;
+      }
     }
   }
 `

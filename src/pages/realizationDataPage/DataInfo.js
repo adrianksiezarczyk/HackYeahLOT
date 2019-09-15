@@ -19,6 +19,9 @@ const Content = styled.div`
     line-height: 1.2;
     margin-bottom: 5px;
     position: relative;
+    @media (max-width: 767px) {
+      font-size: 14px;
+    }
   }
 `
 const InputStyles = styled.div`
@@ -68,16 +71,13 @@ const StyledFormGroup = styled(Form.Group)`
 `}
 `
 
-const DataInfo = ({ onDateChange }) => {
+const DataInfo = ({ onDateChange, twoWayDirection, setTwoWayDirection }) => {
   const [from, setFrom] = useState(null)
   const [to, setTo] = useState(null)
-  const [twoWayDirection, setTwoWayDirection] = useState(false)
 
   // useEffect(() => {
   //   if (from || to) onDateChange(from, to)
   // }, [from, onDateChange, to])
-
-
 
   const toRef = useRef(null)
 
