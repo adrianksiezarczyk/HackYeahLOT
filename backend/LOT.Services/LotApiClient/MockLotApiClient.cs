@@ -14,7 +14,13 @@ namespace LOT.Services.LotApiClient
         {
             var flightTime = new Random().Next(2, 10);
             var arrivalDate = request.DepartueDate.AddHours(12 + flightTime);
-            var deepLink = $@"https://bookerproxy.lot.com/service.php?COUNTRY_CODE=PL&LANGUAGE_CODE=PL&ORIGIN={request.Origin}&DESTINATION={request.Destination}&DEPARTURE_DATE={request.DepartueDate.ToLotFormat()}&ARRIVAL_DATE={arrivalDate.ToLotFormat()}&ADULT_COUNT={request.NumberOfAdults}&CHILD_COUNT=0&INFANT_COUNT=0&PARTNER=TFFNZEZK88W4&CLASS=E&utm_source=github&utm_medium=api";
+            var deepLink = $@"https://bookerproxy.lot.com/service.php?COUNTRY_CODE=PL&LANGUAGE_CODE=PL&ORIGIN={request.OriginCode}&DESTINATION={request.DestinationCode}&DEPARTURE_DATE={request.DepartueDate.ToLotFormat()}&ARRIVAL_DATE={arrivalDate.ToLotFormat()}&ADULT_COUNT={request.NumberOfAdults}&CHILD_COUNT=0&INFANT_COUNT=0&PARTNER=TFFNZEZK88W4&CLASS=E&utm_source=github&utm_medium=api";
+
+            var data = await GetMockData<IEnumerable<FlightModel>>("flights");
+
+            var flight = data.FirstOrDefault(a => a.DestinationCode == request.DestinationCode && a.OriginCode == request.OriginCode);
+            if (flight == null)
+                throw new Exception("Invalid flight data!");
 
             var result = new FlightDetailsModel()
             {
@@ -25,7 +31,8 @@ namespace LOT.Services.LotApiClient
                 ReturnPlaneSeats = request.ReturnDate.HasValue ? GeneratePlaneSeats() : null,
                 ReturnDate = request.ReturnDate,
                 ArrivalReturnDate = request.ReturnDate.HasValue ? request.ReturnDate.Value.AddHours(flightTime) : (DateTime?)null,
-                PlaneName = "Dreamliner"
+                PlaneName = "Dreamliner",
+                TotalPrice = flight.MinPrice * request.NumberOfAdults
             };
 
             return result;
