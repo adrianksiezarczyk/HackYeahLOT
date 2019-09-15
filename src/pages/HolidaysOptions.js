@@ -7,7 +7,7 @@ import CitiesTable from './holidaysOptions/CitiesTable';
 const StyledHolidaysOptionsSection = styled.section`
   z-index: 2;
   position: relative;
-  margin-top: 60px;
+  /* margin-top: 60px; */
   display: flex;
   align-items: center;
   outline: 1px solid white;

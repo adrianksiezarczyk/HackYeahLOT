@@ -23,10 +23,11 @@ const StyledLabel = styled(Form.Label)`
   position: relative;
 `;
 const AddPassenger = styled.a`
-  float: right;
+  /* float: right; */
   margin-top: 15px;
   color: #063778;
   text-decoration: none;
+  margin-bottom: 15px;
 `;
 const MinusIcon = styled.div`
   display: flex;
@@ -45,7 +46,7 @@ const People = ({ peopleCount, setPeopleCount, peopleData, setPeopleData }) => {
 
         {[...Array(peopleCount)].map((e, i) => {
           return (
-            <div style={{ display: 'flex' }} key={i}>
+            <div style={{ display: 'flex', marginBottom: '4px' }} key={i}>
               <Input style={{ flexBasis: '195px', marginTop: 0 }}>
                 <Form.Control
                   key={i}

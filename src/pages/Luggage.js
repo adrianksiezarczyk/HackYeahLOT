@@ -170,12 +170,10 @@ const Luggage = props => {
               <div>
                 <h3>Bezpłatny bagaż podręczny</h3>
                 <p>
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Dolore odio neque quis dignissimos alias ab iure hic quia, cum
-                  obcaecati! Tempore aperiam quas dicta laborum odio eligendi
-                  qui doloremque officiis voluptatem aspernatur expedita quae,
-                  sit reiciendis quisquam necessitatibus! Eveniet illo tempore
-                  vero sunt tenetur iste amet, error sequi cumque libero.
+                  Pasażerowie mogą podróżować z jedną bezpłatną sztuką bagażu
+                  podręcznego (maks. wymiary: 40 x 30 x 20 cm). Pamiętaj, aby
+                  przed odlotem zapoznać się z zasadami bezpieczeństwa oraz
+                  wykazem przedmiotów niedozwolonych na pokładzie samolotu.
                 </p>
               </div>
             </LuggageDesc>
@@ -184,12 +182,10 @@ const Luggage = props => {
               <div>
                 <h3>Bagaż rejestrowany</h3>
                 <p>
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Dolore odio neque quis dignissimos alias ab iure hic quia, cum
-                  obcaecati! Tempore aperiam quas dicta laborum odio eligendi
-                  qui doloremque officiis voluptatem aspernatur expedita quae,
-                  sit reiciendis quisquam necessitatibus! Eveniet illo tempore
-                  vero sunt tenetur iste amet, error sequi cumque libero.
+                  Bagaż rejestrowany jest dodatkowo płatny, zgodnie z{' '}
+                  <b>cennikiem</b>. Każdy pasażer może przewieźć jedną sztukę
+                  bagażu rejestrowanego. Pamiętaj, aby upewnić się, czy wymiary
+                  Twojej walizki mieszczą się w określonych wymiarach.
                 </p>
               </div>
             </LuggageDesc>

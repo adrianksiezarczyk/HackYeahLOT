@@ -11,6 +11,7 @@ import MediaQuery from 'react-responsive';
 
 const Page = styled.div`
   position: relative;
+  margin-top: 60px;
   height: 100%;
   background: #fff;
   display: flex;
