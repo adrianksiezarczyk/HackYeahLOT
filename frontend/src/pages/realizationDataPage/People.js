@@ -1,15 +1,9 @@
-import React, { useState } from "react"
+import React from "react"
 import styled from "styled-components"
-import { Plus, Minus } from "react-feather"
+import {  Minus } from "react-feather"
 import { Form } from "react-bootstrap"
 import useImmerState from "../../hooks/useImmerState"
 
-const ChangePeopleCountButton = styled.div`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-`
 const Input = styled.div`
   margin-top: 10px;
 `
