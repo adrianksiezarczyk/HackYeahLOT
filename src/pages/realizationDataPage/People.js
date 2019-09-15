@@ -26,6 +26,8 @@ const StyledLabel = styled(Form.Label)`
 const AddPassenger = styled.a`
   float: right;
   margin-top: 15px;
+  color: #063778;
+  text-decoration: none;
 `;
 const MinusIcon = styled.div`
   display: flex;

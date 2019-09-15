@@ -38,7 +38,7 @@ const StyledHolidaysTypeSection = styled.section`
   background-image: url(${Clouds});
   background-repeat: no-repeat;
   background-position: top;
-  background-size: 100% 85%;
+  background-size: 100% 80%;
 
   /* margin-top: 60px; */
   position: relative;
@@ -54,11 +54,25 @@ const StyledHolidaysTypeSection = styled.section`
     position: relative;
     font-weight: 300;
     bottom: 100px;
+
     @media (max-width: 767px) {
       font-size: 24px;
       font-weight: 400;
       top: -20px;
       bottom: unset;
+    }
+
+    animation: headingAnimation 1s ease-in-out forwards;
+
+    @keyframes headingAnimation {
+      0% {
+        left: -15px;
+        opacity: 0;
+      }
+      100% {
+        left: 0px;
+        opacity: 1;
+      }
     }
   }
 
@@ -98,7 +112,7 @@ const DarkOverlap = styled.div`
   right: 0;
   left: 0;
   width: 100%;
-  height: 85%;
+  height: 80%;
   background: rgba(9, 52, 121, 0.4);
 `;
 

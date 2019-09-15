@@ -15,10 +15,18 @@ const Page = styled.div`
   @media (max-width: 767px) {
     min-height: 500px;
   }
+
+  .container {
+    height: 100%;
+    padding-bottom: 60px;
+  }
 `;
 const Content = styled.div`
   background: #f1f2f4;
   padding: 30px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 const Side = styled.div`
   //  padding: 24px 40px 20px;
@@ -45,18 +53,30 @@ const LuggageButton = styled.div`
   font-size: 1.28571em;
   padding: 0 0.55556em 0;
   line-height: 2.05556em;
-  background-color: #3a99ff;
+  background-color: #063778;
   color: #fff;
   text-align: center;
 `;
 const PayButton = styled(LuggageButton)`
   margin-left: 30px;
-  background-color: #0069d9;
+  background-color: #063778;
 `;
 const Footer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 30px;
+  position: relative;
+  justify-self: flex-end;
+  margin-top: auto;
+
+  .luggage-counter {
+    position: absolute;
+    left: 0;
+    font-size: 24px;
+    top: -60px;
+    font-weight: 500;
+    color: #083377;
+  }
 `;
 const Price = styled.h3`
   text-align: center;
@@ -77,7 +97,8 @@ const RealizationDataPage = ({
   selectedCity,
   peopleData,
   setPeopleData,
-  goToPage
+  goToPage,
+  luggageCount
 }) => {
   const [isLoading, setLoading] = useState(true);
   const [details, setDetails] = useState(null);
@@ -183,12 +204,22 @@ const RealizationDataPage = ({
               </Col>
             </Row>
             <Footer>
+              {luggageCount >= 1 && (
+                <p className='luggage-counter'>
+                  Dodano {luggageCount} {luggageCount === 1 && 'sztukę'}{' '}
+                  {luggageCount >= 2 && luggageCount <= 4 && 'sztuki'}{' '}
+                  {luggageCount >= 5 && 'sztuk'} bagażu rejestrowanego
+                </p>
+              )}
               <LuggageButton onClick={() => goToPage(3)}>
                 Potrzebujesz dodatkowy bagaż?
               </LuggageButton>
               {details && (
                 <div style={{ display: 'flex' }}>
-                  <Price>Łącznie do zapłaty: {details.totalPrice}zł </Price>
+                  <Price>
+                    Łącznie do zapłaty: {details.totalPrice + luggageCount * 50}
+                    zł{' '}
+                  </Price>
                   <PayButton
                     onClick={() => {
                       window.location.href = `${details.deepLink}`;

@@ -1,8 +1,8 @@
-import React from "react"
-import styled from "styled-components"
-import { Container, Row } from "react-bootstrap"
+import React from 'react';
+import styled from 'styled-components';
+import { Container, Row } from 'react-bootstrap';
 
-import CitiesTable from "./holidaysOptions/CitiesTable"
+import CitiesTable from './holidaysOptions/CitiesTable';
 
 const StyledHolidaysOptionsSection = styled.section`
   position: relative;
@@ -12,6 +12,10 @@ const StyledHolidaysOptionsSection = styled.section`
   }
   width: 100%;
   height: 100%;
+
+  .container {
+    padding-top: 10px;
+  }
 
   .dropdown-row {
     margin-bottom: 20px;
@@ -24,13 +28,13 @@ const StyledHolidaysOptionsSection = styled.section`
   .no-padding-left {
     padding-left: 0;
   }
-`
+`;
 
 const HolidaysOptions = ({ availableFlights, goToPage, setSelectedFlight }) => {
   const selectFlight = flight => {
-    setSelectedFlight(flight)
-    goToPage(2)
-  }
+    setSelectedFlight(flight);
+    goToPage(2);
+  };
 
   return (
     <StyledHolidaysOptionsSection>
@@ -54,7 +58,7 @@ const HolidaysOptions = ({ availableFlights, goToPage, setSelectedFlight }) => {
         </Row>
       </Container>
     </StyledHolidaysOptionsSection>
-  )
-}
+  );
+};
 
-export default HolidaysOptions
+export default HolidaysOptions;

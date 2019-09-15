@@ -15,6 +15,11 @@ const Layout = styled.div`
   width: 100vw;
   padding: 0 !important;
   margin: 0 !important;
+
+  .container:focus,
+  div:focus {
+    outline: none !important;
+  }
 `;
 const BreakWall = styled.div`
   height: 120px;
@@ -92,6 +97,7 @@ function App() {
                   peopleData={peopleData}
                   setPeopleData={setPeopleData}
                   goToPage={goToPage}
+                  luggageCount={luggageCount}
                 />
                 <Luggage
                   goToPage={goToPage}
@@ -129,6 +135,7 @@ function App() {
                 goToPage={goToPage}
                 peopleData={peopleData}
                 setPeopleData={setPeopleData}
+                luggageCount={luggageCount}
               />
 
               <Luggage
