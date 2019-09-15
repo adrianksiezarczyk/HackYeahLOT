@@ -66,7 +66,10 @@ function App() {
           setSelectedFlight
         ) => (
           <ReactPageScroller
-            blockScrollDown={availableFlights.length === 0}
+            blockScrollDown={
+              availableFlights.length === 0 ||
+              (currentPage === 1 && selectedFlight === null)
+            }
             ref={scrollerRef}
             animationTimer={300}>
             <HolidaysType
