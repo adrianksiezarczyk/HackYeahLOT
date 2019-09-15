@@ -3,7 +3,6 @@ import './css/global.css';
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import ReactPageScroller from 'react-page-scroller';
-import SecondPage from './pages/SecondPage';
 
 import FourthPage from './pages/FourthPage';
 import { ArrowUp, ArrowDown } from 'react-feather';
@@ -27,7 +26,6 @@ const ScrollerArrows = styled.div`
   height: 150px;
   color: #fff;
 `;
-
 const Arrow = styled.div`
   display: flex;
   justify-content: center;
@@ -63,7 +61,9 @@ function App() {
           selectedTime,
           setSelectedTime,
           availableFlights,
-          setAvailableFlights
+          setAvailableFlights,
+          selectedFlight,
+          setSelectedFlight
         ) => (
           <ReactPageScroller
             blockScrollDown={availableFlights.length === 0}
@@ -82,8 +82,13 @@ function App() {
             <HolidaysOptions
               loading={loading}
               availableFlights={availableFlights}
+              goToPage={goToPage}
+              setSelectedFlight={setSelectedFlight}
             />
-            <RealizationDataPage />
+            <RealizationDataPage
+              selectedFlight={selectedFlight}
+              selectedCity={selectedCity}
+            />
             <FourthPage />
           </ReactPageScroller>
         )}
@@ -92,14 +97,14 @@ function App() {
         <Arrow>
           <ArrowUp
             onClick={() => {
-              goToPage(currentPage - 1);
+              goToPage(currentPage - 1)
             }}
           />
         </Arrow>
         <Arrow>
           <ArrowDown
             onClick={() => {
-              goToPage(currentPage + 1);
+              goToPage(currentPage + 1)
             }}
           />
         </Arrow>

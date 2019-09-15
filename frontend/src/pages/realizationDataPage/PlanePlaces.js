@@ -22,78 +22,58 @@ const TabHeader = styled.div`
 `
 const TabsContent = styled.div``
 const TabContent = styled.div`
-  visibility: hidden;
-  ${props => props.visible && "visibility:visible;"}
-  display:flex;
+  display: flex;
   justify-content: center;
 `
+const TabContent2 = styled(TabContent)``
 const Image = styled.div``
 
-const PlanePlaces = () => {
+const PlanePlaces = ({ places, peopleCount }) => {
   const [loading, setLoading] = useState(false)
   const [selectedTab, setSelectedTab] = useState(1)
 
   const addSeatCallback = async (row, number, id, cb) => {
     setLoading(true)
 
-    await new Promise(resolve => setTimeout(resolve, 500))
     console.log(`Added seat ${number}, row ${row}, id ${id}`)
     cb(row, number)
     setLoading(false)
   }
 
-  const rows = [
-    [
-      { id: 1, number: 1, isSelected: true },
-      { id: 2, number: 2 },
-      null,
-      { id: 3, number: "3", isReserved: true, orientation: "east" },
-      { id: 4, number: "4", orientation: "west" },
-      null,
-      { id: 5, number: 5 },
-      { id: 6, number: 6 }
-    ],
-    [
-      { id: 7, number: 1, isReserved: true },
-      { id: 8, number: 2, isReserved: true },
-      null,
-      { id: 9, number: "3", isReserved: true, orientation: "east" },
-      { id: 10, number: "4", orientation: "west" },
-      null,
-      { id: 11, number: 5 },
-      { id: 12, number: 6 }
-    ],
-    [
-      { id: 13, number: 1 },
-      { id: 14, number: 2 },
-      null,
-      { id: 15, number: 3, isReserved: true, orientation: "east" },
-      { id: 16, number: "4", orientation: "west" },
-      null,
-      { id: 17, number: 5 },
-      { id: 18, number: 6 }
-    ],
-    [
-      { id: 19, number: 1 },
-      { id: 20, number: 2 },
-      null,
-      { id: 21, number: 3, orientation: "east" },
-      { id: 22, number: "4", orientation: "west" },
-      null,
-      { id: 23, number: 5 },
-      { id: 24, number: 6 }
-    ],
-    [
-      { id: 25, number: 1, isReserved: true },
-      { id: 26, number: 2, orientation: "east" },
-      null,
-      { id: 27, number: "3", isReserved: true },
-      { id: 28, number: "4", orientation: "west" },
-      null,
-      { id: 29, number: 5 },
-      { id: 30, number: 6, isReserved: true }
-    ]
-  ]
+  const economicClassPlaces = places
+    .filter(p => p.class === "E")
+    .reduce((prev, curr, index) => {
+      const _curr = {
+        id: index + 1,
+        number: parseInt(curr.name[1]),
+        isReserved: !curr.available
+      }
+      const firstArrIndex = parseInt(index / 6)
+      if (index % 6 === 3) prev[firstArrIndex].push(null)
+      if (index % 6 === 0) {
+        prev.push([_curr])
+      } else {
+        prev[firstArrIndex].push(_curr)
+      }
+      return prev
+    }, [])
+  const firstClassPlaces = places
+    .filter(p => p.class === "F")
+    .reduce((prev, curr, index) => {
+      const _curr = {
+        id: index + 1,
+        number: parseInt(curr.name[1]),
+        isReserved: !curr.available
+      }
+      const firstArrIndex = parseInt(index / 6)
+      if (index % 6 === 3) prev[firstArrIndex].push(null)
+      if (index % 6 === 0) {
+        prev.push([_curr])
+      } else {
+        prev[firstArrIndex].push(_curr)
+      }
+      return prev
+    }, [])
 
   return (
     <Content>
@@ -116,17 +96,31 @@ const PlanePlaces = () => {
         </TabHeader>
       </TabsHeader>
       <TabsContent>
-        <TabContent visible={selectedTab === 1}>
-          <SeatPicker
-            addSeatCallback={addSeatCallback}
-            rows={rows}
-            maxReservableSeats={3}
-            alpha
-            visible
-            selectedByDefault
-            loading={loading}
-          />
-        </TabContent>
+        {selectedTab === 1 ? (
+          <TabContent>
+            <SeatPicker
+              addSeatCallback={addSeatCallback}
+              rows={firstClassPlaces}
+              maxReservableSeats={peopleCount}
+              alpha
+              visible
+              selectedByDefault
+              loading={loading}
+            />
+          </TabContent>
+        ) : (
+          <TabContent2>
+            <SeatPicker
+              addSeatCallback={addSeatCallback}
+              rows={economicClassPlaces}
+              maxReservableSeats={peopleCount}
+              alpha
+              visible
+              selectedByDefault
+              loading={loading}
+            />
+          </TabContent2>
+        )}
       </TabsContent>
     </Content>
   )

@@ -42,39 +42,17 @@ const MinusIcon = styled.div`
   cursor: pointer;
 `
 const initialPersonData = { fullName: "" }
-const People = () => {
-  const [peopleCount, setPeopleCount] = useState(1)
+const People = ({ peopleCount, setPeopleCount }) => {
   const [peopleData, setPeopleData] = useImmerState(() => [initialPersonData])
 
   return (
     <div>
       <Form.Group>
         <StyledLabel>Pasażerowie ({peopleCount})</StyledLabel>
-        {/* <Plus
-            onClick={() => {
-              if (peopleCount < 6) {
-                setPeopleData(draft => {
-                  draft.push(initialPersonData)
-                })
-                setPeopleCount(peopleCount + 1)
-              }
-            }}
-          />
-        </ChangePeopleCountButton>
-        <ChangePeopleCountButton>
-          <Minus
-            onClick={() => {
-              if (peopleCount > 1) {
-                setPeopleData(draft => {
-                  draft.splice(peopleCount - 1, 0)
-                })
-                setPeopleCount(peopleCount - 1)
-              }
-            }}
-          /> */}
+
         {[...Array(peopleCount)].map((e, i) => {
           return (
-            <div style={{ display: "flex" }}>
+            <div style={{ display: "flex" }} key={i}>
               <Input style={{ flexBasis: "100%" }}>
                 <Form.Control
                   key={i}

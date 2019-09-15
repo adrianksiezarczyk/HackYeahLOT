@@ -40,6 +40,7 @@ const StyledHolidaysTypeSection = styled.section`
   background-position: top;
   background-size: 100% 85%;
 
+  /* margin-top: 60px; */
   position: relative;
   width: 100%;
   height: 100%;

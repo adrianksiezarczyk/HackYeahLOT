@@ -9,7 +9,7 @@ const LocalStore = ({ children }) => {
   });
   const [selectedTime, setSelectedTime] = useState(TITLES[1]);
   const [availableFlights, setAvailableFlights] = useState([]);
-
+  const [selectedFlight, setSelectedFlight] = useState(null);
   return children(
     loading,
     setLoading,
@@ -18,7 +18,9 @@ const LocalStore = ({ children }) => {
     selectedTime,
     setSelectedTime,
     availableFlights,
-    setAvailableFlights
+    setAvailableFlights,
+    selectedFlight,
+    setSelectedFlight
   );
 };
 

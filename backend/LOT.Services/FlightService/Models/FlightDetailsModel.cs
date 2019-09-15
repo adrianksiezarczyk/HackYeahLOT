@@ -12,6 +12,7 @@ namespace LOT.Services.FlightService.Models
         public DateTime? ArrivalReturnDate { get; set; }
         public string PlaneName { get; set; }
         public string DeepLink { get; set; }
+        public decimal TotalPrice { get; set; }
 
         public List<PlaneSeat> DepartuePlaneSeats { get; set; }
         public List<PlaneSeat> ReturnPlaneSeats { get; set; }

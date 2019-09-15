@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace LOT.Services.FlightService.Models
 {
@@ -9,13 +10,7 @@ namespace LOT.Services.FlightService.Models
         public int NumberOfAdultsOver16 { get; set; }
         public bool OneWay { get; set; }
         public DateTime Date { get; set; }
-        public GetFlightsMode Mode { get; set; }
-    }
-
-    public enum GetFlightsMode
-    {
-        Hot,
-        Cold,
-        Suprise
+        public string Mode { get; set; }
+        public IEnumerable<string> Tags { get; set; }
     }
 }

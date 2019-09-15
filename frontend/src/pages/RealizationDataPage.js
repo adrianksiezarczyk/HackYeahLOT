@@ -1,10 +1,12 @@
-import React from "react"
+import React, { useState } from "react"
 
 import styled from "styled-components"
 import { Container, Row, Col, Form } from "react-bootstrap"
 import DataInfo from "./realizationDataPage/DataInfo"
 import People from "./realizationDataPage/People"
 import PlanePlaces from "./realizationDataPage/PlanePlaces"
+import Loader from "react-loader-spinner"
+import LotApi from "../services/lot/api"
 
 const Page = styled.div`
   height: 100%;
@@ -44,23 +46,67 @@ const LuggageButton = styled.div`
   text-align: center;
   margin-top: 30px;
 `
-const RealizationDataPage = () => {
+const Heading = styled.h3`
+  text-align: center;
+  margin-bottom: 30px;
+`
+const RealizationDataPage = ({ selectedFlight, selectedCity }) => {
+  const [isLoading, setLoading] = useState(true)
+  const [details, setDetails] = useState(null)
+  const [peopleCount, setPeopleCount] = useState(1)
+
+  const onDateChange = async (fromDate, toDate) => {
+    console.log("TEST", selectedCity, selectedFlight)
+    try {
+      const data = await LotApi.getFlightDetails({
+        DepartueDate: fromDate,
+        ReturnDate: toDate,
+        OriginCode: selectedFlight.originCode,
+        DestinationCode: selectedFlight.destinationCode,
+        NumberOfAdults: peopleCount
+      })
+      setDetails(data)
+    } catch (e) {
+      console.error("err", e)
+    }
+    setLoading(false)
+  }
+
+  if (!selectedFlight)
+    return (
+      <Loader
+        type="TailSpin"
+        color="#063778"
+        height={100}
+        width={100}
+        timeout={3000}
+      />
+    )
   return (
     <Page>
       <Container>
         <Content>
+          <Heading>Kierunek podróży: {selectedFlight.originName}</Heading>
           <Row>
             <Col>
               <Form>
                 <Side>
-                  <DataInfo />
-                  <People />
+                  <DataInfo onDateChange={onDateChange} />
+                  <People
+                    peopleCount={peopleCount}
+                    setPeopleCount={setPeopleCount}
+                  />
                 </Side>
               </Form>
             </Col>
             <Col></Col>
             <Col>
-              <PlanePlaces />
+              {!isLoading && (
+                <PlanePlaces
+                  places={details && details.departuePlaneSeats}
+                  peopleCount={peopleCount}
+                />
+              )}
             </Col>
           </Row>
           <LuggageButton>Potrzebujesz bagaż?</LuggageButton>

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react"
+import styled from "styled-components"
 
 const StyledFlightCard = styled.div`
   position: relative;
@@ -39,7 +39,7 @@ const StyledFlightCard = styled.div`
     width: 100%;
     border-radius: 5px;
   }
-`;
+`
 
 const DarkOverlay = styled.div`
   position: absolute;
@@ -48,26 +48,28 @@ const DarkOverlay = styled.div`
   left: 0;
   bottom: 0;
   background: rgba(9, 52, 121, 0.85);
-  opacity: ${props => (props.show ? '1' : '0')};
+  opacity: ${props => (props.show ? "1" : "0")};
   transition: all 0.2s ease-in-out;
   border-radius: 5px;
-`;
+`
 
 const FlightCard = props => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false)
 
   return (
     <StyledFlightCard
+      onClick={props.onClick}
       onMouseEnter={() => setShow(true)}
-      onMouseLeave={() => setShow(false)}>
+      onMouseLeave={() => setShow(false)}
+    >
       <DarkOverlay show={show} />
       <p>{props.flightData.temperature}&deg;C</p>
       <p>{props.flightData.destinationName}</p>
       <p>wylot z {props.flightData.originName}</p>
       <p>od {props.flightData.minPrice}zł</p>
-      <img src={props.flightData.imageUrl} alt='Destination place' />
+      <img src={props.flightData.imageUrl} alt="Destination place" />
     </StyledFlightCard>
-  );
-};
+  )
+}
 
-export default FlightCard;
+export default FlightCard

@@ -6,8 +6,8 @@ namespace LOT.Services.FlightService.Models
     {
         public DateTime DepartueDate { get; set; }
         public DateTime? ReturnDate { get; set; }
-        public string Origin { get; set; }
-        public string Destination { get; set; }
+        public string OriginCode { get; set; }
+        public string DestinationCode { get; set; }
         public int NumberOfAdults { get; set; }
     }
 }

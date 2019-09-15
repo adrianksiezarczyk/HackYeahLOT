@@ -76,6 +76,7 @@ const data = [
 const StyledHolidaysOptionsSection = styled.section`
   position: relative;
   margin-top: 60px;
+
   width: 100%;
   height: 100%;
 
@@ -92,10 +93,15 @@ const StyledHolidaysOptionsSection = styled.section`
   }
 `;
 
-const HolidaysOptions = props => {
+const HolidaysOptions = ({ availableFlights, goToPage, setSelectedFlight }) => {
   const [selectedBtn, setSelectedBtn] = useState(MODES.ACTIVE);
 
   const handleClick = e => setSelectedBtn(parseInt(e.target.value));
+
+  const selectFlight = flight => {
+    setSelectedFlight(flight);
+    goToPage(2);
+  };
 
   return (
     <StyledHolidaysOptionsSection>
@@ -112,7 +118,10 @@ const HolidaysOptions = props => {
           ))}
         </Row> */}
         <Row>
-          <CitiesTable availableFlights={props.availableFlights} />
+          <CitiesTable
+            availableFlights={availableFlights}
+            selectFlight={selectFlight}
+          />
         </Row>
       </Container>
     </StyledHolidaysOptionsSection>
