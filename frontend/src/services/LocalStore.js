@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const TITLES = ['From', 'When'];
+const TITLES = ['Skąd chcesz wylecieć?', 'Kiedy planujesz podróż?'];
 const LocalStore = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [selectedCity, setSelectedCity] = useState({

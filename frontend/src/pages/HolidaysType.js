@@ -5,12 +5,16 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Dropdown from '../components/Inputs/Dropdown';
 
 import HolidayCard from './holidayType/HolidayCard';
-import Cat from '../assets/images/cat.jpg';
-import Surprise from '../assets/images/surprise.png';
-import Summer from '../assets/images/wakajki.jpg';
-import backgroundImg from '../assets/images/backgroundImg.png';
+import Draw from '../assets/images/draw.jpg';
+import Summer from '../assets/images/summer.jpg';
+import Winter from '../assets/images/winter.jpg';
+import Clouds from '../assets/images/top.jpg';
 
-const whenAnswers = ['Kiedykolwiek', 'Jutro', 'Pojutrze'];
+import LotApi from '../services/lot/api';
+
+const whenAnswers = ['W najbliższym czasie', 'Za 3 miesiące', 'Za pół roku'];
+
+const MODES = { 1: 'cold', 2: null, 3: 'hot' };
 
 const texts = {
   winter: {
@@ -19,22 +23,22 @@ const texts = {
     desc: 'Wybierz się w mroźne rejony'
   },
   surprise: {
-    header: 'Obojętne',
+    header: 'Losowo',
     text: 'Zaskocz mnie!',
     desc: 'Pozwól nam zająć się Twoimi wakacjami'
   },
   summer: {
     header: 'Ciepło',
-    text: 'Letnie opalanko',
+    text: 'Letnie plażowanie',
     desc: 'Wyleguj się na słonecznych plażach'
   }
 };
 
 const StyledHolidaysTypeSection = styled.section`
-  background-image: url(${backgroundImg});
+  background-image: url(${Clouds});
   background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  background-position: top;
+  background-size: 100% 85%;
 
   position: relative;
   width: 100%;
@@ -42,6 +46,18 @@ const StyledHolidaysTypeSection = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  h1 {
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    position: relative;
+    bottom: 100px;
+    font-weight: 300;
+  }
+
+  .row {
+    margin: 0;
+  }
 
   .dropdown-row {
     margin-bottom: 20px;
@@ -54,24 +70,56 @@ const StyledHolidaysTypeSection = styled.section`
   .no-padding-left {
     padding-left: 0;
   }
+
+  .container {
+    position: relative;
+    top: 90px;
+  }
+`;
+
+const DarkOverlap = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: 85%;
+  background: rgba(9, 52, 121, 0.4);
 `;
 
 const Dropdowns = styled.div`
   display: flex;
   width: 100%;
+  margin: 0 auto;
+  justify-content: space-between;
 
   .dropdown-menu {
     width: 100%;
   }
 
   .btn-primary {
-    background-color: #063778;
-    border-color: #063778;
+    color: #063778;
+    background-color: #fff;
+    border: none;
+    outline: none;
+    padding: 1.2em;
+    border-radius: 10px;
+  }
+
+  .btn-primary:not(:disabled):not(.disabled).active:focus,
+  .btn-primary:not(:disabled):not(.disabled):active:focus,
+  .show > .btn-primary.dropdown-toggle:focus {
+    box-shadow: none;
+    background: #063778;
+  }
+
+  .btn-primary.focus,
+  .btn-primary:focus {
+    box-shadow: none;
   }
 
   .dropdown {
-    width: 30%;
-    background-color: #063778;
+    width: 47%;
 
     &:nth-child(1) {
       margin-right: 10px;
@@ -100,10 +148,14 @@ const HolidaysType = ({
 }) => {
   const [cities, setCities] = useState([]);
 
-  useEffect(() => {
-    fetch('http://134.209.248.19:8080/Airport')
-      .then(res => res.json())
-      .then(data => setCities(data));
+  useEffect(async () => {
+    try {
+      const data = await LotApi.getAirportsNames();
+
+      setCities(data);
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
 
   const handleDropdownClick = (e, id) => {
@@ -115,10 +167,14 @@ const HolidaysType = ({
     } else setSelectedTime(e.target.innerText);
   };
 
-  const handleCardClick = props => {
+  const handleCardClick = mode => {
     setLoading(true);
 
-    fetch(`http://134.209.248.19:8080/Flight?From=${selectedCity.code}`)
+    const modeString = MODES[mode] === null ? '' : `&Mode=${MODES[mode]}`;
+
+    fetch(
+      `http://134.209.248.19:8080/Flight?From=${selectedCity.code}${modeString}`
+    )
       .then(res => res.json())
       .then(flights => {
         setAvailableFlights(flights);
@@ -129,8 +185,10 @@ const HolidaysType = ({
 
   return (
     <StyledHolidaysTypeSection>
+      <DarkOverlap />
       {/* <BackgroundSquare /> */}
       <Container>
+        <h1>Znajdź swoje miejsce</h1>
         <Row className='dropdown-row'>
           <Dropdowns>
             <Dropdown
@@ -148,19 +206,19 @@ const HolidaysType = ({
         <Row>
           <Col className='no-padding-left'>
             <HolidayCard
-              onClick={handleCardClick}
-              image={Cat}
+              onClick={() => handleCardClick(1)}
+              image={Winter}
               text={texts.winter}></HolidayCard>
           </Col>
           <Col>
             <HolidayCard
-              onClick={handleCardClick}
-              image={Surprise}
+              onClick={() => handleCardClick(2)}
+              image={Draw}
               text={texts.surprise}></HolidayCard>
           </Col>
           <Col className='no-padding-right'>
             <HolidayCard
-              onClick={handleCardClick}
+              onClick={() => handleCardClick(3)}
               image={Summer}
               text={texts.summer}></HolidayCard>
           </Col>

@@ -2,30 +2,40 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const StyledCard = styled.div`
-  border-radius: 4px;
+  border-radius: 8px;
   position: relative;
   cursor: pointer;
 
   h3 {
     position: absolute;
     bottom: 15px;
-    font-size: 25px;
-    left: 5px;
+    font-size: 30px;
+    left: 7%;
+    font-weight: 300;
     right: 0;
     color: #fff;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
     opacity: ${props => (props.show ? '0' : '1')};
     transition: all 0.2s ease-in-out;
   }
+`;
+
+const DarkOverlap = styled.div`
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 8px;
 `;
 
 const StyledImage = styled.img`
   width: 100%;
   height: 250px;
   object-fit: cover;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+  border-radius: 8px;
 `;
 
 const StyledText = styled.div`
@@ -39,10 +49,9 @@ const StyledText = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
   opacity: ${props => (props.show ? '1' : '0')};
   transition: opacity 0.2s ease-in-out;
+  border-radius: 8px;
 
   p:nth-child(1) {
     position: relative;
@@ -75,6 +84,7 @@ const HolidayCard = props => {
       onMouseEnter={() => setShow(true)}
       onMouseLeave={() => setShow(false)}
       show={show}>
+      <DarkOverlap />
       <StyledImage src={props.image}></StyledImage>
       <h3>{props.text.header}</h3>
       <StyledText show={show}>

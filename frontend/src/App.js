@@ -27,6 +27,7 @@ const ScrollerArrows = styled.div`
   height: 150px;
   color: #fff;
 `;
+
 const Arrow = styled.div`
   display: flex;
   justify-content: center;
@@ -64,7 +65,10 @@ function App() {
           availableFlights,
           setAvailableFlights
         ) => (
-          <ReactPageScroller ref={scrollerRef} animationTimer={300}>
+          <ReactPageScroller
+            blockScrollDown={availableFlights.length === 0}
+            ref={scrollerRef}
+            animationTimer={300}>
             <HolidaysType
               selectedCity={selectedCity}
               setSelectedCity={setSelectedCity}
@@ -84,7 +88,7 @@ function App() {
           </ReactPageScroller>
         )}
       </LocalStore>
-      <ScrollerArrows>
+      {/* <ScrollerArrows>
         <Arrow>
           <ArrowUp
             onClick={() => {
@@ -99,7 +103,7 @@ function App() {
             }}
           />
         </Arrow>
-      </ScrollerArrows>
+      </ScrollerArrows> */}
     </Layout>
   );
 }

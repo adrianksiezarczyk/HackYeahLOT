@@ -17,7 +17,7 @@ const StyledFlightCard = styled.div`
     }
 
     &:nth-child(3) {
-      bottom: 0;
+      bottom: 20px;
       left: 7%;
       font-size: 34px;
     }
@@ -25,7 +25,7 @@ const StyledFlightCard = styled.div`
     &:nth-child(4) {
       bottom: 0;
       left: 7%;
-      font-size: 34px;
+      font-size: 16px;
     }
 
     &:nth-child(5) {
@@ -63,7 +63,7 @@ const FlightCard = props => {
       <DarkOverlay show={show} />
       <p>{props.flightData.temperature}&deg;C</p>
       <p>{props.flightData.destinationName}</p>
-      <p>{props.flightData.destinationName}</p>
+      <p>wylot z {props.flightData.originName}</p>
       <p>od {props.flightData.minPrice}zł</p>
       <img src={props.flightData.imageUrl} alt='Destination place' />
     </StyledFlightCard>
