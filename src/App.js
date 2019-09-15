@@ -1,29 +1,29 @@
-import React, { useRef, useState } from "react"
-import styled from "styled-components"
-import ReactPageScroller from "react-page-scroller"
+import React, { useRef, useState } from 'react';
+import styled from 'styled-components';
+import ReactPageScroller from 'react-page-scroller';
 
-import FourthPage from "./pages/FourthPage"
-import HolidaysType from "./pages/HolidaysType"
-import HolidaysOptions from "./pages/HolidaysOptions"
-import RealizationDataPage from "./pages/RealizationDataPage"
-import Header from "./pages/layout/Header"
-import LocalStore from "./services/LocalStore"
+import FourthPage from './pages/FourthPage';
+import HolidaysType from './pages/HolidaysType';
+import HolidaysOptions from './pages/HolidaysOptions';
+import RealizationDataPage from './pages/RealizationDataPage';
+import Header from './pages/layout/Header';
+import LocalStore from './services/LocalStore';
 
 const Layout = styled.div`
   width: 100vw;
   padding: 0 !important;
   margin: 0 !important;
-`
+`;
 
 function App() {
-  const [currentPage, setCurrentPage] = useState(0)
-  const scrollerRef = useRef(null)
+  const [currentPage, setCurrentPage] = useState(0);
+  const scrollerRef = useRef(null);
 
   const goToPage = pageNumber => {
-    if (pageNumber < 0 || pageNumber > 2) return
-    setCurrentPage(pageNumber)
-    scrollerRef.current.goToPage(pageNumber)
-  }
+    if (pageNumber < 0 || pageNumber > 2) return;
+    setCurrentPage(pageNumber);
+    scrollerRef.current.goToPage(pageNumber);
+  };
 
   return (
     <Layout>
@@ -43,13 +43,9 @@ function App() {
           setSelectedFlight
         ) => (
           <ReactPageScroller
-            blockScrollDown={
-              availableFlights.length === 0 ||
-              (currentPage === 1 && selectedFlight === null)
-            }
+            blockScrollDown={availableFlights.length === 0}
             ref={scrollerRef}
-            animationTimer={300}
-          >
+            animationTimer={300}>
             <HolidaysType
               selectedCity={selectedCity}
               setSelectedCity={setSelectedCity}
@@ -75,7 +71,7 @@ function App() {
         )}
       </LocalStore>
     </Layout>
-  )
+  );
 }
 
-export default App
+export default App;

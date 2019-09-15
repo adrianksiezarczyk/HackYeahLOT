@@ -1,38 +1,38 @@
-import React, { useState, useEffect } from "react"
-import styled from "styled-components"
-import { Container, Row, Col } from "react-bootstrap"
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { Container, Row, Col } from 'react-bootstrap';
 
-import Dropdown from "../components/Inputs/Dropdown"
+import Dropdown from '../components/Inputs/Dropdown';
 
-import HolidayCard from "./holidayType/HolidayCard"
-import Draw from "../assets/images/draw.jpg"
-import Summer from "../assets/images/summer.jpg"
-import Winter from "../assets/images/winter.jpg"
-import Clouds from "../assets/images/top.jpg"
+import HolidayCard from './holidayType/HolidayCard';
+import Draw from '../assets/images/draw.jpg';
+import Summer from '../assets/images/summer.jpg';
+import Winter from '../assets/images/winter.jpg';
+import Clouds from '../assets/images/top.jpg';
 
-import LotApi from "../services/lot/api"
+import LotApi from '../services/lot/api';
 
-const whenAnswers = ["W najbliższym czasie", "Za 3 miesiące", "Za pół roku"]
+const whenAnswers = ['W najbliższym czasie', 'Za 3 miesiące', 'Za pół roku'];
 
-const MODES = { 1: "cold", 2: null, 3: "hot" }
+const MODES = { 1: 'cold', 2: null, 3: 'hot' };
 
 const texts = {
   winter: {
-    header: "Zimno",
-    text: "Zimowe szaleństwo",
-    desc: "Wybierz się w mroźne rejony"
+    header: 'Zimno',
+    text: 'Zimowe szaleństwo',
+    desc: 'Wybierz się w mroźne rejony'
   },
   surprise: {
-    header: "Losowo",
-    text: "Zaskocz mnie!",
-    desc: "Pozwól nam zająć się Twoimi wakacjami"
+    header: 'Losowo',
+    text: 'Zaskocz mnie!',
+    desc: 'Pozwól nam zająć się Twoimi wakacjami'
   },
   summer: {
-    header: "Ciepło",
-    text: "Letnie plażowanie",
-    desc: "Wyleguj się na słonecznych plażach"
+    header: 'Ciepło',
+    text: 'Letnie plażowanie',
+    desc: 'Wyleguj się na słonecznych plażach'
   }
-}
+};
 
 const StyledHolidaysTypeSection = styled.section`
   background-image: url(${Clouds});
@@ -76,7 +76,7 @@ const StyledHolidaysTypeSection = styled.section`
     position: relative;
     top: 90px;
   }
-`
+`;
 
 const DarkOverlap = styled.div`
   position: absolute;
@@ -86,7 +86,7 @@ const DarkOverlap = styled.div`
   width: 100%;
   height: 85%;
   background: rgba(9, 52, 121, 0.4);
-`
+`;
 
 const Dropdowns = styled.div`
   display: flex;
@@ -105,6 +105,10 @@ const Dropdowns = styled.div`
     outline: none;
     padding: 1.2em;
     border-radius: 10px;
+
+    &:hover {
+      background: #063778;
+    }
   }
 
   .btn-primary:not(:disabled):not(.disabled).active:focus,
@@ -131,7 +135,7 @@ const Dropdowns = styled.div`
       width: 100%;
     }
   }
-`
+`;
 
 const HolidaysType = ({
   selectedCity,
@@ -143,44 +147,44 @@ const HolidaysType = ({
   goToPage,
   currentPage
 }) => {
-  const [cities, setCities] = useState([])
+  const [cities, setCities] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await LotApi.getAirportsNames()
-        setCities(data)
+        const data = await LotApi.getAirportsNames();
+        setCities(data);
       } catch (e) {
-        console.error(e)
+        console.error(e);
       }
-    }
-    fetchData()
-  }, [])
+    };
+    fetchData();
+  }, []);
 
   const handleDropdownClick = (e, id) => {
     if (id === 2) {
       setSelectedCity({
         name: e.target.innerText,
         code: e.target.attributes[0].value
-      })
-    } else setSelectedTime(e.target.innerText)
-  }
+      });
+    } else setSelectedTime(e.target.innerText);
+  };
 
   const handleCardClick = mode => {
-    setLoading(true)
+    setLoading(true);
 
-    const modeString = MODES[mode] === null ? "" : `&Mode=${MODES[mode]}`
+    const modeString = MODES[mode] === null ? '' : `&Mode=${MODES[mode]}`;
 
     fetch(
-      `http://134.209.248.19:8080/Flight?From=${selectedCity.code}${modeString}`
+      `https://api.zainspirujlot.tk//Flight?From=${selectedCity.code}${modeString}`
     )
       .then(res => res.json())
       .then(flights => {
-        setAvailableFlights(flights)
-        goToPage(1)
-        setLoading(false)
-      })
-  }
+        setAvailableFlights(flights);
+        goToPage(1);
+        setLoading(false);
+      });
+  };
 
   return (
     <StyledHolidaysTypeSection>
@@ -188,48 +192,43 @@ const HolidaysType = ({
       {/* <BackgroundSquare /> */}
       <Container>
         <h1>Znajdź swoje miejsce</h1>
-        <Row className="dropdown-row">
+        <Row className='dropdown-row'>
           <Dropdowns>
             <Dropdown
               handleClick={handleDropdownClick}
               id={1}
               answers={whenAnswers}
-              title={selectedTime}
-            ></Dropdown>
+              title={selectedTime}></Dropdown>
             <Dropdown
               handleClick={handleDropdownClick}
               id={2}
               answers={cities}
-              title={selectedCity.name}
-            ></Dropdown>
+              title={selectedCity.name}></Dropdown>
           </Dropdowns>
         </Row>
         <Row>
-          <Col className="no-padding-left">
+          <Col className='no-padding-left'>
             <HolidayCard
               onClick={() => handleCardClick(1)}
               image={Winter}
-              text={texts.winter}
-            ></HolidayCard>
+              text={texts.winter}></HolidayCard>
           </Col>
           <Col>
             <HolidayCard
               onClick={() => handleCardClick(2)}
               image={Draw}
-              text={texts.surprise}
-            ></HolidayCard>
+              text={texts.surprise}></HolidayCard>
           </Col>
-          <Col className="no-padding-right">
+          <Col className='no-padding-right'>
             <HolidayCard
               onClick={() => handleCardClick(3)}
               image={Summer}
-              text={texts.summer}
-            ></HolidayCard>
+              text={texts.summer}></HolidayCard>
           </Col>
         </Row>
       </Container>
     </StyledHolidaysTypeSection>
-  )
-}
+  );
+};
 
-export default HolidaysType
+export default HolidaysType;
