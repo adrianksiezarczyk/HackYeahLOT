@@ -56,7 +56,6 @@ const RealizationDataPage = ({ selectedFlight, selectedCity }) => {
   const [peopleCount, setPeopleCount] = useState(1)
 
   const onDateChange = async (fromDate, toDate) => {
-    console.log("TEST", selectedCity, selectedFlight)
     try {
       const data = await LotApi.getFlightDetails({
         DepartueDate: fromDate,
